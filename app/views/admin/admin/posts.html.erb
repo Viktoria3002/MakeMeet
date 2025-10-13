@@ -1,0 +1,72 @@
+<% content_for :title, "Управление постами - Админ панель" %>
+
+<div class="admin-container">
+  <div class="admin-header">
+    <h1>📝 Управление постами</h1>
+    <p>Просмотр и управление постами пользователей</p>
+  </div>
+
+  <div class="admin-nav">
+    <%= link_to "Главная", admin_root_path, class: "nav-link" %>
+    <%= link_to "Пользователи", admin_users_path, class: "nav-link" %>
+    <%= link_to "Посты", admin_posts_path, class: "nav-link active" %>
+    <%= link_to "Комментарии", admin_comments_path, class: "nav-link" %>
+    <%= link_to "Спринты", admin_sprints_path, class: "nav-link" %>
+  </div>
+
+  <div class="admin-table-container">
+    <div class="table-header">
+      <h2>Список постов (<%= @posts.count %>)</h2>
+    </div>
+
+    <div class="table-responsive">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Автор</th>
+            <th>Содержимое</th>
+            <th>Дата создания</th>
+            <th>Комментарии</th>
+            <th>Лайки</th>
+            <th>Действия</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @posts.each do |post| %>
+            <tr>
+              <td><%= post.post_id || post.id %></td>
+              <td>
+                <div class="user-cell">
+                  <strong><%= post.author.username %></strong>
+                  <small><%= post.author.email %></small>
+                </div>
+              </td>
+              <td>
+                <div class="content-cell">
+                  <%= truncate(post.content, length: 80) %>
+                </div>
+              </td>
+              <td><%= post.created_at.strftime("%d.%m.%Y %H:%M") %></td>
+              <td>
+                <span class="badge badge-info"><%= post.comments_count %></span>
+              </td>
+              <td>
+                <span class="badge badge-success"><%= post.likes_count %></span>
+              </td>
+              <td>
+                <div class="action-buttons">
+                  <%= link_to "Удалить", 
+                      admin_delete_post_path(post), 
+                      method: :delete,
+                      class: "btn btn-danger btn-sm",
+                      confirm: "Вы уверены, что хотите удалить этот пост?" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

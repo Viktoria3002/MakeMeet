@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Make Meet1" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+  </head>
+
+  <body>
+    <nav class="main-navigation">
+      <div class="nav-container">
+        <div class="nav-brand">
+          <%= link_to "Make Meet1", root_path, class: "brand-link" %>
+        </div>
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <%= link_to "Страница 1", page1_path, class: "nav-link #{'active' if current_page?(page1_path) || current_page?(root_path)}" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Страница 2", page2_path, class: "nav-link #{'active' if current_page?(page2_path)}" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Страница 3", page3_path, class: "nav-link #{'active' if current_page?(page3_path)}" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Страница 4", page4_path, class: "nav-link #{'active' if current_page?(page4_path)}" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "🔧 Админ", admin_root_path, class: "nav-link #{'active' if current_page?(admin_root_path)}" %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <%= yield %>
+    </main>
+
+    <footer class="main-footer">
+      <div class="footer-content">
+        <p>&copy; 2024 Make Meet1. Все права защищены.</p>
+      </div>
+    </footer>
+  </body>
+</html>

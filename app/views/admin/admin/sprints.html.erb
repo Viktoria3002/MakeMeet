@@ -1,0 +1,113 @@
+<% content_for :title, "Управление спринтами - Админ панель" %>
+
+<div class="admin-container">
+  <div class="admin-header">
+    <h1>🏃 Управление спринтами</h1>
+    <p>Просмотр и управление спринтами и челленджами</p>
+  </div>
+
+  <div class="admin-nav">
+    <%= link_to "Главная", admin_root_path, class: "nav-link" %>
+    <%= link_to "Пользователи", admin_users_path, class: "nav-link" %>
+    <%= link_to "Посты", admin_posts_path, class: "nav-link" %>
+    <%= link_to "Комментарии", admin_comments_path, class: "nav-link" %>
+    <%= link_to "Спринты", admin_sprints_path, class: "nav-link active" %>
+  </div>
+
+  <div class="admin-table-container">
+    <div class="table-header">
+      <h2>Список спринтов (<%= @sprints.count %>)</h2>
+    </div>
+
+    <div class="table-responsive">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Дата начала</th>
+            <th>Дата окончания</th>
+            <th>Статус</th>
+            <th>Участников</th>
+            <th>Прогресс</th>
+            <th>Действия</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @sprints.each do |sprint| %>
+            <tr>
+              <td><%= sprint.sprint_id || sprint.id %></td>
+              <td>
+                <div class="sprint-cell">
+                  <strong><%= sprint.name %></strong>
+                </div>
+              </td>
+              <td>
+                <div class="content-cell">
+                  <%= truncate(sprint.description, length: 60) %>
+                </div>
+              </td>
+              <td><%= sprint.start_date.strftime("%d.%m.%Y") %></td>
+              <td><%= sprint.end_date.strftime("%d.%m.%Y") %></td>
+              <td>
+                <% if sprint.is_active? %>
+                  <span class="badge badge-success">Активный</span>
+                <% elsif sprint.is_upcoming? %>
+                  <span class="badge badge-warning">Предстоящий</span>
+                <% else %>
+                  <span class="badge badge-secondary">Завершен</span>
+                <% end %>
+              </td>
+              <td>
+                <span class="badge badge-info"><%= sprint.participants_count %></span>
+              </td>
+              <td>
+                <div class="progress-cell">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: <%= sprint.progress_percentage %>%"></div>
+                  </div>
+                  <small><%= sprint.progress_percentage %>%</small>
+                </div>
+              </td>
+              <td>
+                <div class="action-buttons">
+                  <%= link_to "Удалить", 
+                      admin_delete_sprint_path(sprint), 
+                      method: :delete,
+                      class: "btn btn-danger btn-sm",
+                      confirm: "Вы уверены, что хотите удалить спринт '#{sprint.name}'?" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sprint-details">
+      <% @sprints.each do |sprint| %>
+        <div class="sprint-detail-card">
+          <h3><%= sprint.name %></h3>
+          <p><%= sprint.description %></p>
+          <div class="sprint-meta">
+            <span><strong>Период:</strong> <%= sprint.start_date.strftime("%d.%m.%Y") %> - <%= sprint.end_date.strftime("%d.%m.%Y") %></span>
+            <span><strong>Длительность:</strong> <%= sprint.duration_days %> дней</span>
+            <span><strong>Участников:</strong> <%= sprint.participants_count %></span>
+          </div>
+          
+          <div class="participants-list">
+            <h4>Участники:</h4>
+            <% sprint.sprint_participants.includes(:user).each do |participant| %>
+              <div class="participant-item">
+                <span><%= participant.user.username %></span>
+                <span class="participant-status"><%= participant.status_in_russian %></span>
+                <span class="participant-date">Присоединился: <%= participant.join_date&.strftime("%d.%m.%Y") %></span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

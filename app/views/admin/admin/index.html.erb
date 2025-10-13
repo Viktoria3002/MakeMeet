@@ -1,0 +1,130 @@
+<% content_for :title, "Админ панель - Make Meet" %>
+
+<div class="admin-container">
+  <div class="admin-header">
+    <h1>🔧 Административная панель</h1>
+    <p>Управление данными приложения Make Meet</p>
+  </div>
+
+  <div class="admin-nav">
+    <%= link_to "Главная", admin_root_path, class: "nav-link active" %>
+    <%= link_to "Пользователи", admin_users_path, class: "nav-link" %>
+    <%= link_to "Посты", admin_posts_path, class: "nav-link" %>
+    <%= link_to "Комментарии", admin_comments_path, class: "nav-link" %>
+    <%= link_to "Спринты", admin_sprints_path, class: "nav-link" %>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon">👥</div>
+      <div class="stat-content">
+        <h3><%= @stats[:users_count] %></h3>
+        <p>Пользователей</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon">📝</div>
+      <div class="stat-content">
+        <h3><%= @stats[:posts_count] %></h3>
+        <p>Постов</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon">💬</div>
+      <div class="stat-content">
+        <h3><%= @stats[:comments_count] %></h3>
+        <p>Комментариев</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon">❤️</div>
+      <div class="stat-content">
+        <h3><%= @stats[:likes_count] %></h3>
+        <p>Лайков</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon">🏃</div>
+      <div class="stat-content">
+        <h3><%= @stats[:sprints_count] %></h3>
+        <p>Спринтов</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon">👤</div>
+      <div class="stat-content">
+        <h3><%= @stats[:participants_count] %></h3>
+        <p>Участников</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="admin-sections">
+    <div class="section-card">
+      <h2>📝 Последние посты</h2>
+      <div class="posts-list">
+        <% @recent_posts.each do |post| %>
+          <div class="post-item">
+            <div class="post-info">
+              <strong><%= post.author.username %></strong>
+              <span class="post-date"><%= post.created_at.strftime("%d.%m.%Y %H:%M") %></span>
+            </div>
+            <div class="post-content">
+              <%= truncate(post.content, length: 100) %>
+            </div>
+            <div class="post-stats">
+              💬 <%= post.comments_count %> | ❤️ <%= post.likes_count %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h2>👥 Новые пользователи</h2>
+      <div class="users-list">
+        <% @recent_users.each do |user| %>
+          <div class="user-item">
+            <div class="user-info">
+              <strong><%= user.username %></strong>
+              <span class="user-email"><%= user.email %></span>
+            </div>
+            <div class="user-stats">
+              📝 <%= user.posts_count %> | 💬 <%= user.comments_count %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h2>🏃 Активные спринты</h2>
+      <div class="sprints-list">
+        <% @active_sprints.each do |sprint| %>
+          <div class="sprint-item">
+            <div class="sprint-info">
+              <strong><%= sprint.name %></strong>
+              <span class="sprint-dates">
+                <%= sprint.start_date.strftime("%d.%m") %> - <%= sprint.end_date.strftime("%d.%m.%Y") %>
+              </span>
+            </div>
+            <div class="sprint-progress">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: <%= sprint.progress_percentage %>%"></div>
+              </div>
+              <span class="progress-text"><%= sprint.progress_percentage %>%</span>
+            </div>
+            <div class="sprint-stats">
+              👥 <%= sprint.participants_count %> участников
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

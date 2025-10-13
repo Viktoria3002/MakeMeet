@@ -1,0 +1,82 @@
+<% content_for :title, "Управление комментариями - Админ панель" %>
+
+<div class="admin-container">
+  <div class="admin-header">
+    <h1>💬 Управление комментариями</h1>
+    <p>Просмотр и управление комментариями пользователей</p>
+  </div>
+
+  <div class="admin-nav">
+    <%= link_to "Главная", admin_root_path, class: "nav-link" %>
+    <%= link_to "Пользователи", admin_users_path, class: "nav-link" %>
+    <%= link_to "Посты", admin_posts_path, class: "nav-link" %>
+    <%= link_to "Комментарии", admin_comments_path, class: "nav-link active" %>
+    <%= link_to "Спринты", admin_sprints_path, class: "nav-link" %>
+  </div>
+
+  <div class="admin-table-container">
+    <div class="table-header">
+      <h2>Список комментариев (<%= @comments.count %>)</h2>
+    </div>
+
+    <div class="table-responsive">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Автор</th>
+            <th>Пост</th>
+            <th>Содержимое</th>
+            <th>Родительский</th>
+            <th>Дата</th>
+            <th>Лайки</th>
+            <th>Действия</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @comments.each do |comment| %>
+            <tr>
+              <td><%= comment.comment_id || comment.id %></td>
+              <td>
+                <div class="user-cell">
+                  <strong><%= comment.author.username %></strong>
+                </div>
+              </td>
+              <td>
+                <div class="post-cell">
+                  <%= truncate(comment.post.content, length: 30) %>
+                  <small>ID: <%= comment.post.post_id || comment.post.id %></small>
+                </div>
+              </td>
+              <td>
+                <div class="content-cell">
+                  <%= truncate(comment.content, length: 60) %>
+                </div>
+              </td>
+              <td>
+                <% if comment.parent_comment_id %>
+                  <span class="badge badge-warning">Ответ</span>
+                <% else %>
+                  <span class="badge badge-info">Основной</span>
+                <% end %>
+              </td>
+              <td><%= comment.created_at.strftime("%d.%m.%Y %H:%M") %></td>
+              <td>
+                <span class="badge badge-success"><%= comment.likes_count %></span>
+              </td>
+              <td>
+                <div class="action-buttons">
+                  <%= link_to "Удалить", 
+                      admin_delete_comment_path(comment), 
+                      method: :delete,
+                      class: "btn btn-danger btn-sm",
+                      confirm: "Вы уверены, что хотите удалить этот комментарий?" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
