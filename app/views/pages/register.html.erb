@@ -8,25 +8,25 @@
   <div class="register-card">
     <h1 class="register-title">Давайте знакомиться</h1>
     
-    <form class="register-form">
+    <form class="register-form" id="registerForm">
       <div class="form-row">
         <div class="form-column">
-          <input type="text" class="form-input" placeholder="Почта" />
+          <input type="email" class="form-input" placeholder="Почта" name="email" required />
         </div>
       </div>
       
       <div class="form-row">
         <div class="form-column">
-          <input type="password" class="form-input" placeholder="Пароль" />
+          <input type="password" class="form-input" placeholder="Пароль" name="password" required />
         </div>
       </div>
       
       <div class="form-row">
         <div class="form-column">
-          <input type="text" class="form-input" placeholder="Имя" />
+          <input type="text" class="form-input" placeholder="Имя" name="name" required />
         </div>
         <div class="form-column">
-          <textarea class="form-textarea" placeholder="О себе"></textarea>
+          <textarea class="form-textarea" placeholder="О себе" name="about"></textarea>
         </div>
       </div>
       
@@ -40,5 +40,48 @@
     </form>
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('registerForm');
+    
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Собираем данные формы
+      const formData = new FormData(form);
+      const email = formData.get('email');
+      const name = formData.get('name');
+      
+      // Проверяем поддержку уведомлений
+      if ('Notification' in window) {
+        // Запрашиваем разрешение на отправку уведомлений
+        Notification.requestPermission().then(function(permission) {
+          if (permission === 'granted') {
+            // Создаем уведомление
+            const notification = new Notification('Успешная регистрация!', {
+              body: `Добро пожаловать, ${name}! Вы успешно зарегистрировались на Make Meet!`,
+              icon: '/icon.png',
+              badge: '/icon.png',
+              tag: 'registration-success',
+              requireInteraction: true
+            });
+            
+            // Закрываем уведомление через 5 секунд
+            setTimeout(function() {
+              notification.close();
+            }, 5000);
+          }
+        });
+      }
+      
+      // Также показываем alert для подстраховки
+      alert(`Добро пожаловать, ${name}! Вы успешно зарегистрировались на Make Meet!`);
+      
+      // Очищаем форму
+      form.reset();
+    });
+  });
+</script>
 
 
