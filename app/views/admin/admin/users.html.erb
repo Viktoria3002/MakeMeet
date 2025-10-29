@@ -55,11 +55,12 @@
               </td>
               <td>
                 <div class="action-buttons">
-                  <%= link_to "Удалить", 
+                  <%= link_to "Редактировать", admin_edit_user_path(user), class: "btn btn-sm", style: "background: rgba(59, 130, 246, 0.3); color: #93c5fd; border-color: rgba(59, 130, 246, 0.4);" %>
+                  <%= button_to "Удалить", 
                       admin_delete_user_path(user), 
                       method: :delete,
                       class: "btn btn-danger btn-sm",
-                      confirm: "Вы уверены, что хотите удалить пользователя #{user.username}?" %>
+                      data: { confirm: "Вы уверены, что хотите удалить пользователя #{user.username}?" } %>
                 </div>
               </td>
             </tr>

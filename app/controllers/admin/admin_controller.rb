@@ -64,11 +64,106 @@ class Admin::AdminController < ApplicationController
     redirect_to admin_sprints_path, notice: 'Спринт удален'
   end
 
+  # Редактирование
+  def edit_user
+    @user = User.find(params[:id])
+  end
+
+  def edit_post
+    @post = Post.find(params[:id])
+    @users = User.all
+  end
+
+  def edit_comment
+    @comment = Comment.find(params[:id])
+    @posts = Post.all
+    @users = User.all
+  end
+
+  def edit_sprint
+    @sprint = Sprint.find(params[:id])
+  end
+
+  # Обновление
+  def update_user
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      redirect_to admin_users_path, notice: 'Пользователь обновлен'
+    else
+      render :edit_user
+    end
+  end
+
+  def update_post
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      redirect_to admin_posts_path, notice: 'Пост обновлен'
+    else
+      @users = User.all
+      render :edit_post
+    end
+  end
+
+  def update_comment
+    @comment = Comment.find(params[:id])
+    if @comment.update(comment_params)
+      redirect_to admin_comments_path, notice: 'Комментарий обновлен'
+    else
+      @posts = Post.all
+      @users = User.all
+      render :edit_comment
+    end
+  end
+
+  def update_sprint
+    @sprint = Sprint.find(params[:id])
+    if @sprint.update(sprint_params)
+      redirect_to admin_sprints_path, notice: 'Спринт обновлен'
+    else
+      render :edit_sprint
+    end
+  end
+
+  def login
+    if request.post?
+      username = params[:username]
+      password = params[:password]
+      
+      # Любой логин и пароль подходит для доступа к админке
+      if username.present? && password.present?
+        session[:admin] = true
+        redirect_to admin_root_path, notice: 'Успешный вход'
+      else
+        flash[:alert] = 'Введите логин и пароль'
+      end
+    end
+  end
+
   private
 
+  def user_params
+    params.require(:user).permit(:username, :email, :password_hash)
+  end
+
+  def post_params
+    params.require(:post).permit(:content, :author_id)
+  end
+
+  def comment_params
+    params.require(:comment).permit(:content, :post_id, :author_id)
+  end
+
+  def sprint_params
+    params.require(:sprint).permit(:name, :description, :start_date, :end_date)
+  end
+
   def authenticate_admin
-    # Простая аутентификация для админки
-    # В реальном приложении здесь должна быть полноценная система авторизации
-    session[:admin] ||= true # Временно разрешаем всем доступ
+    # Пропускаем аутентификацию для страницы логина
+    return if action_name == 'login'
+    
+    # Проверяем вход в админку
+    unless session[:admin]
+      redirect_to admin_login_path
+    end
   end
 end

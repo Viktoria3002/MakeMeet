@@ -1,7 +1,18 @@
 class PagesController < ApplicationController
+  def about
+    # Страница О сервисе с приветственным экраном
+  end
+
+  def register
+    # Страница регистрации
+  end
+
+  def login
+    # Страница входа
+  end
+
   def page1
-    @title = "Страница 1"
-    @content = "Добро пожаловать на первую страницу нашего приложения!"
+    # Главная страница с hero секцией и медиа контентом
   end
 
   def page2

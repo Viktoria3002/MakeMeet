@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="<%= 'admin-page' if controller_path.include?('admin') %>">
   <head>
     <title><%= content_for(:title) || "Make Meet1" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -17,31 +17,49 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
+    <!-- SF Pro Display Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
   </head>
 
-  <body>
+  <body class="<%= 'media-page' if current_page?(page1_path) %> <%= 'admin-page' if controller_path.include?('admin') %> <%= 'sprints-page' if current_page?(page2_path) %> <%= 'profile-page' if current_page?(page4_path) %>">
+    <% if current_page?(page1_path) %>
+      <div class="media-page-wrapper">
+    <% end %>
+    
     <nav class="main-navigation">
       <div class="nav-container">
         <div class="nav-brand">
-          <%= link_to "Make Meet1", root_path, class: "brand-link" %>
+          <%= link_to root_path, class: "brand-link" do %>
+            <div class="logo-container">
+              <span class="logo-semicolon">;</span>
+              <span class="logo-m">m</span>
+              <span class="logo-M">M</span>
+            </div>
+          <% end %>
         </div>
         <ul class="nav-menu">
           <li class="nav-item">
-            <%= link_to "Страница 1", page1_path, class: "nav-link #{'active' if current_page?(page1_path) || current_page?(root_path)}" %>
+            <%= link_to "О сервисе", about_path, class: "nav-link #{'active' if current_page?(about_path) || current_page?(root_path)}" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Страница 2", page2_path, class: "nav-link #{'active' if current_page?(page2_path)}" %>
+            <%= link_to "Медиа", page1_path, class: "nav-link #{'active' if current_page?(page1_path)}" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Страница 3", page3_path, class: "nav-link #{'active' if current_page?(page3_path)}" %>
+            <%= link_to "Открытые спринты", page2_path, class: "nav-link #{'active' if current_page?(page2_path)}" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Страница 4", page4_path, class: "nav-link #{'active' if current_page?(page4_path)}" %>
+            <%= link_to "Мои спринты", page3_path, class: "nav-link #{'active' if current_page?(page3_path)}" %>
           </li>
           <li class="nav-item">
-            <%= link_to "🔧 Админ", admin_root_path, class: "nav-link #{'active' if current_page?(admin_root_path)}" %>
+            <%= link_to "Профиль", page4_path, class: "nav-link #{'active' if current_page?(page4_path)}" %>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link admin-link-btn" onclick="openAdminLogin()">🔧 Админ</button>
           </li>
         </ul>
       </div>
@@ -50,11 +68,99 @@
     <main class="main-content">
       <%= yield %>
     </main>
+    
+    <% if current_page?(page1_path) %>
+      </div>
+    <% end %>
 
     <footer class="main-footer">
       <div class="footer-content">
-        <p>&copy; 2024 Make Meet1. Все права защищены.</p>
+        <div class="footer-logo">
+          <span class="footer-semicolon">;</span>
+          <span class="footer-m">m</span>
+          <span class="footer-M">M</span>
+        </div>
+        <div class="footer-text">
+          найди единомышленников с make Meet
+        </div>
+        <button class="footer-submit">
+          <img src="<%= asset_path('Q_Telegram.png') %>" alt="Telegram" class="footer-icon">
+        </button>
       </div>
     </footer>
+
+    <!-- Admin Login Modal -->
+    <div class="admin-login-modal" id="adminLoginModal" style="display: none;">
+      <div class="admin-login-modal-backdrop" onclick="closeAdminLogin()"></div>
+      <div class="admin-login-modal-content">
+        <h2 class="admin-login-title">Вход в админку</h2>
+        <%= form_tag admin_login_path, method: :post, class: "admin-login-form", id: "adminLoginForm" do %>
+          <div class="form-group">
+            <label class="form-label">Логин</label>
+            <%= text_field_tag :username, nil, class: "form-input", placeholder: "Введите логин" %>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Пароль</label>
+            <%= password_field_tag :password, nil, class: "form-input", placeholder: "Введите пароль" %>
+          </div>
+          <div id="adminLoginAlert"></div>
+          <%= submit_tag "Войти", class: "admin-login-submit" %>
+          <button type="button" class="admin-login-close" onclick="closeAdminLogin()">✕</button>
+        <% end %>
+      </div>
+    </div>
+
+    <script>
+      function openAdminLogin() {
+        const modal = document.getElementById('adminLoginModal');
+        if (modal) {
+          modal.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        }
+      }
+
+      function closeAdminLogin() {
+        const modal = document.getElementById('adminLoginModal');
+        if (modal) {
+          modal.style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }
+      }
+
+      // Закрыть по ESC
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeAdminLogin();
+        }
+      });
+
+      // Обработка формы
+      document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('adminLoginForm');
+        if (form) {
+          form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(form);
+            fetch('<%= admin_login_path %>', {
+              method: 'POST',
+              body: formData,
+              headers: {
+                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+              }
+            })
+            .then(response => {
+              if (response.redirected) {
+                window.location.href = response.url;
+              } else {
+                return response.text();
+              }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+          });
+        }
+      });
+    </script>
   </body>
 </html>

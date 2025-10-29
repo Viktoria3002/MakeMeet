@@ -1,0 +1,30 @@
+<% content_for :title, "Редактировать пользователя - Админ панель" %>
+
+<div class="admin-container">
+  <div class="admin-header">
+    <h1>✏️ Редактировать пользователя</h1>
+  </div>
+
+  <%= form_with model: [:admin, @user], url: admin_update_user_path(@user), method: :patch, local: true do |f| %>
+    <div class="form-group">
+      <%= f.label :username, "Имя пользователя", class: "form-label" %>
+      <%= f.text_field :username, class: "form-input", required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :email, "Email", class: "form-label" %>
+      <%= f.email_field :email, class: "form-input", required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password_hash, "Хеш пароля", class: "form-label" %>
+      <%= f.text_field :password_hash, class: "form-input", placeholder: "Оставьте пустым, чтобы не менять" %>
+    </div>
+
+    <div style="display: flex; gap: 10px; margin-top: 30px;">
+      <%= f.submit "Сохранить изменения", class: "admin-login-submit" %>
+      <%= link_to "Отмена", admin_users_path, class: "btn", style: "background: rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.7);" %>
+    </div>
+  <% end %>
+</div>
+

@@ -72,11 +72,12 @@
               </td>
               <td>
                 <div class="action-buttons">
-                  <%= link_to "Удалить", 
+                  <%= link_to "Редактировать", admin_edit_sprint_path(sprint), class: "btn btn-sm", style: "background: rgba(59, 130, 246, 0.3); color: #93c5fd; border-color: rgba(59, 130, 246, 0.4);" %>
+                  <%= button_to "Удалить", 
                       admin_delete_sprint_path(sprint), 
                       method: :delete,
                       class: "btn btn-danger btn-sm",
-                      confirm: "Вы уверены, что хотите удалить спринт '#{sprint.name}'?" %>
+                      data: { confirm: "Вы уверены, что хотите удалить спринт '#{sprint.name}'?" } %>
                 </div>
               </td>
             </tr>

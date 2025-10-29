@@ -1,0 +1,35 @@
+<% content_for :title, "Редактировать спринт - Админ панель" %>
+
+<div class="admin-container">
+  <div class="admin-header">
+    <h1>✏️ Редактировать спринт</h1>
+  </div>
+
+  <%= form_with model: [:admin, @sprint], url: admin_update_sprint_path(@sprint), method: :patch, local: true do |f| %>
+    <div class="form-group">
+      <%= f.label :name, "Название", class: "form-label" %>
+      <%= f.text_field :name, class: "form-input", required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description, "Описание", class: "form-label" %>
+      <%= f.text_area :description, class: "form-input", rows: 6, required: true, style: "resize: vertical;" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :start_date, "Дата начала", class: "form-label" %>
+      <%= f.date_field :start_date, class: "form-input", required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :end_date, "Дата окончания", class: "form-label" %>
+      <%= f.date_field :end_date, class: "form-input", required: true %>
+    </div>
+
+    <div style="display: flex; gap: 10px; margin-top: 30px;">
+      <%= f.submit "Сохранить изменения", class: "admin-login-submit" %>
+      <%= link_to "Отмена", admin_sprints_path, class: "btn", style: "background: rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.7);" %>
+    </div>
+  <% end %>
+</div>
+

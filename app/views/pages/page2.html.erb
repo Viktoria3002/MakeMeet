@@ -1,26 +1,153 @@
-<% content_for :title, "Страница 2 - Make Meet" %>
+<% content_for :title, "Открытые спринты - Make Meet" %>
 
-<div class="page-container">
-  <h1><%= @title %></h1>
-  <div class="content">
-    <p><%= @content %></p>
-    
-    <div class="info-section">
-      <h2>Информация о проекте</h2>
-      <div class="info-grid">
-        <div class="info-card">
-          <h3>Технологии</h3>
-          <p>Ruby on Rails 8.0</p>
-          <p>HTML5, CSS3</p>
-          <p>JavaScript</p>
-        </div>
-        <div class="info-card">
-          <h3>Особенности</h3>
-          <p>MVC архитектура</p>
-          <p>RESTful маршруты</p>
-          <p>Адаптивный дизайн</p>
-        </div>
+<div class="open-sprints-page">
+  <!-- Hero Section -->
+  <div class="sprints-hero-section">
+    <h1 class="sprints-hero-title">Выбирай цели и достигай их за короткий срок</h1>
+    <p class="sprints-hero-description">Присоединяйтесь к коротким, четко структурированным мероприятиям, которые помогают двигаться к вашим целям</p>
+  </div>
+
+  <!-- Info Section -->
+  <div class="sprints-info-section">
+    <div class="sprints-info-box">Открытый спринт — это</div>
+    <p class="sprints-info-text">короткие онлайн инициативы с конкретной целью, рассчитанной на 1-4 недели. Они помогают сосредоточиться, добиться видимых результатов</p>
+  </div>
+
+  <!-- Sprints Grid -->
+  <div class="sprints-grid">
+    <!-- Sprint Card 1 -->
+    <div class="sprint-card">
+      <div class="sprint-card-content">
+        <h3 class="sprint-card-title">Улучшить утренние ритуалы</h3>
+        <p class="sprint-card-description">Создайте свой личный план утренней рутины — упражнения, пробежки, чтение книг, тренировки, языки</p>
+        <span class="sprint-card-duration">1 неделя</span>
       </div>
+      <div class="sprint-card-image">
+        <div class="sprint-image-placeholder meditation"></div>
+      </div>
+      <button class="sprint-card-button" onclick="joinSprint('Улучшить утренние ритуалы', 'Создайте свой личный план утренней рутины — упражнения, пробежки, чтение книг, тренировки, языки', '1 неделя', 'morning')">Присоединиться</button>
+    </div>
+
+    <!-- Sprint Card 2 -->
+    <div class="sprint-card">
+      <div class="sprint-card-content">
+        <h3 class="sprint-card-title">Развить привычку чтения</h3>
+        <p class="sprint-card-description">Читайте каждый день по 10 страниц любой книги</p>
+        <span class="sprint-card-duration">2 недели</span>
+      </div>
+      <div class="sprint-card-image">
+        <div class="sprint-image-placeholder books"></div>
+      </div>
+      <button class="sprint-card-button" onclick="joinSprint('Развить привычку чтения', 'Читайте каждый день по 10 страниц любой книги', '2 недели', 'reading')">Присоединиться</button>
+    </div>
+
+    <!-- Sprint Card 3 -->
+    <div class="sprint-card">
+      <div class="sprint-card-content">
+        <h3 class="sprint-card-title">Освоить базовые навыки программирования</h3>
+        <p class="sprint-card-description">Пройдите онлайн-курс по Python или JavaScript</p>
+        <span class="sprint-card-duration">4 недели</span>
+      </div>
+      <div class="sprint-card-image">
+        <div class="sprint-image-placeholder coding"></div>
+      </div>
+      <button class="sprint-card-button" onclick="joinSprint('Освоить базовые навыки программирования', 'Пройдите онлайн-курс по Python или JavaScript', '4 недели', 'coding')">Присоединиться</button>
+    </div>
+
+    <!-- Sprint Card 4 -->
+    <div class="sprint-card">
+      <div class="sprint-card-content">
+        <h3 class="sprint-card-title">Улучшить физическую форму</h3>
+        <p class="sprint-card-description">Занимайтесь спортом каждый день по 15 минут</p>
+        <span class="sprint-card-duration">3 недели</span>
+      </div>
+      <div class="sprint-card-image">
+        <div class="sprint-image-placeholder running"></div>
+      </div>
+      <button class="sprint-card-button" onclick="joinSprint('Улучшить физическую форму', 'Занимайтесь спортом каждый день по 15 минут', '3 недели', 'fitness')">Присоединиться</button>
+    </div>
+
+    <!-- Sprint Card 5 -->
+    <div class="sprint-card">
+      <div class="sprint-card-content">
+        <h3 class="sprint-card-title">Разобраться с тайм-менеджментом</h3>
+        <p class="sprint-card-description">Изучите принципы планирования и управления временем</p>
+        <span class="sprint-card-duration">1 неделя</span>
+      </div>
+      <div class="sprint-card-image">
+        <div class="sprint-image-placeholder calendar"></div>
+      </div>
+      <button class="sprint-card-button" onclick="joinSprint('Разобраться с тайм-менеджментом', 'Изучите принципы планирования и управления временем', '1 неделя', 'timemanage')">Присоединиться</button>
+    </div>
+
+    <!-- Sprint Card 6 -->
+    <div class="sprint-card">
+      <div class="sprint-card-content">
+        <h3 class="sprint-card-title">Медитация и ментальное здоровье</h3>
+        <p class="sprint-card-description">Практикуйте медитацию по 10 минут каждый день</p>
+        <span class="sprint-card-duration">1 неделя</span>
+      </div>
+      <div class="sprint-card-image">
+        <div class="sprint-image-placeholder meditation"></div>
+      </div>
+      <button class="sprint-card-button" onclick="joinSprint('Медитация и ментальное здоровье', 'Практикуйте медитацию по 10 минут каждый день', '1 неделя', 'meditation')">Присоединиться</button>
     </div>
   </div>
 </div>
+
+<script>
+  function getJoinedSprints() {
+    const sprints = localStorage.getItem('joinedSprints');
+    return sprints ? JSON.parse(sprints) : [];
+  }
+
+  function saveJoinedSprints(sprints) {
+    localStorage.setItem('joinedSprints', JSON.stringify(sprints));
+  }
+
+  function joinSprint(title, description, duration, id) {
+    const sprints = getJoinedSprints();
+    
+    // Проверяем, не присоединен ли уже этот спринт
+    if (sprints.find(s => s.id === id)) {
+      alert('Вы уже присоединились к этому спринту!');
+      return;
+    }
+
+    const sprintData = {
+      id: id,
+      title: title,
+      description: description,
+      duration: duration
+    };
+    
+    sprints.push(sprintData);
+    saveJoinedSprints(sprints);
+    
+    // Обновляем кнопку
+    const button = event.target;
+    button.textContent = 'Присоединено';
+    button.style.background = '#22c55e';
+    button.disabled = true;
+    
+    alert('Вы успешно присоединились к спринту!');
+  }
+
+  // Проверяем при загрузке, какие спринты уже присоединены
+  document.addEventListener('DOMContentLoaded', function() {
+    const sprints = getJoinedSprints();
+    const sprintIds = sprints.map(s => s.id);
+    
+    document.querySelectorAll('.sprint-card-button').forEach(button => {
+      if (button.onclick) {
+        const onclickText = button.onclick.toString();
+        const match = onclickText.match(/'(\w+)'/);
+        if (match && sprintIds.includes(match[1])) {
+          button.textContent = 'Присоединено';
+          button.style.background = '#22c55e';
+          button.disabled = true;
+        }
+      }
+    });
+  });
+</script>
