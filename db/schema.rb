@@ -19,11 +19,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_20_000007) do
     t.bigint "parent_comment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["author_id"], name: "index_comments_on_author_id"
     t.index ["comment_id"], name: "index_comments_on_comment_id", unique: true
     t.index ["created_at"], name: "index_comments_on_created_at"
-    t.index ["parent_comment_id"], name: "index_comments_on_parent_comment_id"
-    t.index ["post_id"], name: "index_comments_on_post_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -45,7 +42,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_20_000007) do
     t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["author_id"], name: "index_posts_on_author_id"
     t.index ["created_at"], name: "index_posts_on_created_at"
     t.index ["post_id"], name: "index_posts_on_post_id", unique: true
   end
