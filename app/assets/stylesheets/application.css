@@ -17,7 +17,8 @@
 }
 
 body {
-  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.6;
   color: #ffffff;
   background-color: #0a0a0a;
@@ -140,7 +141,7 @@ body {
 
 .nav-link.active {
   background: transparent;
-  color: #FD3D17;
+  color: #fd3d17;
   box-shadow: none;
 }
 
@@ -153,14 +154,13 @@ body {
   overflow-x: hidden;
 }
 
-
 .page-container {
   max-width: 1000px;
   margin: 0 auto;
   background: white;
   padding: 40px;
   border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .page-container h1 {
@@ -178,11 +178,17 @@ body {
 }
 
 /* Стили для страниц */
-.features, .info-section, .gallery-section, .final-section {
+.features,
+.info-section,
+.gallery-section,
+.final-section {
   margin-top: 40px;
 }
 
-.features h2, .info-section h2, .gallery-section h2, .final-section h2 {
+.features h2,
+.info-section h2,
+.gallery-section h2,
+.final-section h2 {
   color: #333;
   margin-bottom: 20px;
   font-size: 1.8rem;
@@ -223,7 +229,7 @@ body {
 
 .info-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 .info-card h3 {
@@ -298,7 +304,13 @@ body {
   margin: 40px auto 40px;
   width: 90%;
   max-width: 1200px;
-  background: linear-gradient(90deg, #000000 0%, #2d1a1a 30%, #8b3e3e 60%, #d45647 100%);
+  background: linear-gradient(
+    90deg,
+    #000000 0%,
+    #2d1a1a 30%,
+    #8b3e3e 60%,
+    #d45647 100%
+  );
   border-radius: 50px;
   padding: 12px 20px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
@@ -450,7 +462,9 @@ body.profile-page .welcome-section .welcome-background::before {
   height: 120px;
   background: #000000;
   border-radius: 60px 60px 0 0;
-  clip-path: path('M0,120 C0,120 100,90 200,100 C300,110 400,80 500,100 C600,120 700,90 800,100 C900,110 1000,100 1200,90 C1400,80 1600,100 1920,100 L1920,120 L0,120 Z');
+  clip-path: path(
+    'M0,120 C0,120 100,90 200,100 C300,110 400,80 500,100 C600,120 700,90 800,100 C900,110 1000,100 1200,90 C1400,80 1600,100 1920,100 L1920,120 L0,120 Z'
+  );
 }
 
 body.profile-page .main-footer {
@@ -578,13 +592,17 @@ body.profile-page .main-footer {
   font-weight: 600;
 }
 
-.posts-list, .users-list, .sprints-list {
+.posts-list,
+.users-list,
+.sprints-list {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.post-item, .user-item, .sprint-item {
+.post-item,
+.user-item,
+.sprint-item {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   padding: 20px;
@@ -593,32 +611,41 @@ body.profile-page .main-footer {
   transition: all 0.3s ease;
 }
 
-.post-item:hover, .user-item:hover, .sprint-item:hover {
+.post-item:hover,
+.user-item:hover,
+.sprint-item:hover {
   transform: translateY(-2px);
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-.post-info, .user-info, .sprint-info {
+.post-info,
+.user-info,
+.sprint-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
 }
 
-.post-date, .user-email, .sprint-dates {
+.post-date,
+.user-email,
+.sprint-dates {
   color: rgba(255, 255, 255, 0.6);
   font-size: 0.9rem;
 }
 
-.post-content, .content-cell {
+.post-content,
+.content-cell {
   color: rgba(255, 255, 255, 0.8);
   margin: 8px 0;
   line-height: 1.4;
 }
 
-.post-stats, .user-stats, .sprint-stats {
+.post-stats,
+.user-stats,
+.sprint-stats {
   color: #ff6b35;
   font-size: 0.9rem;
   font-weight: 500;
@@ -668,7 +695,7 @@ body.profile-page .main-footer {
 .table-responsive {
   overflow-x: auto;
   border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .admin-table {
@@ -698,17 +725,22 @@ body.profile-page .main-footer {
   background: rgba(255, 255, 255, 0.03);
 }
 
-.user-cell, .post-cell, .sprint-cell, .content-cell {
+.user-cell,
+.post-cell,
+.sprint-cell,
+.content-cell {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.user-cell strong, .sprint-cell strong {
+.user-cell strong,
+.sprint-cell strong {
   color: #ffffff;
 }
 
-.user-cell small, .post-cell small {
+.user-cell small,
+.post-cell small {
   color: rgba(255, 255, 255, 0.5);
   font-size: 0.8rem;
 }
@@ -855,12 +887,12 @@ body.profile-page .main-footer {
   .main-navigation {
     justify-content: center;
   }
-  
+
   .nav-container {
     width: 1312px;
     height: 91px;
   }
-  
+
   .main-content {
     max-width: 1512px;
   }
@@ -871,7 +903,7 @@ body.profile-page .main-footer {
   .main-navigation {
     padding: 10px 0;
   }
-  
+
   .nav-container {
     flex-direction: column;
     height: auto;
@@ -880,52 +912,52 @@ body.profile-page .main-footer {
     max-width: calc(100% - 40px);
     margin: 0 20px;
   }
-  
+
   .nav-menu {
     margin-top: 15px;
     gap: 20px;
     flex-wrap: wrap;
     justify-content: center;
   }
-  
+
   .logo-container {
     gap: 1px;
     width: 60px;
     height: 30px;
   }
-  
+
   .logo-semicolon {
     font-size: 18px;
     font-weight: 600;
   }
-  
+
   .logo-m {
     font-size: 16px;
     font-weight: 600;
   }
-  
+
   .logo-M {
     font-size: 20px;
     font-weight: 600;
   }
-  
+
   .nav-link {
     font-weight: 300;
   }
-  
+
   .page-container {
     padding: 20px;
     margin: 0 10px;
   }
-  
+
   .page-container h1 {
     font-size: 2rem;
   }
-  
+
   .info-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .stats-grid {
     grid-template-columns: 1fr;
   }
@@ -1016,7 +1048,6 @@ body.profile-page .main-footer {
   margin-right: calc(-50vw + 50%);
 }
 
-
 .hero-content {
   position: relative;
   z-index: 3;
@@ -1026,7 +1057,7 @@ body.profile-page .main-footer {
 }
 
 .hero-title {
-  font-family: 'SF Pro Display',;
+  font-family: 'SF Pro Display';
   font-size: 7em;
   font-weight: 500;
   color: #ffffff;
@@ -1039,7 +1070,7 @@ body.profile-page .main-footer {
 .hero-subtitle {
   font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 1.7rem;
-  color: #EBEBEB;
+  color: #ebebeb;
   margin-bottom: 40px;
   opacity: 0.6;
   letter-spacing: -1px;
@@ -1054,8 +1085,8 @@ a.cta-button {
   background-color: #ffffff20;
   color: #ffffff;
   border: none;
-  padding: 16px 32px;
-  border-radius: 12px;
+  padding: 12px 60px;
+  border-radius: 50px;
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
@@ -1119,7 +1150,7 @@ a.cta-button:hover {
 
 .media-title {
   font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 2.5rem;
+  font-size: 5rem;
   font-weight: 700;
   color: #ffffff;
   margin: 0;
@@ -1129,14 +1160,15 @@ a.cta-button:hover {
   background: rgba(255, 255, 255, 0.1);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-size: 1rem;
+  padding: 12px 40px;
+  border-radius: 50px;
+  font-size: 1.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-top: 1%;
 }
 
 .filter-button:hover {
@@ -1226,9 +1258,18 @@ a.cta-button:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: 
-    linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%),
-    linear-gradient(-45deg, transparent 20%, rgba(255, 255, 255, 0.05) 50%, transparent 80%);
+  background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 70%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.05) 50%,
+      transparent 80%
+    );
 }
 
 .icon-arrow {
@@ -1241,7 +1282,6 @@ a.cta-button:hover {
 }
 
 .running-image {
- 
   background-size: cover;
   background-position: center;
   background-blend-mode: multiply;
@@ -1256,9 +1296,16 @@ a.cta-button:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: 
-    radial-gradient(circle at 30% 40%, rgba(255, 107, 53, 0.4) 0%, transparent 50%),
-    radial-gradient(circle at 70% 60%, rgba(139, 92, 246, 0.3) 0%, transparent 50%);
+  background: radial-gradient(
+      circle at 30% 40%,
+      rgba(255, 107, 53, 0.4) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 70% 60%,
+      rgba(139, 92, 246, 0.3) 0%,
+      transparent 50%
+    );
   border-radius: 12px;
 }
 
@@ -1268,7 +1315,7 @@ a.cta-button:hover {
   left: 0;
   right: 0;
   bottom: 0;
- 
+
   border-radius: 12px;
   z-index: 1;
 }
@@ -1327,7 +1374,12 @@ a.cta-button:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -1347,41 +1399,41 @@ a.cta-button:hover {
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.1rem;
   }
-  
+
   .media-title {
     font-size: 2rem;
   }
-  
+
   .card-title {
     font-size: 1.1rem;
   }
-  
+
   .media-header {
     flex-direction: column;
     gap: 20px;
     align-items: flex-start;
   }
-  
+
   .media-grid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
-  
+
   .media-card {
     padding: 20px;
   }
-  
+
   .card-visual {
     position: static;
     width: 100%;
     height: 80px;
     margin-top: 16px;
   }
-  
+
   .apps-icon {
     height: 100px;
   }
@@ -1407,8 +1459,14 @@ a.cta-button:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: 
-    linear-gradient(180deg, #6366f1 0%, #a855f7 30%, #ec4899 60%, #f97316 90%, #0a0a0a 100%);
+  background: linear-gradient(
+    180deg,
+    #6366f1 0%,
+    #a855f7 30%,
+    #ec4899 60%,
+    #f97316 90%,
+    #0a0a0a 100%
+  );
   opacity: 0.8;
   filter: blur(100px);
   z-index: 0;
@@ -1421,15 +1479,16 @@ a.cta-button:hover {
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    rgba(255, 255, 255, 0.8) 10%, 
-    rgba(139, 92, 246, 0.6) 20%, 
-    rgba(236, 72, 153, 0.8) 30%, 
-    rgba(255, 255, 255, 0.8) 40%, 
-    rgba(236, 72, 153, 0.8) 50%, 
-    rgba(139, 92, 246, 0.6) 60%, 
-    rgba(255, 255, 255, 0.8) 70%, 
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.8) 10%,
+    rgba(139, 92, 246, 0.6) 20%,
+    rgba(236, 72, 153, 0.8) 30%,
+    rgba(255, 255, 255, 0.8) 40%,
+    rgba(236, 72, 153, 0.8) 50%,
+    rgba(139, 92, 246, 0.6) 60%,
+    rgba(255, 255, 255, 0.8) 70%,
     transparent 100%
   );
   filter: blur(20px);
@@ -1440,14 +1499,15 @@ a.cta-button:hover {
   position: relative;
   z-index: 10;
   width: 90%;
-  max-width: 600px;
+  max-width: 1312px;
   padding: 60px 40px;
-  background: rgba(18, 18, 18, 0.7);
+  background: rgba(252, 252, 252, 0.1);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 24px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  margin-top: -10%;
 }
 
 .welcome-title {
@@ -1484,18 +1544,20 @@ a.cta-button:hover {
   gap: 16px;
   margin-bottom: 24px;
   flex-wrap: wrap;
+  margin-left: 10%;
 }
 
-.register-button, .login-button {
+.register-button,
+.login-button {
   flex: 1;
-  padding: 16px 32px;
-  border-radius: 12px;
+  max-width: 484px;
+  padding: 10px 5px;
+  border-radius: 50px;
   border: none;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  min-width: 200px;
 }
 
 .register-button {
@@ -1574,28 +1636,23 @@ a.cta-button:hover {
     width: 95%;
     padding: 40px 24px;
   }
-  
+
   .welcome-title {
     font-size: 2.5rem;
   }
-  
+
   .welcome-description {
     font-size: 1.2rem;
   }
-  
+
   .welcome-subdescription {
     font-size: 1rem;
   }
-  
-  .register-button, .login-button {
-    font-size: 1rem;
-    padding: 14px 24px;
-  }
-  
+
   .social-buttons {
     gap: 12px;
   }
-  
+
   .social-button {
     width: 48px;
     height: 48px;
@@ -1622,8 +1679,14 @@ a.cta-button:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: 
-    linear-gradient(180deg, #6366f1 0%, #a855f7 30%, #ec4899 60%, #f97316 90%, #0a0a0a 100%);
+  background: linear-gradient(
+    180deg,
+    #6366f1 0%,
+    #a855f7 30%,
+    #ec4899 60%,
+    #f97316 90%,
+    #0a0a0a 100%
+  );
   opacity: 0.6;
   z-index: 0;
 }
@@ -1737,28 +1800,28 @@ a.cta-button:hover {
     width: 95%;
     padding: 40px 24px;
   }
-  
+
   .register-title {
     font-size: 2rem;
     margin-bottom: 30px;
   }
-  
+
   .form-row {
     flex-direction: column;
     gap: 16px;
   }
-  
+
   .form-input,
   .form-textarea {
     padding: 14px 18px;
     font-size: 0.95rem;
   }
-  
+
   .register-submit-button {
     padding: 14px 24px;
     font-size: 1rem;
   }
-  
+
   .register-disclaimer {
     font-size: 0.8rem;
   }
@@ -1784,7 +1847,14 @@ a.cta-button:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(180deg, rgba(99, 102, 241, 0.4) 0%, rgba(168, 85, 247, 0.3) 30%, rgba(236, 72, 153, 0.3) 60%, rgba(249, 115, 22, 0.5) 90%, #0a0a0a 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(99, 102, 241, 0.4) 0%,
+    rgba(168, 85, 247, 0.3) 30%,
+    rgba(236, 72, 153, 0.3) 60%,
+    rgba(249, 115, 22, 0.5) 90%,
+    #0a0a0a 100%
+  );
   z-index: 0;
 }
 
@@ -1794,7 +1864,11 @@ a.cta-button:hover {
   left: 0;
   right: 0;
   height: 60%;
-  background: radial-gradient(ellipse at center, rgba(249, 115, 22, 0.4) 0%, transparent 70%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(249, 115, 22, 0.4) 0%,
+    transparent 70%
+  );
   filter: blur(100px);
 }
 
@@ -1899,7 +1973,11 @@ a.cta-button:hover {
   padding: 80px 20px;
   max-width: 1200px;
   margin: 0 auto;
-  background: linear-gradient(180deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.05) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(99, 102, 241, 0.1) 0%,
+    rgba(168, 85, 247, 0.05) 100%
+  );
   border-radius: 0;
 }
 
@@ -1988,7 +2066,11 @@ a.cta-button:hover {
   height: 80px;
   border-radius: 50%;
   margin: 0 auto 12px;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.8) 0%, rgba(168, 85, 247, 0.8) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.8) 0%,
+    rgba(168, 85, 247, 0.8) 100%
+  );
 }
 
 .profile-info {
@@ -2125,11 +2207,19 @@ a.cta-button:hover {
 }
 
 .goal-run {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.8) 0%, rgba(168, 85, 247, 0.8) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.8) 0%,
+    rgba(168, 85, 247, 0.8) 100%
+  );
 }
 
 .goal-books {
-  background: linear-gradient(135deg, rgba(249, 115, 22, 0.8) 0%, rgba(236, 72, 153, 0.8) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(249, 115, 22, 0.8) 0%,
+    rgba(236, 72, 153, 0.8) 100%
+  );
 }
 
 .goal-text {
@@ -2404,7 +2494,11 @@ body.admin-page .form-input:focus {
   right: 0;
   width: 60%;
   height: 60%;
-  background: radial-gradient(ellipse at center, rgba(138, 92, 246, 0.15) 0%, transparent 70%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(138, 92, 246, 0.15) 0%,
+    transparent 70%
+  );
   pointer-events: none;
 }
 
@@ -2545,23 +2639,43 @@ body.admin-page .form-input:focus {
 }
 
 .sprint-image-placeholder.meditation {
-  background: linear-gradient(135deg, rgba(138, 92, 246, 0.4) 0%, rgba(255, 107, 53, 0.3) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(138, 92, 246, 0.4) 0%,
+    rgba(255, 107, 53, 0.3) 100%
+  );
 }
 
 .sprint-image-placeholder.books {
-  background: linear-gradient(135deg, rgba(138, 92, 246, 0.4) 0%, rgba(255, 107, 53, 0.3) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(138, 92, 246, 0.4) 0%,
+    rgba(255, 107, 53, 0.3) 100%
+  );
 }
 
 .sprint-image-placeholder.coding {
-  background: linear-gradient(135deg, rgba(138, 92, 246, 0.4) 0%, rgba(255, 107, 53, 0.3) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(138, 92, 246, 0.4) 0%,
+    rgba(255, 107, 53, 0.3) 100%
+  );
 }
 
 .sprint-image-placeholder.running {
-  background: linear-gradient(135deg, rgba(138, 92, 246, 0.4) 0%, rgba(255, 107, 53, 0.3) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(138, 92, 246, 0.4) 0%,
+    rgba(255, 107, 53, 0.3) 100%
+  );
 }
 
 .sprint-image-placeholder.calendar {
-  background: linear-gradient(135deg, rgba(138, 92, 246, 0.4) 0%, rgba(255, 107, 53, 0.3) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(138, 92, 246, 0.4) 0%,
+    rgba(255, 107, 53, 0.3) 100%
+  );
 }
 
 .sprint-card-button {
