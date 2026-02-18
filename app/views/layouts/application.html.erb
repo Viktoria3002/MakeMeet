@@ -26,7 +26,7 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
   </head>
 
-  <body class="<%= 'media-page' if current_page?(page1_path) %> <%= 'admin-page' if controller_path.include?('admin') %> <%= 'sprints-page' if current_page?(page2_path) %> <%= 'profile-page' if current_page?(page4_path) %>">
+  <body class="<%= 'about-page' if current_page?(about_path) || current_page?(root_path) %> <%= 'media-page' if current_page?(page1_path) %> <%= 'admin-page' if controller_path.include?('admin') %> <%= 'sprints-page' if current_page?(page2_path) %> <%= 'profile-page' if current_page?(page4_path) %>">
     <% if current_page?(page1_path) %>
       <div class="media-page-wrapper">
     <% end %>
@@ -36,9 +36,7 @@
         <div class="nav-brand">
           <%= link_to root_path, class: "brand-link" do %>
             <div class="logo-container">
-              <span class="logo-semicolon">;</span>
-              <span class="logo-m">m</span>
-              <span class="logo-M">M</span>
+              <%= image_tag "nav_logo.png", alt: "Make Meet", class: "nav-logo-img" %>
             </div>
           <% end %>
         </div>
@@ -58,7 +56,7 @@
           <li class="nav-item">
             <%= link_to "Профиль", page4_path, class: "nav-link #{'active' if current_page?(page4_path)}" %>
           </li>
-          <li class="nav-item">
+          <li class="nav-item nav-item--admin-hidden">
             <button class="nav-link admin-link-btn" onclick="openAdminLogin()">🔧 Админ</button>
           </li>
         </ul>
@@ -75,17 +73,7 @@
 
     <footer class="main-footer">
       <div class="footer-content">
-        <div class="footer-logo">
-          <span class="footer-semicolon">;</span>
-          <span class="footer-m">m</span>
-          <span class="footer-M">M</span>
-        </div>
-        <div class="footer-text">
-          найди единомышленников с make Meet
-        </div>
-        <button class="footer-submit">
-          <img src="<%= asset_path('Q_Telegram.png') %>" alt="Telegram" class="footer-icon">
-        </button>
+        <%= image_tag "footer_bar.svg", alt: "найди единомышленников с make Meet", class: "footer-bar-img" %>
       </div>
     </footer>
 

@@ -1,0 +1,33 @@
+{
+  "name": "makemeet",
+  "version": "1.0.0",
+  "description": "Make Meet - это веб-приложение для организации встреч и спринтов, построенное на Ruby on Rails.",
+  "homepage": "https://github.com/Viktoria3002/MakeMeet#readme",
+  "bugs": {
+    "url": "https://github.com/Viktoria3002/MakeMeet/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Viktoria3002/MakeMeet.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.0.0",
+    "globals": "^17.3.0",
+    "prettier": "2.2.1",
+    "prettier-plugin-erb": "^0.4.0",
+    "@prettier/plugin-ruby": "^1.0.0"
+  }
+}

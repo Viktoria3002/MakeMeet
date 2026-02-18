@@ -1,103 +1,85 @@
 <% content_for :title, "О сервисе - Make Meet" %>
+<% content_for :head do %>
+  <style>
+    body.about-page {
+      background-image: url('<%= asset_path("about_background.png") %>');
+      background-size: 1600px 3455px;
+      background-position: center top;
+      background-repeat: no-repeat;
+      background-color: #0a0a0a;
+    }
+  </style>
+<% end %>
 
-<div class="about-hero-section">
-  <div class="about-hero-content">
-    <div class="about-hero-text">
-      <h1 class="about-hero-title">Знакомься и двигайся к целям вместе</h1>
-      <p class="about-hero-description">
-        ;make.Meet — платформа для поиска единомышленников и совместного роста через спринты
-      </p>
-      <%= link_to "Открыть силу комьюнити", register_path, class: "about-cta-button" %>
+<div class="about-page-wrap">
+  <!-- Hero -->
+  <section class="about-hero-section">
+    <div class="about-hero-content">
+      <%= image_tag "about/pill_notification.png", alt: "", class: "about-hero-pill-img", width: 140, height: 44 %>
+      <%= image_tag "about/globe.png", alt: "", class: "about-hero-globe-img", width: 80, height: 80 %>
+      <div class="about-hero-main">
+        <h1 class="about-hero-title">Знакомься и двигайся к целям вместе</h1>
+        <p class="about-hero-description">
+          ;make.Meet — платформа для поиска друзей и совместного роста через спринты
+        </p>
+        <div class="about-hero-row">
+          <div class="about-hero-profile">
+            <%= image_tag "about/profile_alisa.png", alt: "Алиса Бёрнс", class: "about-hero-avatar-img", width: 80, height: 80 %>
+          </div>
+          <%= image_tag "about/card.png", alt: "", class: "about-hero-card-img", width: 200 %>
+        </div>
+        <%= link_to register_path, class: "about-cta-button" do %>
+          <%= image_tag "about/cta_button.png", alt: "Открыть силу комьюнити", class: "about-cta-button-img" %>
+        <% end %>
+      </div>
     </div>
-    
-    <div class="about-profiles">
-      <div class="profile-card">
-        <div class="profile-image profile-1"></div>
-        <div class="profile-info">
-          <div class="profile-name">София Маршал, 21</div>
-          <div class="profile-role">дизайнер одежды</div>
+  </section>
+
+  <!-- Присоединяйся -->
+  <section class="about-join-section">
+    <h2 class="about-section-title">Присоединяйся</h2>
+    <p class="about-section-description">
+      к открытому челленджу, найди свою команду роста <br />
+      и двигайся к успеху среди людей, которые действительно понимают твои стремления
+    </p>
+    <div class="about-activity-cards">
+      <%= image_tag "about/activity_cards.png", alt: "Цель достигнута, Гарри Стэнтон", class: "about-activity-cards-img" %>
+    </div>
+  </section>
+
+  <!-- Выбери цель — по макету: слева текст, справа карточки-пузыри -->
+  <section class="about-goal-section">
+    <div class="about-goal-wrap">
+      <div class="about-goal-left">
+        <div class="about-goal-header">
+          <%= image_tag "about/just_shine.png", alt: "", class: "about-goal-justshine-img" %>
+          <%= image_tag "about/lightning.png", alt: "", class: "about-goal-lightning-img" %>
+        </div>
+        <h2 class="about-section-title">Выбери цель</h2>
+        <p class="about-section-description">
+          определи, к чему хочешь прийти <span class="about-description-muted">— в работе, обучении или жизни. Цель помогает найти людей, которые идут тем же путём</span>
+        </p>
+      </div>
+      <div class="about-goal-tiles">
+        <div class="about-goal-tile about-goal-tile--first">
+          <%= image_tag "about/goal_run_card.png", alt: "Пробежать 50 км за месяц", class: "about-goal-tile-card-img" %>
+        </div>
+        <div class="about-goal-tile about-goal-tile--second">
+          <%= image_tag "about/goal_books_card.png", alt: "Прочитать 20 книг за год", class: "about-goal-tile-card-img" %>
         </div>
       </div>
-      <div class="profile-card">
-        <div class="profile-image profile-2"></div>
-        <div class="profile-info">
-          <div class="profile-name">Алиса Бернс, 28</div>
-          <div class="profile-role">дизайнер интерьера</div>
-        </div>
-      </div>
-      <div class="profile-card">
-        <div class="profile-image profile-3"></div>
-        <div class="profile-info">
-          <div class="profile-name">Джексон Рид, 34</div>
-          <div class="profile-role">фэшн-фотограф</div>
-        </div>
-      </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<div class="about-join-section">
-  <h2 class="about-section-title">Присоединяйся</h2>
-  <p class="about-section-description">
-    к открытому челленджу, найди свою команду роста и двигайся к успеху среди людей, которые действительно понимают твои стремления
-  </p>
-  
-  <div class="about-chat">
-    <div class="chat-message">
-      <div class="chat-sender">mM</div>
-      <div class="chat-content">Цель достигнута Какой вы молодец! Разделите с друз...</div>
-      <div class="chat-time">1 minute ago</div>
+  <!-- Сделай жизнь лучше -->
+  <section class="about-lifestyle-section">
+    <h2 class="about-section-title">Сделай жизнь лучше</h2>
+    <p class="about-section-description">
+      всё в твоих руках и в приложении ;make.Meet, главное, только начать и сделать первый шаг, а
+      единомышленники тебя поддержат
+    </p>
+    <div class="about-status-bar">
+      <%= image_tag "about/status_bar.png", alt: "Режим достижения целей. Сегодня вы всего добьетесь!", class: "about-status-bar-img" %>
     </div>
-    <div class="chat-message">
-      <div class="chat-avatar">ГС</div>
-      <div class="chat-sender">Гарри Стэнтон</div>
-      <div class="chat-content">хэй, мы справились!</div>
-      <div class="chat-time">1 minute ago</div>
-    </div>
-    <div class="chat-message">
-      <div class="chat-avatar">ГС</div>
-      <div class="chat-sender">Гарри Стэнтон</div>
-      <div class="chat-content chat-faded">ты вообще веришь в это?</div>
-      <div class="chat-time">1 minute ago</div>
-    </div>
-  </div>
-</div>
-
-<div class="about-goal-section">
-  <div class="about-goal-content">
-    <div class="about-goal-text">
-      <h2 class="about-section-title">Выбери цель</h2>
-      <p class="about-section-description">
-        определи, к чему хочешь прийти — в работе, обучении или жизни. Цель помогает найти людей, которые идут тем же путём
-      </p>
-    </div>
-    
-    <div class="goal-cards">
-      <div class="goal-card">
-        <div class="goal-badge">10+</div>
-        <div class="goal-image goal-run"></div>
-        <div class="goal-text">Пробежать 50 км за месяц</div>
-      </div>
-      <div class="goal-card">
-        <div class="goal-badge">25+</div>
-        <div class="goal-image goal-books"></div>
-        <div class="goal-text">Прочитать 20 книг за год</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="about-lifestyle-section">
-  <h2 class="about-section-title">Сделай жизнь лучше</h2>
-  <p class="about-section-description">
-    всё в твоих руках и в приложении ;make.Meet, главное, только начать и сделать первый шаг, а единомышленники тебя поддержат
-  </p>
-  
-  <div class="about-status-bar">
-    <div class="status-logo">mM</div>
-    <div class="status-text">
-      <div class="status-title">Режим достижения целей</div>
-      <div class="status-subtitle">Сегодня вы всего добьетесь!</div>
-    </div>
-  </div>
+  </section>
 </div>
