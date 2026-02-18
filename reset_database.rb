@@ -65,8 +65,8 @@ ActiveRecord::Base.connection.create_table :likes, force: true do |t|
 end
 
 ActiveRecord::Base.connection.add_index :likes, :like_id, unique: true
-ActiveRecord::Base.connection.add_index :likes, [:user_id, :target_type, :target_id], unique: true
-ActiveRecord::Base.connection.add_index :likes, [:target_type, :target_id]
+ActiveRecord::Base.connection.add_index :likes, [ :user_id, :target_type, :target_id ], unique: true
+ActiveRecord::Base.connection.add_index :likes, [ :target_type, :target_id ]
 ActiveRecord::Base.connection.add_index :likes, :created_at
 
 ActiveRecord::Base.connection.create_table :sprints, force: true do |t|
@@ -92,14 +92,14 @@ ActiveRecord::Base.connection.create_table :sprint_participants, force: true do 
 end
 
 ActiveRecord::Base.connection.add_index :sprint_participants, :sprint_participant_id, unique: true
-ActiveRecord::Base.connection.add_index :sprint_participants, [:sprint_id, :user_id], unique: true
+ActiveRecord::Base.connection.add_index :sprint_participants, [ :sprint_id, :user_id ], unique: true
 ActiveRecord::Base.connection.add_index :sprint_participants, :progress_status
 ActiveRecord::Base.connection.add_index :sprint_participants, :join_date
 
 puts "База данных успешно создана!"
 puts "Таблицы созданы:"
 puts "- users"
-puts "- posts" 
+puts "- posts"
 puts "- comments"
 puts "- likes"
 puts "- sprints"

@@ -48,8 +48,8 @@ class CreateAllTables < ActiveRecord::Migration[8.0]
     end
 
     add_index :likes, :like_id, unique: true
-    add_index :likes, [:user_id, :target_type, :target_id], unique: true
-    add_index :likes, [:target_type, :target_id]
+    add_index :likes, [ :user_id, :target_type, :target_id ], unique: true
+    add_index :likes, [ :target_type, :target_id ]
     add_index :likes, :created_at
 
     # Создаем таблицу sprints
@@ -77,7 +77,7 @@ class CreateAllTables < ActiveRecord::Migration[8.0]
     end
 
     add_index :sprint_participants, :sprint_participant_id, unique: true
-    add_index :sprint_participants, [:sprint_id, :user_id], unique: true
+    add_index :sprint_participants, [ :sprint_id, :user_id ], unique: true
     add_index :sprint_participants, :progress_status
     add_index :sprint_participants, :join_date
 

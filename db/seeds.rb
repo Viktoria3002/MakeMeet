@@ -96,23 +96,23 @@ puts "Создание спринтов..."
 
 # Создание спринтов
 sprints = [
-  { 
-    name: "Изучение Ruby on Rails", 
-    description: "30-дневный марафон по изучению основ Ruby on Rails для начинающих разработчиков", 
-    start_date: Date.current, 
-    end_date: Date.current + 30.days 
+  {
+    name: "Изучение Ruby on Rails",
+    description: "30-дневный марафон по изучению основ Ruby on Rails для начинающих разработчиков",
+    start_date: Date.current,
+    end_date: Date.current + 30.days
   },
-  { 
-    name: "UI/UX Дизайн", 
-    description: "Интенсивный курс по современному дизайну интерфейсов и пользовательского опыта", 
-    start_date: Date.current + 7.days, 
-    end_date: Date.current + 37.days 
+  {
+    name: "UI/UX Дизайн",
+    description: "Интенсивный курс по современному дизайну интерфейсов и пользовательского опыта",
+    start_date: Date.current + 7.days,
+    end_date: Date.current + 37.days
   },
-  { 
-    name: "Тестирование ПО", 
-    description: "Практический курс по автоматизированному и ручному тестированию приложений", 
-    start_date: Date.current - 5.days, 
-    end_date: Date.current + 25.days 
+  {
+    name: "Тестирование ПО",
+    description: "Практический курс по автоматизированному и ручному тестированию приложений",
+    start_date: Date.current - 5.days,
+    end_date: Date.current + 25.days
   }
 ]
 

@@ -1,12 +1,12 @@
 class User < ApplicationRecord
   # Ассоциации
-  has_many :posts, foreign_key: 'author_id', dependent: :destroy
-  has_many :comments, foreign_key: 'author_id', dependent: :destroy
+  has_many :posts, foreign_key: "author_id", dependent: :destroy
+  has_many :comments, foreign_key: "author_id", dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :sprint_participants, dependent: :destroy
   has_many :sprints, through: :sprint_participants
-  has_many :liked_posts, through: :likes, source: :target, source_type: 'Post'
-  has_many :liked_comments, through: :likes, source: :target, source_type: 'Comment'
+  has_many :liked_posts, through: :likes, source: :target, source_type: "Post"
+  has_many :liked_comments, through: :likes, source: :target, source_type: "Comment"
 
   # Валидации
   validates :username, presence: true, uniqueness: true, length: { minimum: 3, maximum: 50 }

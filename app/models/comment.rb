@@ -1,9 +1,9 @@
 class Comment < ApplicationRecord
   # Ассоциации
   belongs_to :post
-  belongs_to :author, class_name: 'User', foreign_key: 'author_id'
-  belongs_to :parent_comment, class_name: 'Comment', optional: true
-  has_many :replies, class_name: 'Comment', foreign_key: 'parent_comment_id', dependent: :destroy
+  belongs_to :author, class_name: "User", foreign_key: "author_id"
+  belongs_to :parent_comment, class_name: "Comment", optional: true
+  has_many :replies, class_name: "Comment", foreign_key: "parent_comment_id", dependent: :destroy
   has_many :likes, as: :target, dependent: :destroy
 
   # Валидации
@@ -44,7 +44,7 @@ class Comment < ApplicationRecord
 
   def toggle_like(user)
     return false unless user
-    
+
     if has_user_liked?(user)
       unlike_by(user)
     else

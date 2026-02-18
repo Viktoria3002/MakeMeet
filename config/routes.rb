@@ -30,17 +30,17 @@ Rails.application.routes.draw do
     get "posts", to: "admin#posts"
     get "comments", to: "admin#comments"
     get "sprints", to: "admin#sprints"
-    
+
     get "users/:id/edit", to: "admin#edit_user", as: :edit_user
     get "posts/:id/edit", to: "admin#edit_post", as: :edit_post
     get "comments/:id/edit", to: "admin#edit_comment", as: :edit_comment
     get "sprints/:id/edit", to: "admin#edit_sprint", as: :edit_sprint
-    
+
     patch "users/:id", to: "admin#update_user", as: :update_user
     patch "posts/:id", to: "admin#update_post", as: :update_post
     patch "comments/:id", to: "admin#update_comment", as: :update_comment
     patch "sprints/:id", to: "admin#update_sprint", as: :update_sprint
-    
+
     delete "users/:id", to: "admin#delete_user", as: :delete_user
     delete "posts/:id", to: "admin#delete_post", as: :delete_post
     delete "comments/:id", to: "admin#delete_comment", as: :delete_comment

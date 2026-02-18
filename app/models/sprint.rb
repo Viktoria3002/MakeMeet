@@ -15,9 +15,9 @@ class Sprint < ApplicationRecord
   before_validation :set_sprint_id, on: :create
 
   # Scopes
-  scope :active, -> { where('start_date <= ? AND end_date >= ?', Date.current, Date.current) }
-  scope :upcoming, -> { where('start_date > ?', Date.current) }
-  scope :completed, -> { where('end_date < ?', Date.current) }
+  scope :active, -> { where("start_date <= ? AND end_date >= ?", Date.current, Date.current) }
+  scope :upcoming, -> { where("start_date > ?", Date.current) }
+  scope :completed, -> { where("end_date < ?", Date.current) }
 
   # Методы
   def participants_count
@@ -48,7 +48,7 @@ class Sprint < ApplicationRecord
   def progress_percentage
     return 100 if is_completed?
     return 0 if is_upcoming?
-    
+
     total_duration = (end_date - start_date).to_i
     elapsed_days = (Date.current - start_date).to_i
     (elapsed_days.to_f / total_duration * 100).round(2)
@@ -69,9 +69,9 @@ class Sprint < ApplicationRecord
 
   def end_date_after_start_date
     return unless start_date && end_date
-    
+
     if end_date <= start_date
-      errors.add(:end_date, 'должна быть после даты начала')
+      errors.add(:end_date, "должна быть после даты начала")
     end
   end
 end
