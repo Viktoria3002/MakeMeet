@@ -7,7 +7,7 @@ class SprintParticipant < ApplicationRecord
   validates :sprint_participant_id, presence: true, uniqueness: true
   validates :sprint_id, presence: true
   validates :user_id, presence: true
-  validates :progress_status, inclusion: { in: ['not_started', 'in_progress', 'completed', 'dropped'] }
+  validates :progress_status, inclusion: { in: [ "not_started", "in_progress", "completed", "dropped" ] }
   validates :user_id, uniqueness: { scope: :sprint_id, message: "уже участвует в этом спринте" }
 
   # Колбэки
@@ -15,32 +15,32 @@ class SprintParticipant < ApplicationRecord
   before_validation :set_join_date, on: :create
 
   # Scopes
-  scope :active, -> { where(progress_status: ['not_started', 'in_progress']) }
-  scope :completed, -> { where(progress_status: 'completed') }
-  scope :dropped, -> { where(progress_status: 'dropped') }
+  scope :active, -> { where(progress_status: [ "not_started", "in_progress" ]) }
+  scope :completed, -> { where(progress_status: "completed") }
+  scope :dropped, -> { where(progress_status: "dropped") }
 
   # Методы
   def is_active?
-    ['not_started', 'in_progress'].include?(progress_status)
+    [ "not_started", "in_progress" ].include?(progress_status)
   end
 
   def is_completed?
-    progress_status == 'completed'
+    progress_status == "completed"
   end
 
   def is_dropped?
-    progress_status == 'dropped'
+    progress_status == "dropped"
   end
 
   def progress_percentage
     case progress_status
-    when 'not_started'
+    when "not_started"
       0
-    when 'in_progress'
+    when "in_progress"
       50
-    when 'completed'
+    when "completed"
       100
-    when 'dropped'
+    when "dropped"
       0
     else
       0
@@ -49,25 +49,25 @@ class SprintParticipant < ApplicationRecord
 
   def status_in_russian
     case progress_status
-    when 'not_started'
-      'Не начат'
-    when 'in_progress'
-      'В процессе'
-    when 'completed'
-      'Завершен'
-    when 'dropped'
-      'Брошен'
+    when "not_started"
+      "Не начат"
+    when "in_progress"
+      "В процессе"
+    when "completed"
+      "Завершен"
+    when "dropped"
+      "Брошен"
     else
-      'Неизвестно'
+      "Неизвестно"
     end
   end
 
   def days_participated
     return 0 unless join_date
-    
+
     end_date = sprint.end_date
     end_date = Time.current if Time.current < end_date
-    
+
     (end_date.to_date - join_date.to_date).to_i
   end
 

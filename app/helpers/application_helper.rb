@@ -19,14 +19,14 @@ module ApplicationHelper
   # Бейдж для статуса
   def status_badge(status)
     case status
-    when 'active', 'completed'
-      content_tag :span, status.humanize, class: 'badge badge-success'
-    when 'pending', 'not_started'
-      content_tag :span, status.humanize, class: 'badge badge-warning'
-    when 'inactive', 'dropped'
-      content_tag :span, status.humanize, class: 'badge badge-secondary'
+    when "active", "completed"
+      content_tag :span, status.humanize, class: "badge badge-success"
+    when "pending", "not_started"
+      content_tag :span, status.humanize, class: "badge badge-warning"
+    when "inactive", "dropped"
+      content_tag :span, status.humanize, class: "badge badge-secondary"
     else
-      content_tag :span, status.humanize, class: 'badge'
+      content_tag :span, status.humanize, class: "badge"
     end
   end
 end

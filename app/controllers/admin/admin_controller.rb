@@ -1,6 +1,6 @@
 class Admin::AdminController < ApplicationController
   before_action :authenticate_admin
-  
+
   def index
     @stats = {
       users_count: User.count,
@@ -10,7 +10,7 @@ class Admin::AdminController < ApplicationController
       sprints_count: Sprint.count,
       participants_count: SprintParticipant.count
     }
-    
+
     @recent_posts = Post.includes(:author).order(created_at: :desc).limit(5)
     @recent_users = User.order(registration_date: :desc).limit(5)
     @active_sprints = Sprint.active.includes(:sprint_participants)
@@ -43,25 +43,25 @@ class Admin::AdminController < ApplicationController
   def delete_user
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to admin_users_path, notice: 'Пользователь удален'
+    redirect_to admin_users_path, notice: "Пользователь удален"
   end
 
   def delete_post
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to admin_posts_path, notice: 'Пост удален'
+    redirect_to admin_posts_path, notice: "Пост удален"
   end
 
   def delete_comment
     @comment = Comment.find(params[:id])
     @comment.destroy
-    redirect_to admin_comments_path, notice: 'Комментарий удален'
+    redirect_to admin_comments_path, notice: "Комментарий удален"
   end
 
   def delete_sprint
     @sprint = Sprint.find(params[:id])
     @sprint.destroy
-    redirect_to admin_sprints_path, notice: 'Спринт удален'
+    redirect_to admin_sprints_path, notice: "Спринт удален"
   end
 
   # Редактирование
@@ -88,7 +88,7 @@ class Admin::AdminController < ApplicationController
   def update_user
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to admin_users_path, notice: 'Пользователь обновлен'
+      redirect_to admin_users_path, notice: "Пользователь обновлен"
     else
       render :edit_user
     end
@@ -97,7 +97,7 @@ class Admin::AdminController < ApplicationController
   def update_post
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      redirect_to admin_posts_path, notice: 'Пост обновлен'
+      redirect_to admin_posts_path, notice: "Пост обновлен"
     else
       @users = User.all
       render :edit_post
@@ -107,7 +107,7 @@ class Admin::AdminController < ApplicationController
   def update_comment
     @comment = Comment.find(params[:id])
     if @comment.update(comment_params)
-      redirect_to admin_comments_path, notice: 'Комментарий обновлен'
+      redirect_to admin_comments_path, notice: "Комментарий обновлен"
     else
       @posts = Post.all
       @users = User.all
@@ -118,7 +118,7 @@ class Admin::AdminController < ApplicationController
   def update_sprint
     @sprint = Sprint.find(params[:id])
     if @sprint.update(sprint_params)
-      redirect_to admin_sprints_path, notice: 'Спринт обновлен'
+      redirect_to admin_sprints_path, notice: "Спринт обновлен"
     else
       render :edit_sprint
     end
@@ -128,13 +128,13 @@ class Admin::AdminController < ApplicationController
     if request.post?
       username = params[:username]
       password = params[:password]
-      
+
       # Любой логин и пароль подходит для доступа к админке
       if username.present? && password.present?
         session[:admin] = true
-        redirect_to admin_root_path, notice: 'Успешный вход'
+        redirect_to admin_root_path, notice: "Успешный вход"
       else
-        flash[:alert] = 'Введите логин и пароль'
+        flash[:alert] = "Введите логин и пароль"
       end
     end
   end
@@ -159,8 +159,8 @@ class Admin::AdminController < ApplicationController
 
   def authenticate_admin
     # Пропускаем аутентификацию для страницы логина
-    return if action_name == 'login'
-    
+    return if action_name == "login"
+
     # Проверяем вход в админку
     unless session[:admin]
       redirect_to admin_login_path

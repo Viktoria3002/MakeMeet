@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   # Ассоциации
-  belongs_to :author, class_name: 'User', foreign_key: 'author_id'
+  belongs_to :author, class_name: "User", foreign_key: "author_id"
   has_many :comments, dependent: :destroy
   has_many :likes, as: :target, dependent: :destroy
 
@@ -36,7 +36,7 @@ class Post < ApplicationRecord
 
   def toggle_like(user)
     return false unless user
-    
+
     if has_user_liked?(user)
       unlike_by(user)
     else
