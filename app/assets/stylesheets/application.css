@@ -434,12 +434,46 @@ body.admin-page .footer {
 }
 
 body.sprints-page {
-  background: #0a0a0a !important;
+  position: relative;
+  min-height: 100vh;
+}
+
+body.sprints-page .main-navigation {
+  position: relative;
+  z-index: 1;
+}
+
+body.sprints-page .main-content {
+  position: relative;
+  z-index: 1;
 }
 
 body.sprints-page .main-footer {
+  position: relative;
+  z-index: 1;
   background: transparent;
   backdrop-filter: none;
+}
+
+/* Навигация на странице Открытые спринты — как в Медиа */
+body.sprints-page .main-navigation .nav-container {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+body.sprints-page .nav-link {
+  color: #ffffff;
+}
+
+body.sprints-page .nav-link.active {
+  background: transparent;
+  color: #ffffff;
+  border-radius: 24px;
+  padding: 8px 16px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 8.5px rgba(255, 255, 255, 0.35);
 }
 
 body.profile-page {
@@ -2842,79 +2876,139 @@ body.admin-page .form-input:focus {
 /* Открытые спринты страница */
 .open-sprints-page {
   min-height: calc(100vh - 200px);
-  background: linear-gradient(180deg, #0a0a0a 0%, #1a0a1a 100%);
   padding: 60px 20px 100px;
-  position: relative;
-}
-
-.open-sprints-page::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 60%;
-  height: 60%;
-  background: radial-gradient(ellipse at center, rgba(138, 92, 246, 0.15) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-/* Hero Section */
-.sprints-hero-section {
-  text-align: center;
-  margin-bottom: 60px;
   position: relative;
   z-index: 1;
 }
 
+/* Hero Section */
+.sprints-hero-section {
+  text-align: left;
+  margin-bottom: 139px;
+  padding-left: 9.3125rem; /* 149px */
+  position: relative;
+  z-index: 1;
+}
+
+.sprints-hero-star {
+  position: absolute;
+  right: 10%;
+  top: 79%;
+  transform: translateY(-50%);
+  object-fit: contain;
+}
+
 .sprints-hero-title {
-  font-size: 3rem;
-  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(48px, 7.94vw, 110px);
+  font-weight: 500;
   color: #ffffff;
-  margin-bottom: 20px;
-  line-height: 1.2;
+  margin-bottom: 4%;
+  line-height: 0.89;
+  letter-spacing: -0.08em;
+  max-width: 1212px;
 }
 
 .sprints-hero-description {
-  font-size: 1.2rem;
-  color: rgba(255, 255, 255, 0.7);
-  max-width: 800px;
-  margin: 0 auto;
-  line-height: 1.6;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(18px, 2.3vw, 35px);
+  color: rgba(255, 255, 255, 0.95);
+  max-width: 692px;
+  margin: 0;
+  line-height: 0.94;
+  letter-spacing: -0.06em;
+}
+
+.sprints-hero-description-muted {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 /* Info Section */
 .sprints-info-section {
   text-align: center;
-  margin-bottom: 80px;
+  margin-bottom: 107px;
   position: relative;
   z-index: 1;
 }
 
-.sprints-info-box {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 12px 24px;
-  border-radius: 50px;
-  color: #ffffff;
-  font-size: 1rem;
-  font-weight: 500;
-  margin-bottom: 20px;
+.sprints-info-box-img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 49px;
 }
 
 .sprints-info-text {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(18px, 2.3vw, 35px);
+  color: rgba(255, 255, 255, 0.95);
   max-width: 900px;
   margin: 0 auto;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 1rem;
-  line-height: 1.6;
+  line-height: 0.94;
+  letter-spacing: -0.06em;
+}
+
+.sprints-info-text-muted {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Блок Теги + Сетка спринтов — фон #89BBCB */
+.sprints-tags-and-grid-wrap {
+  background: #89bbcb;
+  border-radius: 24px;
+  padding: 40px 24px 48px;
+  max-width: 1384px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.sprints-tags-section {
+  margin-bottom: 73px;
+}
+
+.sprints-tags-title {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(44px, 7.3vw, 110px);
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0 0 20px 0;
+  line-height: 0.89;
+  letter-spacing: -0.08em;
+  margin-bottom: 53px;
+}
+
+.sprints-tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.sprints-tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 28px;
+  font-weight: 500;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 50px;
+  padding: 26px 49px;
+  color: #518ea2;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: -0.02em;
+}
+
+.sprints-tag:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.2);
 }
 
 /* Sprints Grid */
 .sprints-grid {
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -2930,8 +3024,8 @@ body.admin-page .form-input:focus {
   border-radius: 24px;
   padding: 30px;
   display: flex;
-  gap: 24px;
-  align-items: flex-start;
+  align-items: stretch;
+  gap: 18px;
   transition: all 0.3s ease;
 }
 
@@ -2947,32 +3041,54 @@ body.admin-page .form-input:focus {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  min-height: 0;
 }
 
 .sprint-card-title {
-  font-size: 1.5rem;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(18px, 2.3vw, 30px);
   font-weight: 600;
   color: #ffffff;
   margin: 0;
-  line-height: 1.3;
+  line-height: 1;
+  letter-spacing: -0.06em;
 }
 
 .sprint-card-description {
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 1.5;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(18px, 2.3vw, 20px);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 0.94;
+  letter-spacing: -0.06em;
   margin: 0;
 }
 
+.sprint-card-content .sprint-card-description {
+  margin-top: auto;
+}
+
 .sprint-card-duration {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(14px, 1.5vw, 16px);
+  font-weight: 400;
   display: inline-block;
   background: rgba(255, 255, 255, 0.1);
   padding: 6px 12px;
   border-radius: 12px;
-  font-size: 0.875rem;
   color: #ffffff;
   width: fit-content;
   margin-top: 8px;
+  letter-spacing: -0.02em;
+}
+
+.sprint-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-shrink: 0;
+  align-self: stretch;
 }
 
 .sprint-card-image {
@@ -3015,14 +3131,13 @@ body.admin-page .form-input:focus {
 }
 
 .sprint-card-button {
-  align-self: flex-end;
   background: #ff6b35;
   color: #ffffff;
   border: none;
-  padding: 12px 32px;
-  border-radius: 16px;
+  padding: 18px 32px;
+  border-radius: 50px;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
   white-space: nowrap;
@@ -3035,14 +3150,86 @@ body.admin-page .form-input:focus {
   box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
 }
 
+/* Карточки внутри блока с фоном #89BBCB — тёмный текст */
+.sprints-tags-and-grid-wrap .sprint-card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.sprints-tags-and-grid-wrap .sprint-card:hover {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.sprints-tags-and-grid-wrap .sprint-card-title {
+  font-size: 40px;
+  color: #518ea2;
+  font-weight: 500;
+}
+
+.sprints-tags-and-grid-wrap .sprint-card-description {
+  font-size: 25px;
+  color: #518ea2;
+  opacity: 0.6;
+  font-weight: 450;
+  max-width: 428px;
+}
+
+.sprints-tags-and-grid-wrap .sprint-card-duration {
+  font-size: 30px;
+  background: #89bbcb;
+  color: #ffffff;
+  padding: 10px 58px;
+  border-radius: 50px;
+  margin-top: 0;
+}
+
+.sprints-tags-and-grid-wrap .sprint-card-button {
+  font-size: 30px;
+  background: #89bbcb;
+  color: #ffffff;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.sprints-tags-and-grid-wrap .sprint-card-button:hover {
+  background: #7aabbb;
+}
+
+/* Картинки в карточках — без фиксированных размеров, как в оригинале */
+.sprints-tags-and-grid-wrap .sprint-card-image {
+  width: auto;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.sprints-tags-and-grid-wrap .sprint-card-image img {
+  display: block;
+  vertical-align: middle;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .sprints-hero-title {
-    font-size: 2rem;
+    font-size: clamp(28px, 8vw, 2rem);
   }
 
   .sprints-hero-description {
-    font-size: 1rem;
+    font-size: clamp(16px, 4vw, 1.1rem);
+  }
+
+  .sprints-hero-star {
+    display: none;
+  }
+
+  .sprints-hero-section {
+    padding-left: 1.5rem;
+  }
+
+  .sprints-tags-and-grid-wrap {
+    padding: 24px 16px 32px;
   }
 
   .sprint-card {

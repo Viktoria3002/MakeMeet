@@ -1,97 +1,140 @@
 <% content_for :title, "Открытые спринты - Make Meet" %>
+<% content_for :head do %>
+  <style>
+    body.sprints-page {
+      background-image: url('<%= asset_path("sprints_background.png") %>');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-color: #0a0a0a;
+    }
+  </style>
+<% end %>
 
 <div class="open-sprints-page">
   <!-- Hero Section -->
   <div class="sprints-hero-section">
     <h1 class="sprints-hero-title">Выбирай цели и достигай их за короткий срок</h1>
-    <p class="sprints-hero-description">Присоединяйтесь к коротким, четко структурированным мероприятиям, которые помогают двигаться к вашим целям</p>
+    <p class="sprints-hero-description">Присоединяйтесь к коротким, четко структурированным мероприятиям, которые помогают <span class="sprints-hero-description-muted">двигаться к вашим целям</span></p>
+    <%= image_tag "sprints_star.png", alt: "", class: "sprints-hero-star" %>
   </div>
 
   <!-- Info Section -->
   <div class="sprints-info-section">
-    <div class="sprints-info-box">Открытый спринт — это</div>
-    <p class="sprints-info-text">короткие онлайн инициативы с конкретной целью, рассчитанной на 1-4 недели. Они помогают сосредоточиться, добиться видимых результатов</p>
+    <%= image_tag "sprints_open_sprint_btn.png", alt: "Открытый спринт — это", class: "sprints-info-box-img" %>
+    <p class="sprints-info-text">короткие <span class="sprints-info-text-muted">онлайн инициативы с конкретной целью</span>, рассчитанной на 1-4 недели. Они помогают сосредоточиться, добиться видимых результатов</p>
   </div>
+
+  <!-- Теги + Спринты в одном блоке с фоном #89BBCB -->
+  <div class="sprints-tags-and-grid-wrap">
+    <section class="sprints-tags-section">
+      <h2 class="sprints-tags-title">Теги</h2>
+      <div class="sprints-tags-list">
+        <button type="button" class="sprints-tag">саморазвитие</button>
+        <button type="button" class="sprints-tag">спорт</button>
+        <button type="button" class="sprints-tag">новые знания</button>
+        <button type="button" class="sprints-tag">привычка</button>
+        <button type="button" class="sprints-tag">здоровье</button>
+        <button type="button" class="sprints-tag">фокус и продуктивность</button>
+        <button type="button" class="sprints-tag">карьера</button>
+        <button type="button" class="sprints-tag">креатив</button>
+        <button type="button" class="sprints-tag">контент</button>
+        <button type="button" class="sprints-tag">путешествия</button>
+        <button type="button" class="sprints-tag">хобби</button>
+      </div>
+    </section>
 
   <!-- Sprints Grid -->
   <div class="sprints-grid">
     <!-- Sprint Card 1 -->
     <div class="sprint-card">
+      <div class="sprint-card-image">
+        <%= image_tag "sprints/card1.png", alt: "" %>
+      </div>
       <div class="sprint-card-content">
         <h3 class="sprint-card-title">Улучшить утренние ритуалы</h3>
-        <p class="sprint-card-description">Создайте свой личный план утренней рутины — упражнения, пробежки, чтение книг, тренировки, языки</p>
+        <p class="sprint-card-description">Создать и следовать персональному утреннему плану по улучшению себя: зарядка, пробежка, чтение, тренировка, изучение языков</p>
+      </div>
+      <div class="sprint-card-actions">
         <span class="sprint-card-duration">1 неделя</span>
+        <button class="sprint-card-button" onclick="joinSprint('Улучшить утренние ритуалы', 'Создать и следовать персональному утреннему плану по улучшению себя: зарядка, пробежка, чтение, тренировка, изучение языков', '1 неделя', 'morning')">Присоединиться</button>
       </div>
-      <div class="sprint-card-image">
-        <div class="sprint-image-placeholder meditation"></div>
-      </div>
-      <button class="sprint-card-button" onclick="joinSprint('Улучшить утренние ритуалы', 'Создайте свой личный план утренней рутины — упражнения, пробежки, чтение книг, тренировки, языки', '1 неделя', 'morning')">Присоединиться</button>
     </div>
 
     <!-- Sprint Card 2 -->
     <div class="sprint-card">
+      <div class="sprint-card-image">
+        <%= image_tag "sprints/card2.png", alt: "" %>
+      </div>
       <div class="sprint-card-content">
         <h3 class="sprint-card-title">Развить привычку чтения</h3>
-        <p class="sprint-card-description">Читайте каждый день по 10 страниц любой книги</p>
+        <p class="sprint-card-description">Читать по 10 страниц книги каждый день для формирования полезной привычки и расширения кругозора</p>
+      </div>
+      <div class="sprint-card-actions">
         <span class="sprint-card-duration">2 недели</span>
+        <button class="sprint-card-button" onclick="joinSprint('Развить привычку чтения', 'Читать по 10 страниц книги каждый день для формирования полезной привычки и расширения кругозора', '2 недели', 'reading')">Присоединиться</button>
       </div>
-      <div class="sprint-card-image">
-        <div class="sprint-image-placeholder books"></div>
-      </div>
-      <button class="sprint-card-button" onclick="joinSprint('Развить привычку чтения', 'Читайте каждый день по 10 страниц любой книги', '2 недели', 'reading')">Присоединиться</button>
     </div>
 
     <!-- Sprint Card 3 -->
     <div class="sprint-card">
+      <div class="sprint-card-image">
+        <%= image_tag "sprints/card3.png", alt: "" %>
+      </div>
       <div class="sprint-card-content">
         <h3 class="sprint-card-title">Освоить базовые навыки программирования</h3>
-        <p class="sprint-card-description">Пройдите онлайн-курс по Python или JavaScript</p>
+        <p class="sprint-card-description">Проходить онлайн-курс по Python/JavaScript для карьерного развития и автоматизации задач</p>
+      </div>
+      <div class="sprint-card-actions">
         <span class="sprint-card-duration">4 недели</span>
+        <button class="sprint-card-button" onclick="joinSprint('Освоить базовые навыки программирования', 'Проходить онлайн-курс по Python/JavaScript для карьерного развития и автоматизации задач', '4 недели', 'coding')">Присоединиться</button>
       </div>
-      <div class="sprint-card-image">
-        <div class="sprint-image-placeholder coding"></div>
-      </div>
-      <button class="sprint-card-button" onclick="joinSprint('Освоить базовые навыки программирования', 'Пройдите онлайн-курс по Python или JavaScript', '4 недели', 'coding')">Присоединиться</button>
     </div>
 
     <!-- Sprint Card 4 -->
     <div class="sprint-card">
+      <div class="sprint-card-image">
+        <%= image_tag "sprints/card4.png", alt: "" %>
+      </div>
       <div class="sprint-card-content">
         <h3 class="sprint-card-title">Улучшить физическую форму</h3>
-        <p class="sprint-card-description">Занимайтесь спортом каждый день по 15 минут</p>
+        <p class="sprint-card-description">Выполнять короткую тренировку 15 минут в день для повышения здоровья и энергии</p>
+      </div>
+      <div class="sprint-card-actions">
         <span class="sprint-card-duration">3 недели</span>
+        <button class="sprint-card-button" onclick="joinSprint('Улучшить физическую форму', 'Выполнять короткую тренировку 15 минут в день для повышения здоровья и энергии', '3 недели', 'fitness')">Присоединиться</button>
       </div>
-      <div class="sprint-card-image">
-        <div class="sprint-image-placeholder running"></div>
-      </div>
-      <button class="sprint-card-button" onclick="joinSprint('Улучшить физическую форму', 'Занимайтесь спортом каждый день по 15 минут', '3 недели', 'fitness')">Присоединиться</button>
     </div>
 
     <!-- Sprint Card 5 -->
     <div class="sprint-card">
+      <div class="sprint-card-image">
+        <%= image_tag "sprints/card5.png", alt: "" %>
+      </div>
       <div class="sprint-card-content">
         <h3 class="sprint-card-title">Разобраться с тайм-менеджментом</h3>
-        <p class="sprint-card-description">Изучите принципы планирования и управления временем</p>
+        <p class="sprint-card-description">Освоить методики планирования и ведения для повышения эффективности и снижения стресса</p>
+      </div>
+      <div class="sprint-card-actions">
         <span class="sprint-card-duration">1 неделя</span>
+        <button class="sprint-card-button" onclick="joinSprint('Разобраться с тайм-менеджментом', 'Освоить методики планирования и ведения для повышения эффективности и снижения стресса', '1 неделя', 'timemanage')">Присоединиться</button>
       </div>
-      <div class="sprint-card-image">
-        <div class="sprint-image-placeholder calendar"></div>
-      </div>
-      <button class="sprint-card-button" onclick="joinSprint('Разобраться с тайм-менеджментом', 'Изучите принципы планирования и управления временем', '1 неделя', 'timemanage')">Присоединиться</button>
     </div>
 
     <!-- Sprint Card 6 -->
     <div class="sprint-card">
-      <div class="sprint-card-content">
-        <h3 class="sprint-card-title">Медитация и ментальное здоровье</h3>
-        <p class="sprint-card-description">Практикуйте медитацию по 10 минут каждый день</p>
-        <span class="sprint-card-duration">1 неделя</span>
-      </div>
       <div class="sprint-card-image">
-        <div class="sprint-image-placeholder meditation"></div>
+        <%= image_tag "sprints/card6.png", alt: "" %>
       </div>
-      <button class="sprint-card-button" onclick="joinSprint('Медитация и ментальное здоровье', 'Практикуйте медитацию по 10 минут каждый день', '1 неделя', 'meditation')">Присоединиться</button>
+      <div class="sprint-card-content">
+        <h3 class="sprint-card-title">Ментальное здоровье</h3>
+        <p class="sprint-card-description">Следовать программе медитации 10 минут в день для снижения стресса и повышения концентрации</p>
+      </div>
+      <div class="sprint-card-actions">
+        <span class="sprint-card-duration">1 неделя</span>
+        <button class="sprint-card-button" onclick="joinSprint('Ментальное здоровье', 'Следовать программе медитации 10 минут в день для снижения стресса и повышения концентрации', '1 неделя', 'meditation')">Присоединиться</button>
+      </div>
     </div>
+  </div>
   </div>
 </div>
 
