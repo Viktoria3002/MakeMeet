@@ -1,87 +1,163 @@
 <% content_for :title, "Мои спринты - Make Meet" %>
 
+<% content_for :head do %>
+  <style>
+    body.mysprints-page {
+      background-image: url('<%= asset_path("mysprints_background.png") %>');
+      background-size: 1600px 3455px;
+      background-position: center 20%;
+      background-repeat: no-repeat;
+      background-color: #ffffffff;
+    }
+  </style>
+<% end %>
+
 <div class="open-sprints-page">
   <div class="sprints-hero-section">
-    <h1 class="sprints-hero-title">Мои активные спринты</h1>
-    <p class="sprints-hero-description">Здесь отображаются спринты, к которым вы присоединились</p>
+    <h1 class="sprints-hero-title">Мои спринты</h1>
   </div>
 
-  <div class="sprints-grid" id="mySprintsGrid">
-    <!-- Спринты будут добавляться динамически через JavaScript -->
-    <div class="empty-state" style="text-align: center; padding: 60px 20px; color: rgba(255, 255, 255, 0.6);">
-      <p style="font-size: 1.2rem; margin-bottom: 12px;">У вас пока нет активных спринтов</p>
-      <p style="font-size: 0.95rem;">Присоединяйтесь к спринтам на странице "Открытые спринты"</p>
-    </div>
+  <div class="my-sprints-panel">
+    <div class="sprints-grid" id="mySprintsGrid"></div>
   </div>
 </div>
 
+
 <script>
-  // Храним присоединенные спринты в localStorage
+  // Rails отдаёт правильную базу ассетов
+  window.ASSET_BASE = "<%= asset_path('') %>";
+
+  // ===== storage =====
   function getJoinedSprints() {
-    const sprints = localStorage.getItem('joinedSprints');
-    return sprints ? JSON.parse(sprints) : [];
+    try {
+      const raw = localStorage.getItem("joinedSprints");
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+      console.error("localStorage parse error:", e);
+      return [];
+    }
   }
 
   function saveJoinedSprints(sprints) {
-    localStorage.setItem('joinedSprints', JSON.stringify(sprints));
+    localStorage.setItem("joinedSprints", JSON.stringify(sprints));
   }
 
-  function addSprint(sprintData) {
-    const sprints = getJoinedSprints();
-    
-    // Проверяем, не присоединен ли уже этот спринт
-    if (!sprints.find(s => s.id === sprintData.id)) {
-      sprints.push(sprintData);
-      saveJoinedSprints(sprints);
-      updateMySprintsDisplay();
-    }
+  // ===== helpers =====
+  function assetUrl(imagePath) {
+    if (!imagePath) return "";
+
+    // уже полный URL
+    if (imagePath.startsWith("http")) return imagePath;
+
+    // уже абсолютный путь (например /assets/xxx)
+    if (imagePath.startsWith("/")) return imagePath;
+
+    // относительный путь из app/assets/images
+    return window.ASSET_BASE + imagePath;
+  }
+
+  // ===== UI =====
+  function renderEmptyState() {
+    return `
+      <div class="empty-state">
+        <p class="empty-title">У вас пока нет активных спринтов</p>
+        <p class="empty-subtitle">Присоединяйтесь к спринтам на странице "Открытые спринты"</p>
+      </div>
+    `;
+  }
+
+  function renderSprintCard(sprint) {
+    const bgUrl = assetUrl(sprint.image);
+    const style = bgUrl ? `background-image: url('${bgUrl}');` : "";
+
+    return `
+      <div class="sprint-card" style="${style}">
+        <div class="sprint-card-overlay"></div>
+
+        <span class="sprint-card-duration">${sprint.duration || ""}</span>
+
+        <div class="sprint-card-content">
+          <h3 class="sprint-card-title">${sprint.title || ""}</h3>
+          <p class="sprint-card-description">${sprint.description || ""}</p>
+        </div>
+
+        <button class="mysprint-card-button" type="button">
+          Завершить спринт
+        </button>
+      </div>
+    `;
   }
 
   function updateMySprintsDisplay() {
-    const grid = document.getElementById('mySprintsGrid');
+    const grid = document.getElementById("mySprintsGrid");
     const sprints = getJoinedSprints();
-    
-    if (sprints.length === 0) {
-      grid.innerHTML = `
-        <div class="empty-state" style="text-align: center; padding: 60px 20px; color: rgba(255, 255, 255, 0.6);">
-          <p style="font-size: 1.2rem; margin-bottom: 12px;">У вас пока нет активных спринтов</p>
-          <p style="font-size: 0.95rem;">Присоединяйтесь к спринтам на странице "Открытые спринты"</p>
-        </div>
-      `;
+
+    if (!sprints.length) {
+      grid.innerHTML = renderEmptyState();
       return;
     }
 
-    grid.innerHTML = sprints.map(sprint => `
-      <div class="sprint-card">
-        <div class="sprint-card-content">
-          <h3 class="sprint-card-title">${sprint.title}</h3>
-          <p class="sprint-card-description">${sprint.description}</p>
-          <span class="sprint-card-duration">${sprint.duration}</span>
-        </div>
-        <div class="sprint-card-image">
-          <div class="sprint-image-placeholder meditation"></div>
-        </div>
-      </div>
-    `).join('');
+    grid.innerHTML = sprints.map(renderSprintCard).join("");
   }
 
-  // Инициализируем при загрузке страницы
-  document.addEventListener('DOMContentLoaded', function() {
-    updateMySprintsDisplay();
-  });
+  // ===== actions =====
+  function addSprint(sprintData) {
+    const sprints = getJoinedSprints();
 
-  // Функция для вызова с других страниц
-  window.joinSprint = function(title, description, duration, id) {
+    if (!sprints.find((s) => s.id === sprintData.id)) {
+      sprints.push(sprintData);
+      saveJoinedSprints(sprints);
+    }
+
+    updateMySprintsDisplay();
+  }
+
+  // ===== API для других страниц (ВАЖНО: объявляем ДО вызовов) =====
+  window.joinSprint = function(title, description, duration, id, image) {
     const sprintData = {
       id: id || title,
-      title: title,
-      description: description,
-      duration: duration
+      title,
+      description,
+      duration,
+      image // пример: "mysprints/M_Sprint-1.png"
     };
+
     addSprint(sprintData);
   };
 
-  // Сохраняем функции для использования на других страницах
+  // ===== init =====
+  document.addEventListener("DOMContentLoaded", function() {
+    // тестовый режим (чтобы точно увидеть картинки)
+    localStorage.removeItem("joinedSprints");
+
+    window.joinSprint(
+      "Улучшить утренние ритуалы",
+      "Создать и следовать персональному утреннему плану: зарядка, пробежка, чтение, тренировка, языки",
+      "3 недели",
+      "morning1",
+      "mysprints/M_Sprint-1.png"
+    );
+
+    window.joinSprint(
+      "Развить привычку чтения",
+      "Читать по 10 страниц каждый день для привычки и расширения кругозора",
+      "2 недели",
+      "books1",
+      "mysprints/M_Sprint-2.png"
+    );
+
+    window.joinSprint(
+      "Улучшить физическую форму",
+      "Короткая тренировка 15 минут в день для здоровья и энергии",
+      "1 неделя",
+      "fitness1",
+      "mysprints/M_Sprint.png"
+    );
+
+    updateMySprintsDisplay();
+  });
+
+  // экспорт (если надо)
   window.getJoinedSprints = getJoinedSprints;
   window.addSprint = addSprint;
 </script>
