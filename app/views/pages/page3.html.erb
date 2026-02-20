@@ -2,12 +2,12 @@
 
 <% content_for :head do %>
   <style>
-    body.mysprints-page {
+    body.my-sprints-page {
       background-image: url('<%= asset_path("mysprints_background.png") %>');
-      background-size: 1600px 3455px;
-      background-position: center 20%;
+      background-size: cover;
+      background-position: center;
       background-repeat: no-repeat;
-      background-color: #ffffffff;
+      background-color: #e8eef1;
     }
   </style>
 <% end %>
@@ -24,8 +24,15 @@
 
 
 <script>
-  // Rails отдаёт правильную базу ассетов
+  // Rails отдаёт правильные пути к ассетам
   window.ASSET_BASE = "<%= asset_path('') %>";
+  window.FINISH_SPRINT_BTN_URL = "<%= asset_path('finish_sprint_btn.png') %>";
+  window.MYSPRINTS_CARD_IMAGES = {
+    "mysprints_card_reading.png": "<%= asset_path('mysprints_card_reading.png') %>",
+    "mysprints_card_books.png": "<%= asset_path('mysprints_card_books.png') %>",
+    "mysprints_card_fitness.png": "<%= asset_path('mysprints_card_fitness.png') %>",
+    "mysprints_card_texture.png": "<%= asset_path('mysprints_card_texture.png') %>"
+  };
 
   // ===== storage =====
   function getJoinedSprints() {
@@ -67,8 +74,9 @@
   }
 
   function renderSprintCard(sprint) {
-    const bgUrl = assetUrl(sprint.image);
+    const bgUrl = (window.MYSPRINTS_CARD_IMAGES && window.MYSPRINTS_CARD_IMAGES[sprint.image]) || assetUrl(sprint.image);
     const style = bgUrl ? `background-image: url('${bgUrl}');` : "";
+    const finishBtnUrl = window.FINISH_SPRINT_BTN_URL || assetUrl("finish_sprint_btn.png");
 
     return `
       <div class="sprint-card" style="${style}">
@@ -81,8 +89,9 @@
           <p class="sprint-card-description">${sprint.description || ""}</p>
         </div>
 
-        <button class="mysprint-card-button" type="button">
-          Завершить спринт
+        <button class="mysprint-card-button" type="button" title="Завершить спринт">
+          <img src="${finishBtnUrl}" alt="Завершить спринт" class="mysprint-card-button-img" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';">
+          <span class="mysprint-card-button-fallback" style="display:none;">Завершить спринт</span>
         </button>
       </div>
     `;
@@ -133,25 +142,25 @@
     window.joinSprint(
       "Улучшить утренние ритуалы",
       "Создать и следовать персональному утреннему плану: зарядка, пробежка, чтение, тренировка, языки",
-      "3 недели",
+      "1 неделя",
       "morning1",
-      "mysprints/M_Sprint-1.png"
+      "mysprints_card_reading.png"
     );
 
     window.joinSprint(
       "Развить привычку чтения",
-      "Читать по 10 страниц каждый день для привычки и расширения кругозора",
+      "Читать по 10 страниц книги каждый день для формирования полезной привычки и расширения кругозора",
       "2 недели",
       "books1",
-      "mysprints/M_Sprint-2.png"
+      "mysprints_card_books.png"
     );
 
     window.joinSprint(
       "Улучшить физическую форму",
-      "Короткая тренировка 15 минут в день для здоровья и энергии",
-      "1 неделя",
+      "Выполнять короткую тренировку 15 минут в день для повышения здоровья и энергии",
+      "3 недели",
       "fitness1",
-      "mysprints/M_Sprint.png"
+      "mysprints_card_fitness.png"
     );
 
     updateMySprintsDisplay();

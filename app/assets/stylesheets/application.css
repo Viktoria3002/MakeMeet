@@ -2287,6 +2287,34 @@ body.media-page .nav-link.active {
   box-shadow: 0 0 8.5px rgba(255, 255, 255, 0.35);
 }
 
+/* Навигация на странице Мои спринты — как на Медиа */
+body.my-sprints-page .main-navigation .nav-container {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+body.my-sprints-page .nav-link {
+  color: #ffffff;
+}
+
+body.my-sprints-page .nav-link.active {
+  background: transparent;
+  color: #ffffff;
+  border-radius: 24px;
+  padding: 8px 16px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 8.5px rgba(255, 255, 255, 0.35);
+}
+
+body.my-sprints-page .sprints-hero-title {
+  background: linear-gradient(to bottom, #ffffff 60%, rgba(255, 255, 255, 0.1) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .about-page-wrap {
   font-family: 'Inter', sans-serif;
   max-width: 1512px;
@@ -3019,7 +3047,7 @@ body.admin-page .form-input:focus {
 
 /* Sprint Card */
 .sprint-card {
-   background-color: rgba(255,255,255,0.05); /* цвет поверх/под картинкой */
+  background-color: rgba(255, 255, 255, 0.05); /* цвет поверх/под картинкой */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -3031,34 +3059,44 @@ body.admin-page .form-input:focus {
   align-items: stretch;
   gap: 18px;
   transition: all 0.3s ease;
-  position: relative; 
+  position: relative;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   overflow: hidden;
+  border: 3px solid white;
 }
 .mysprint-card-button {
   position: absolute;
   bottom: 24px;
   right: 24px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  line-height: 0;
+}
 
+.mysprint-card-button-img {
+  display: block;
+  object-fit: contain;
+}
+
+.mysprint-card-button:hover .mysprint-card-button-img {
+  opacity: 0.9;
+}
+
+.mysprint-card-button-fallback {
   font-family: 'Inter', sans-serif;
   font-size: 25px;
   font-weight: 400;
   color: #ffffff;
-
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(8px);
-
   padding: 14px 40px;
   border-radius: 50px;
-
-  border: none;
-  cursor: pointer;
-  margin-top: auto;  
-  align-self: flex-end;
+  display: inline-block;
 }
-
 
 .sprint-card:hover {
   background: rgba(255, 255, 255, 0.08);
@@ -3073,7 +3111,7 @@ body.admin-page .form-input:focus {
   flex-direction: column;
   gap: 68px;
   min-height: 0;
-   max-width: 900px;
+  max-width: 900px;
 }
 
 .sprint-card-title {
@@ -3088,18 +3126,19 @@ body.admin-page .form-input:focus {
 
 .sprint-card-description {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(18px, 2.3vw, 20px);
-  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(18px, 2.3vw, 25px);
+  color: rgba(255, 255, 255, 0.5);
   line-height: 0.94;
   letter-spacing: -0.06em;
   margin: 0;
+  max-width: 533px;
 }
 
 .sprint-card-content .sprint-card-description {
   margin-top: auto;
 }
 .sprint-card-content {
-  padding-right: 160px; /* подбери (в зависимости от ширины кнопки) */
+  padding-right: 101px; /* подбери (в зависимости от ширины кнопки) */
 }
 .sprint-card-duration {
   font-family: 'Inter', sans-serif;
@@ -3107,7 +3146,7 @@ body.admin-page .form-input:focus {
   font-weight: 400;
   display: inline-block;
   background: rgba(255, 255, 255, 0.1);
-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   padding: 12px 40px;
   border-radius: 50px;
   color: #ffffff;
@@ -3115,15 +3154,6 @@ backdrop-filter: blur(8px);
   margin-top: 8px;
   letter-spacing: -0.02em;
 }
-.sprint-card-duration {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  margin: 0;          /* убираем старые отступы */
-  z-index: 2;
-}
-
-
 .sprint-card-actions {
   display: flex;
   flex-direction: column;
@@ -3291,29 +3321,112 @@ backdrop-filter: blur(8px);
   }
 }
 /* ===== МОИ СПРИНТЫ: общий блок-панель ===== */
-.my-sprints-panel{
-  max-width: 1384px;                 /* как у wrap на другой странице */
+.my-sprints-panel {
+  max-width: 1384px; /* как у wrap на другой странице */
   margin: 0 auto;
   padding: 60px 60px 60px;
   border-radius: 24px;
-  background: #79ABE0;
+  background: #adc9e8;
   backdrop-filter: blur(12px);
+  box-shadow: 0 0 24px 8px rgba(82, 124, 190, 0.45), 0 0 48px 16px rgba(82, 124, 190, 0.25);
+}
 
+.my-sprints-panel .sprints-grid {
+  background: #79abe0;
+  padding: 38px 0px;
+  border-radius: 24px;
+  border: 3px solid white;
+}
+
+.my-sprints-panel .sprint-card {
+  margin: 18px 36px;
+}
+
+.my-sprints-panel .sprint-card:first-child {
+  margin-top: 0;
+}
+
+.my-sprints-panel .sprint-card:last-child {
+  margin-bottom: 0;
 }
 
 /* ===== МОИ СПРИНТЫ: пустое состояние без inline-стилей ===== */
-.my-sprints-panel .empty-state{
+.my-sprints-panel .empty-state {
   text-align: center;
   padding: 60px 20px;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255, 255, 255, 0.7);
 }
 
-.my-sprints-panel .empty-title{
+.my-sprints-panel .empty-title {
   font-size: 1.2rem;
   margin: 0 0 12px 0;
 }
 
-.my-sprints-panel .empty-subtitle{
+.my-sprints-panel .empty-subtitle {
   font-size: 0.95rem;
   margin: 0;
+}
+
+/* Карточки «Мои спринты» по макету: светлый фон, картинка справа, тег и кнопка */
+.my-sprints-panel .sprint-card {
+  background-color: #badaff;
+  background-size: cover;
+  background-position: right center;
+  border: 0px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.my-sprints-panel .sprint-card:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+.my-sprints-panel .sprint-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(186, 218, 255, 0.92) 0%,
+    rgba(186, 218, 255, 0.4) 55%,
+    transparent 75%
+  );
+  pointer-events: none;
+  z-index: 0;
+  border-radius: inherit;
+}
+
+.my-sprints-panel .sprint-card-duration {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 210px;
+  height: 61px;
+  margin: 0;
+  z-index: 2;
+  background: transparent;
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-size: 25px;
+  font-weight: 400;
+  color: #ebebeb;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.my-sprints-panel .sprint-card-content {
+  position: relative;
+  z-index: 1;
+}
+
+.my-sprints-panel .sprint-card-title {
+  color: #ffffff;
+  font-weight: 600;
+  max-width: 750px;
+}
+
+.my-sprints-panel .sprint-card-description {
+  color: rgba(255, 255, 255, 0.5);
 }
