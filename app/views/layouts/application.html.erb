@@ -27,7 +27,7 @@
     
   </head>
 
-  <body class="<%= 'about-page' if current_page?(about_path) || current_page?(root_path) %> <%= 'media-page' if current_page?(page1_path) %> <%= 'admin-page' if controller_path.include?('admin') %> <%= 'sprints-page' if current_page?(page2_path) %> <%= 'profile-page' if current_page?(page4_path) %>">
+  <body class="<%= 'about-page' if current_page?(about_path) || current_page?(root_path) %> <%= 'media-page' if current_page?(page1_path) %> <%= 'admin-page' if controller_path.include?('admin') %> <%= 'sprints-page' if current_page?(page2_path) %> <%= 'profile-page' if current_page?(page4_path) %> <%= 'my-sprints-page' if current_page?(page3_path) %>">
     <% if current_page?(page1_path) %>
       <div class="media-page-wrapper">
     <% end %>
