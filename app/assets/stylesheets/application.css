@@ -2308,7 +2308,18 @@ body.my-sprints-page .nav-link.active {
   box-shadow: 0 0 8.5px rgba(255, 255, 255, 0.35);
 }
 
+body.my-sprints-page .sprints-hero-section {
+  text-align: center;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 body.my-sprints-page .sprints-hero-title {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
   background: linear-gradient(to bottom, #ffffff 60%, rgba(255, 255, 255, 0.1) 100%);
   -webkit-background-clip: text;
   background-clip: text;
