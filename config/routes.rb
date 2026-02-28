@@ -1,18 +1,12 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  # Health check
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-
-  # Defines the root path route ("/")
+  # Root
   root "pages#about"
 
-  # Маршруты для страниц
+  # Страницы
   get "about", to: "pages#about", as: :about
   get "register", to: "pages#register", as: :register
   get "login", to: "pages#login", as: :login
@@ -21,11 +15,14 @@ Rails.application.routes.draw do
   get "page3", to: "pages#page3", as: :page3
   get "page4", to: "pages#page4", as: :page4
 
-  # Маршруты для админки
+  # =========================
+  # Админка (HTML)
+  # =========================
   namespace :admin do
     get "login", to: "admin#login", as: :login
     post "login", to: "admin#login"
     root to: "admin#index"
+
     get "users", to: "admin#users"
     get "posts", to: "admin#posts"
     get "comments", to: "admin#comments"
@@ -46,4 +43,14 @@ Rails.application.routes.draw do
     delete "comments/:id", to: "admin#delete_comment", as: :delete_comment
     delete "sprints/:id", to: "admin#delete_sprint", as: :delete_sprint
   end
+
+  # =========================
+  # API для Gateway
+  # =========================
+  namespace :api do
+    namespace :admin do
+      get :overview
+    end
+  end
+
 end
