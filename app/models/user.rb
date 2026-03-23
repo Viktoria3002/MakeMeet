@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_secure_password
+
   # Ассоциации
   has_many :posts, foreign_key: "author_id", dependent: :destroy
   has_many :comments, foreign_key: "author_id", dependent: :destroy
@@ -8,13 +10,16 @@ class User < ApplicationRecord
   has_many :liked_posts, through: :likes, source: :target, source_type: "Post"
   has_many :liked_comments, through: :likes, source: :target, source_type: "Comment"
 
+  ROLES = %w[author moderator admin].freeze
+
   # Валидации
   validates :username, presence: true, uniqueness: true, length: { minimum: 3, maximum: 50 }
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password_hash, presence: true
+  validates :role, inclusion: { in: ROLES }
 
   # Колбэки
   before_validation :set_registration_date, on: :create
+  before_create :generate_session_token
 
   # Методы
   def full_name
@@ -55,9 +60,25 @@ class User < ApplicationRecord
     like_record&.destroy
   end
 
+  def rotate_session_token!
+    update!(session_token: SecureRandom.hex(32))
+  end
+
+  def admin?
+    role == "admin"
+  end
+
+  def moderator?
+    role == "moderator" || admin?
+  end
+
   private
 
   def set_registration_date
     self.registration_date ||= Time.current
+  end
+
+  def generate_session_token
+    self.session_token ||= SecureRandom.hex(32)
   end
 end

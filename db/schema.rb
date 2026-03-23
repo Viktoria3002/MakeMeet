@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_20_000007) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_23_205152) do
   create_table "comments", force: :cascade do |t|
     t.integer "comment_id", null: false
     t.bigint "post_id", null: false
@@ -42,8 +42,12 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_20_000007) do
     t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status", default: "pending", null: false
+    t.text "moderation_comment"
+    t.bigint "moderated_by"
     t.index ["created_at"], name: "index_posts_on_created_at"
     t.index ["post_id"], name: "index_posts_on_post_id", unique: true
+    t.index ["status"], name: "index_posts_on_status"
   end
 
   create_table "sprint_participants", force: :cascade do |t|
@@ -77,11 +81,16 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_20_000007) do
     t.integer "user_id"
     t.string "username", null: false
     t.string "email", null: false
-    t.string "password_hash", null: false
+    t.string "password_hash"
     t.datetime "registration_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
+    t.string "session_token"
+    t.string "role", default: "author", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["role"], name: "index_users_on_role"
+    t.index ["session_token"], name: "index_users_on_session_token", unique: true
     t.index ["user_id"], name: "index_users_on_user_id", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
@@ -91,6 +100,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_20_000007) do
   add_foreign_key "comments", "users", column: "author_id"
   add_foreign_key "likes", "users"
   add_foreign_key "posts", "users", column: "author_id"
+  add_foreign_key "posts", "users", column: "moderated_by"
   add_foreign_key "sprint_participants", "sprints"
   add_foreign_key "sprint_participants", "users"
 end

@@ -53,4 +53,20 @@ Rails.application.routes.draw do
     end
   end
 
+  # =========================
+# Mini App API (запись)
+# =========================
+namespace :api, defaults: { format: :json } do
+  post "login", to: "sessions#create"
+  post "logout", to: "sessions#destroy"
+
+  resources :posts, only: [:index, :show, :create, :update, :destroy] do
+    member do
+      patch :moderate
+    end
+  end
+
+  resources :users, only: [:update]
+end
+
 end

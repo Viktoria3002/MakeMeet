@@ -1,13 +1,19 @@
 class Post < ApplicationRecord
   # Ассоциации
   belongs_to :author, class_name: "User", foreign_key: "author_id"
+  belongs_to :moderator, class_name: "User", foreign_key: "moderated_by", optional: true
+
   has_many :comments, dependent: :destroy
   has_many :likes, as: :target, dependent: :destroy
+
+  # Статусы
+  STATUSES = %w[pending approved rejected].freeze
 
   # Валидации
   validates :post_id, presence: true, uniqueness: true
   validates :content, presence: true, length: { minimum: 1, maximum: 5000 }
   validates :author_id, presence: true
+  validates :status, inclusion: { in: STATUSES }
 
   # Колбэки
   before_validation :set_post_id, on: :create
