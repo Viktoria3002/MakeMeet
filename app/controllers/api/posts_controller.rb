@@ -1,5 +1,5 @@
 class Api::PostsController < Api::BaseController
-  before_action :set_post, only: [:show, :update, :destroy, :moderate]
+  before_action :set_post, only: [ :show, :update, :destroy, :moderate ]
 
   def index
     posts = if current_user.moderator?
