@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_23_205152) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_25_185511) do
   create_table "comments", force: :cascade do |t|
     t.integer "comment_id", null: false
     t.bigint "post_id", null: false
@@ -88,6 +88,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_23_205152) do
     t.string "password_digest"
     t.string "session_token"
     t.string "role", default: "author", null: false
+    t.string "name"
+    t.text "about"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["role"], name: "index_users_on_role"
     t.index ["session_token"], name: "index_users_on_session_token", unique: true
