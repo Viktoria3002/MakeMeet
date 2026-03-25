@@ -7,12 +7,15 @@ Rails.application.routes.draw do
 
   # Страницы
   get "about", to: "pages#about", as: :about
-  get "register", to: "pages#register", as: :register
   get "login", to: "pages#login", as: :login
   get "page1", to: "pages#page1", as: :page1
   get "page2", to: "pages#page2", as: :page2
   get "page3", to: "pages#page3", as: :page3
   get "page4", to: "pages#page4", as: :page4
+
+  # Регистрация
+ get "new", to: "users#new", as: :new_user_registration
+post "register", to: "users#create"
 
   # =========================
   # Админка (HTML)
@@ -52,21 +55,21 @@ Rails.application.routes.draw do
     end
   end
 
-# =========================
-# Mini App API (запись)
-# =========================
-namespace :api, defaults: { format: :json } do
-  post "login", to: "sessions#create"
-  post "logout", to: "sessions#destroy"
+  # =========================
+  # Mini App API (запись)
+  # =========================
+  namespace :api, defaults: { format: :json } do
+    post "login", to: "sessions#create"
+    post "logout", to: "sessions#destroy"
 
-  resources :posts, only: [ :index, :show, :create, :update, :destroy ] do
-    member do
-      patch :moderate
+    resources :posts, only: [:index, :show, :create, :update, :destroy] do
+      member do
+        patch :moderate
+      end
     end
-  end
 
-  resources :users, only: [ :update ]
-end
+    resources :users, only: [:update]
+  end
 
   # =========================
   # Admin Mini App
