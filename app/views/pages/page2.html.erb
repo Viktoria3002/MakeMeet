@@ -2,8 +2,9 @@
 <% content_for :head do %>
   <style>
     body.sprints-page {
-      background-image: url('<%= asset_path("sprints_background.png") %>');
+      background-image: url('<%= asset_path("backgroundOpenSprints.png") %>');
       background-size: cover;
+      background-position: center;
       background-repeat: no-repeat;
       background-color: #0a0a0a;
     }
@@ -50,8 +51,8 @@
       <div class="sprint-card-image">
         <%= image_tag "sprints/card1.png", alt: "" %>
       </div>
-      <div class="sprint-card-content">
-        <h3 class="sprint-card-title">Улучшить утренние ритуалы</h3>
+        <div class="sprint-card-content">
+        <%= link_to "Улучшить утренние ритуалы", article_path, class: "sprint-card-title sprint-card-title-link" %>
         <p class="sprint-card-description">Создать и следовать персональному утреннему плану по улучшению себя: зарядка, пробежка, чтение, тренировка, изучение языков</p>
       </div>
       <div class="sprint-card-actions">
@@ -139,58 +140,7 @@
 </div>
 
 <script>
-  function getJoinedSprints() {
-    const sprints = localStorage.getItem('joinedSprints');
-    return sprints ? JSON.parse(sprints) : [];
+  function joinSprint(title) {
+    alert('Вы успешно присоединились к спринту: ' + title);
   }
-
-  function saveJoinedSprints(sprints) {
-    localStorage.setItem('joinedSprints', JSON.stringify(sprints));
-  }
-
-  function joinSprint(title, description, duration, id) {
-    const sprints = getJoinedSprints();
-    
-    // Проверяем, не присоединен ли уже этот спринт
-    if (sprints.find(s => s.id === id)) {
-      alert('Вы уже присоединились к этому спринту!');
-      return;
-    }
-
-    const sprintData = {
-      id: id,
-      title: title,
-      description: description,
-      duration: duration
-    };
-    
-    sprints.push(sprintData);
-    saveJoinedSprints(sprints);
-    
-    // Обновляем кнопку
-    const button = event.target;
-    button.textContent = 'Присоединено';
-    button.style.background = '#22c55e';
-    button.disabled = true;
-    
-    alert('Вы успешно присоединились к спринту!');
-  }
-
-  // Проверяем при загрузке, какие спринты уже присоединены
-  document.addEventListener('DOMContentLoaded', function() {
-    const sprints = getJoinedSprints();
-    const sprintIds = sprints.map(s => s.id);
-    
-    document.querySelectorAll('.sprint-card-button').forEach(button => {
-      if (button.onclick) {
-        const onclickText = button.onclick.toString();
-        const match = onclickText.match(/'(\w+)'/);
-        if (match && sprintIds.includes(match[1])) {
-          button.textContent = 'Присоединено';
-          button.style.background = '#22c55e';
-          button.disabled = true;
-        }
-      }
-    });
-  });
 </script>

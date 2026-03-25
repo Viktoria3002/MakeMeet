@@ -8,11 +8,16 @@ Rails.application.routes.draw do
   # Страницы
   get "about", to: "pages#about", as: :about
   get "register", to: "pages#register", as: :register
+  get "registration", to: "pages#registration", as: :registration
   get "login", to: "pages#login", as: :login
   get "page1", to: "pages#page1", as: :page1
   get "page2", to: "pages#page2", as: :page2
   get "page3", to: "pages#page3", as: :page3
   get "page4", to: "pages#page4", as: :page4
+  get "profile_details", to: "pages#profile_details", as: :profile_details
+
+  # Страница статьи (не отображается в основном меню)
+  get "article", to: "pages#article", as: :article
 
   # =========================
   # Админка (HTML)

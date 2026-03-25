@@ -1,87 +1,46 @@
 <% content_for :title, "Регистрация - Make Meet" %>
+<% content_for :head do %>
+  <style>
+    body.register-page {
+      background-image: url('<%= asset_path("bgwelcome.png") %>');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+    }
+  </style>
+<% end %>
 
-<div class="register-section">
-  <div class="register-background">
-    <!-- Градиент будет добавлен через CSS -->
-  </div>
-  
+<section class="register-section">
   <div class="register-card">
-    <h1 class="register-title">Давайте знакомиться</h1>
-    
-    <form class="register-form" id="registerForm">
-      <div class="form-row">
-        <div class="form-column">
-          <input type="email" class="form-input" placeholder="Почта" name="email" required />
-        </div>
-      </div>
-      
-      <div class="form-row">
-        <div class="form-column">
-          <input type="password" class="form-input" placeholder="Пароль" name="password" required />
-        </div>
-      </div>
-      
-      <div class="form-row">
-        <div class="form-column">
-          <input type="text" class="form-input" placeholder="Имя" name="name" required />
-        </div>
-        <div class="form-column">
-          <textarea class="form-textarea" placeholder="О себе" name="about"></textarea>
-        </div>
-      </div>
-      
-      <div class="form-row">
-        <button type="submit" class="register-submit-button">Зарегистрироваться</button>
-      </div>
-      
-      <p class="register-disclaimer">
-        Нажимая «Зарегистрироваться», вы принимаете условия сервиса и даёте согласие на обработку данных.
-      </p>
-    </form>
-  </div>
-</div>
+    <h1 class="register-title">Добро пожаловать</h1>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('registerForm');
-    
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      // Собираем данные формы
-      const formData = new FormData(form);
-      const email = formData.get('email');
-      const name = formData.get('name');
-      
-      // Проверяем поддержку уведомлений
-      if ('Notification' in window) {
-        // Запрашиваем разрешение на отправку уведомлений
-        Notification.requestPermission().then(function(permission) {
-          if (permission === 'granted') {
-            // Создаем уведомление
-            const notification = new Notification('Успешная регистрация!', {
-              body: `Добро пожаловать, ${name}! Вы успешно зарегистрировались на Make Meet!`,
-              icon: '/icon.png',
-              badge: '/icon.png',
-              tag: 'registration-success',
-              requireInteraction: true
-            });
-            
-            // Закрываем уведомление через 5 секунд
-            setTimeout(function() {
-              notification.close();
-            }, 5000);
-          }
-        });
-      }
-      
-      // Также показываем alert для подстраховки
-      alert(`Добро пожаловать, ${name}! Вы успешно зарегистрировались на Make Meet!`);
-      
-      // Очищаем форму
-      form.reset();
-    });
-  });
-</script>
+    <p class="register-description">
+      Один - тоже путь. Но вместе - больше мотивации.<br>
+      Войди или зарегистрируйся, чтобы<br>
+      найти своего человека
+    </p>
+
+    <div class="register-actions">
+      <%= link_to registration_path, class: "register-cta-link" do %>
+        <%= image_tag "Q_Button_1 (5).png", alt: "Зарегистрироваться", class: "register-cta-image" %>
+      <% end %>
+
+      <%= link_to login_path, class: "register-cta-link" do %>
+        <%= image_tag "Q_Button_1 (6).png", alt: "Войти", class: "register-cta-image" %>
+      <% end %>
+    </div>
+
+    <div class="register-socials">
+      <button type="button" class="register-social-button">
+        <%= image_tag "Q_Button_1 (7).png", alt: "Войти через Apple", class: "register-social-image" %>
+      </button>
+
+      <button type="button" class="register-social-button">
+        <%= image_tag "Q_Button_1 (8).png", alt: "Войти через Google", class: "register-social-image" %>
+      </button>
+    </div>
+  </div>
+</section>
 
 

@@ -1,0 +1,88 @@
+<% content_for :title, "Улучшить утренние ритуалы - Make Meet" %>
+
+<% content_for :head do %>
+  <style>
+    body.article-page {
+      background-image: url('<%= asset_path("bgarticle.png") %>');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #e8eef1;
+    }
+
+    body.article-page .main-content {
+      padding: 0;
+    }
+  </style>
+<% end %>
+
+<div class="article-page-wrapper">
+  <section class="article-card">
+    <%= image_tag 'Union (2).png', alt: '', class: 'article-union-img' %>
+
+    <div class="article-header">
+      <%= image_tag "article_header_bg.png", alt: "", class: "article-header-bg" %>
+      <h1 class="article-title">Улучшить утренние ритуалы</h1>
+    </div>
+
+    <p class="article-lead">
+      Создать и следовать персональному утреннему плану по улучшению себя: зарядка, пробежка, чтение, тренировка, изучение языков
+    </p>
+
+    <div class="article-plaque-stack">
+      <%= image_tag 'A_Button_5 (1).png', alt: '', class: 'article-plaque-img' %>
+      <%= image_tag 'A_Button_5 (2).png', alt: '', class: 'article-plaque-img' %>
+      <%= image_tag 'A_Button_5 (3).png', alt: '', class: 'article-plaque-img' %>
+    </div>
+
+    <p class="article-morning-text">
+      Утро задаёт тон всему дню.<br>
+      Если первые 60 минут проходят в спешке,<br>
+      телефоне и хаосе - продуктивность падает
+    </p>
+
+    <h2 class="article-section-title">Этот спринт поможет тебе:</h2>
+
+    <div class="article-help-wrap">
+      <div class="article-help-buttons">
+        <button type="button" class="article-help-button">выстроить структуру утра</button>
+        <button type="button" class="article-help-button">убрать хаотичные действия</button>
+        <button type="button" class="article-help-button">добавить полезные привычки</button>
+        <button type="button" class="article-help-button">начать день без ощущения гонки</button>
+      </div>
+    </div>
+
+    <div class="article-plan-block">
+      <div class="article-plan-heading">План:</div>
+      <div class="article-plan-frames">
+        <%= image_tag "Frame 324.png", alt: "", class: "article-plan-frame" %>
+        <%= image_tag "Frame 323.png", alt: "", class: "article-plan-frame" %>
+        <%= image_tag "Frame 322.png", alt: "", class: "article-plan-frame" %>
+        <%= image_tag "Frame 321.png", alt: "", class: "article-plan-frame" %>
+      </div>
+    </div>
+
+    <div class="article-quote">
+      <%= image_tag "dontneed.png", alt: "", class: "article-quote-img" %>
+    </div>
+
+    <div class="article-actions">
+      <button type="button" class="article-cta-button">Присоединиться</button>
+    </div>
+
+    <div class="article-bottom-actions">
+      <button type="button" class="article-bottom-icon-btn" aria-label="Лайк">
+        <%= image_tag 'A_Button_5 (4).png', alt: '', class: 'article-bottom-icon-img' %>
+      </button>
+
+      <button type="button" class="article-bottom-icon-btn" aria-label="Переслать">
+        <%= image_tag 'A_Button_5 (5).png', alt: '', class: 'article-bottom-icon-img' %>
+      </button>
+
+      <button type="button" class="article-bottom-icon-btn" aria-label="Сообщения">
+        <%= image_tag 'A_Button_5 (6).png', alt: '', class: 'article-bottom-icon-img' %>
+      </button>
+    </div>
+  </section>
+</div>
+

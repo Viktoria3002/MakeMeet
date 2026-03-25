@@ -1,0 +1,201 @@
+<% content_for :title, "Профиль Алисы - Make Meet" %>
+<% content_for :head do %>
+  <style>
+    body.profile-details-page {
+      background-image: url('<%= asset_path("bgprofilewatch.png") %>');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+    }
+  </style>
+<% end %>
+
+<section class="profile-details-section">
+  <div class="profile-details-wrap">
+    <div class="profile-details-card" id="profileDetailsCard">
+      <%= image_tag "Mask group.png", alt: "", class: "profile-details-mask", aria: { hidden: true } %>
+
+      <div class="profile-details-header">
+        <div class="profile-details-identity">
+          <div class="profile-details-left-column">
+            <div class="profile-details-photo-wrap">
+              <%= image_tag "photoprofile.png", alt: "Алиса Бёрнс", class: "profile-details-photo" %>
+            </div>
+
+            <p class="profile-details-description">
+              <span class="profile-details-description-muted" data-profile-editable="description-start">Здесь ты можешь обновить </span>
+              <span class="profile-details-description-strong" data-profile-editable="description-strong">информацию о себе</span>
+              <span class="profile-details-description-muted" data-profile-editable="description-end">, настроить видимость, отразить то, куда ты идёшь.</span>
+            </p>
+          </div>
+
+          <div class="profile-details-header-copy">
+            <div class="profile-details-name-row">
+              <h1 class="profile-details-name">
+                <span data-profile-editable="name-first">Алиса</span><br>
+                <span data-profile-editable="name-last">Бёрнс</span>
+              </h1>
+              <span class="profile-details-age" data-profile-editable="age">28 лет</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-details-header-actions">
+          <button
+            type="button"
+            class="profile-details-edit-button"
+            id="profileDetailsEditButton"
+            data-edit-src="<%= asset_path("Q_Button_1 (3).png") %>"
+            data-save-src="<%= asset_path("Q_Button_1 (4).png") %>"
+          >
+            <%= image_tag "Q_Button_1 (3).png", alt: "Изменить", class: "profile-details-edit-image", id: "profileDetailsEditImage" %>
+          </button>
+
+          <%= link_to "https://t.me/alisa_berns", class: "profile-details-telegram-link", target: "_blank", rel: "noopener noreferrer" do %>
+            <%= image_tag "A_Button_5 (8).png", alt: "Telegram Алисы", class: "profile-details-telegram-image" %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="profile-details-fields">
+        <div class="profile-details-fields-row profile-details-fields-row--double">
+          <div class="profile-details-field" data-profile-editable="email">pochta@gmail.com</div>
+          <div class="profile-details-field" data-profile-editable="city">Москва</div>
+        </div>
+
+        <div class="profile-details-fields-row profile-details-fields-row--double">
+          <div class="profile-details-field" data-profile-editable="profession">ux/ui дизайнер</div>
+          <div class="profile-details-field" data-profile-editable="languages">Русский, Английский</div>
+        </div>
+
+        <div class="profile-details-fields-row">
+          <div class="profile-details-field profile-details-field--large" data-profile-editable="bio">
+            Люблю бег, чтение, постоянно развиваюсь и придерживаюсь дисциплины. Работаю на фрилансе, также развиваю блог и осваиваю фехтование. Хочу найти человека, с которым можно вместе двигаться к целям и поддерживать друг друга.
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-details-block">
+        <h2 class="profile-details-title">Интересы</h2>
+        <div class="profile-details-tags">
+          <span class="profile-details-tag" data-profile-editable="interest-1">саморазвитие</span>
+          <span class="profile-details-tag" data-profile-editable="interest-2">спорт</span>
+          <span class="profile-details-tag" data-profile-editable="interest-3">новые знания</span>
+          <span class="profile-details-tag" data-profile-editable="interest-4">привычка</span>
+          <span class="profile-details-tag" data-profile-editable="interest-5">здоровье</span>
+          <span class="profile-details-tag" data-profile-editable="interest-6">контент</span>
+          <span class="profile-details-tag" data-profile-editable="interest-7">креатив</span>
+        </div>
+      </div>
+
+      <div class="profile-details-block profile-details-block--goals">
+        <h2 class="profile-details-title">Цели</h2>
+
+        <div class="profile-details-goals">
+          <div class="profile-details-goal-row">
+            <span class="profile-details-goal-chip profile-details-goal-chip--light" data-profile-editable="goal-label-1">Цели на месяц</span>
+            <span class="profile-details-goal-chip profile-details-goal-chip--fill" data-profile-editable="goal-value-1">фокус -- меньше...</span>
+          </div>
+
+          <div class="profile-details-goal-row">
+            <span class="profile-details-goal-chip profile-details-goal-chip--light" data-profile-editable="goal-label-2">Формат спринтов:</span>
+            <span class="profile-details-goal-chip profile-details-goal-chip--fill" data-profile-editable="goal-value-2">парный</span>
+          </div>
+
+          <div class="profile-details-goal-row">
+            <span class="profile-details-goal-chip profile-details-goal-chip--light" data-profile-editable="goal-label-3">Тип встреч:</span>
+            <div class="profile-details-goal-options">
+              <span class="profile-details-goal-chip profile-details-goal-chip--option" data-profile-editable="meeting-type-1">оффлайн</span>
+              <span class="profile-details-goal-chip profile-details-goal-chip--option" data-profile-editable="meeting-type-2">онлайн</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-details-filter">
+          <div class="profile-details-filter-line">
+            <div class="profile-details-filter-thumb"></div>
+          </div>
+
+          <div class="profile-details-filter-meta">
+            <div class="profile-details-filter-side">
+              <span class="profile-details-filter-chip" data-profile-editable="filter-left-1">интроверт</span>
+              <span class="profile-details-filter-chip" data-profile-editable="filter-left-2">люблю чаты</span>
+            </div>
+
+            <div class="profile-details-filter-side profile-details-filter-side--right">
+              <span class="profile-details-filter-chip" data-profile-editable="filter-right-1">экстраверт</span>
+              <span class="profile-details-filter-chip" data-profile-editable="filter-right-2">люблю созвоны</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const card = document.getElementById('profileDetailsCard');
+    const editButton = document.getElementById('profileDetailsEditButton');
+    const editImage = document.getElementById('profileDetailsEditImage');
+
+    if (!card || !editButton || !editImage) return;
+
+    const editableElements = Array.from(card.querySelectorAll('[data-profile-editable]'));
+    const storagePrefix = 'make_meet_profile_details_';
+    let isEditing = false;
+
+    editableElements.forEach((element) => {
+      const key = element.dataset.profileEditable;
+      const savedValue = window.localStorage.getItem(storagePrefix + key);
+
+      if (savedValue !== null) {
+        element.textContent = savedValue;
+      }
+
+      element.setAttribute('contenteditable', 'false');
+      element.setAttribute('spellcheck', 'false');
+
+      element.addEventListener('keydown', function(event) {
+        const multiline = element.classList.contains('profile-details-field--large');
+
+        if (event.key === 'Enter' && !multiline) {
+          event.preventDefault();
+          element.blur();
+        }
+      });
+    });
+
+    function setEditingState(nextState) {
+      isEditing = nextState;
+      card.classList.toggle('is-editing', isEditing);
+      editImage.src = isEditing ? editButton.dataset.saveSrc : editButton.dataset.editSrc;
+      editImage.alt = isEditing ? 'Сохранить' : 'Изменить';
+
+      editableElements.forEach((element) => {
+        element.setAttribute('contenteditable', isEditing ? 'true' : 'false');
+      });
+
+      if (isEditing && editableElements[0]) {
+        editableElements[0].focus();
+      }
+    }
+
+    function saveProfileDetails() {
+      editableElements.forEach((element) => {
+        const key = element.dataset.profileEditable;
+        window.localStorage.setItem(storagePrefix + key, element.textContent.trim());
+      });
+    }
+
+    editButton.addEventListener('click', function() {
+      if (isEditing) {
+        saveProfileDetails();
+        setEditingState(false);
+      } else {
+        setEditingState(true);
+      }
+    });
+  });
+</script>
