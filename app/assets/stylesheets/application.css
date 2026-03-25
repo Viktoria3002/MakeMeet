@@ -4442,7 +4442,6 @@ body.article-page .article-bottom-icon-img {
     margin-top: 16px;
   }
 }
-
 .admin-mini-page {
   max-width: 960px;
   margin: 0 auto;
@@ -5701,4 +5700,144 @@ body.article-page .article-bottom-icon-img {
   .admin-mini-title {
     font-size: 28px;
   }
+}
+
+/* ===== МОИ СПРИНТЫ: общий блок-панель ===== */
+.my-sprints-panel {
+  max-width: 1384px; /* как у wrap на другой странице */
+  margin: 0 auto;
+  padding: 60px 60px 60px;
+  border-radius: 24px;
+  background: #adc9e8;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 24px 8px rgba(82, 124, 190, 0.45), 0 0 48px 16px rgba(82, 124, 190, 0.25);
+}
+
+.my-sprints-panel .sprints-grid {
+  background: #79abe0;
+  padding: 38px 0px;
+  border-radius: 24px;
+  border: 3px solid white;
+}
+
+.my-sprints-panel .sprint-card {
+  margin: 18px 36px;
+}
+
+.my-sprints-panel .sprint-card:first-child {
+  margin-top: 0;
+}
+
+.my-sprints-panel .sprint-card:last-child {
+  margin-bottom: 0;
+}
+
+/* ===== МОИ СПРИНТЫ: пустое состояние без inline-стилей ===== */
+.my-sprints-panel .empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.my-sprints-panel .empty-title {
+  font-size: 1.2rem;
+  margin: 0 0 12px 0;
+}
+
+.my-sprints-panel .empty-subtitle {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Карточки «Мои спринты» по макету: светлый фон, картинка справа, тег и кнопка */
+.my-sprints-panel .sprint-card {
+  background-color: #badaff;
+  background-size: cover;
+  background-position: right center;
+  border: 0px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.my-sprints-panel .sprint-card:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+.my-sprints-panel .sprint-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(186, 218, 255, 0.92) 0%,
+    rgba(186, 218, 255, 0.4) 55%,
+    transparent 75%
+  );
+  pointer-events: none;
+  z-index: 0;
+  border-radius: inherit;
+}
+
+.my-sprints-panel .sprint-card-duration {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 210px;
+  height: 61px;
+  margin: 0;
+  z-index: 2;
+  background: transparent;
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-size: 25px;
+  font-weight: 400;
+  color: #ebebeb;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.my-sprints-panel .sprint-card-content {
+  position: relative;
+  z-index: 1;
+}
+
+.my-sprints-panel .sprint-card-title {
+  color: #ffffff;
+  font-weight: 600;
+  max-width: 750px;
+}
+
+.my-sprints-panel .sprint-card-description {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+
+
+.success-message {
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #eafaf1;
+  color: #1f7a4d;
+  font-size: 14px;
+}
+
+.error-message {
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #fff1f1;
+  color: #b42318;
+  font-size: 14px;
+}
+
+.form-errors {
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #fff4e5;
+  color: #9a6700;
+  font-size: 14px;
 }

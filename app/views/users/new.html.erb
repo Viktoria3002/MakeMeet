@@ -1,0 +1,63 @@
+<% content_for :title, "Регистрация - Make Meet" %>
+
+
+<% if notice.present? %>
+  <p class="success-message"><%= notice %></p>
+<% end %>
+
+<% if alert.present? %>
+  <p class="error-message"><%= alert %></p>
+<% end %>
+
+<% if @user&.errors&.any? %>
+  <div class="form-errors">
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<div class="register-section">
+  <div class="register-background"></div>
+
+  <div class="register-card">
+    <h1 class="register-title">Давайте знакомиться</h1>
+
+    <%= form_with model: @user, url: register_path, method: :post, local: true, class: "register-form" do |f| %>
+
+      <div class="form-row">
+        <div class="form-column">
+          <%= f.email_field :email, class: "form-input", placeholder: "Почта", required: true %>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-column">
+          <%= f.password_field :password, class: "form-input", placeholder: "Пароль", required: true %>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-column">
+          <%= f.text_field :name, class: "form-input", placeholder: "Имя", required: true %>
+        </div>
+        <div class="form-column">
+          <%= f.text_area :about, class: "form-textarea", placeholder: "О себе" %>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <%= f.submit "Зарегистрироваться", class: "register-submit-button" %>
+      </div>
+
+      <p class="register-disclaimer">
+        Нажимая «Зарегистрироваться», вы принимаете условия сервиса.
+      </p>
+
+    <% end %>
+  </div>
+</div>
+

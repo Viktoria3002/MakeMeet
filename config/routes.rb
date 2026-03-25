@@ -19,6 +19,10 @@ Rails.application.routes.draw do
   # Страница статьи (не отображается в основном меню)
   get "article", to: "pages#article", as: :article
 
+  # Регистрация пользователей
+  get "new", to: "users#new", as: :new_user_registration
+  post "register", to: "users#create"
+
   # =========================
   # Админка (HTML)
   # =========================
@@ -57,21 +61,21 @@ Rails.application.routes.draw do
     end
   end
 
-# =========================
-# Mini App API (запись)
-# =========================
-namespace :api, defaults: { format: :json } do
-  post "login", to: "sessions#create"
-  post "logout", to: "sessions#destroy"
+  # =========================
+  # Mini App API (запись)
+  # =========================
+  namespace :api, defaults: { format: :json } do
+    post "login", to: "sessions#create"
+    post "logout", to: "sessions#destroy"
 
-  resources :posts, only: [ :index, :show, :create, :update, :destroy ] do
-    member do
-      patch :moderate
+    resources :posts, only: [:index, :show, :create, :update, :destroy] do
+      member do
+        patch :moderate
+      end
     end
-  end
 
-  resources :users, only: [ :update ]
-end
+    resources :users, only: [:update]
+  end
 
   # =========================
   # Admin Mini App

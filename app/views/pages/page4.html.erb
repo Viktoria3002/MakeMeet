@@ -1,4 +1,5 @@
 <% content_for :title, "Профиль - Make Meet" %>
+
 <% content_for :head do %>
   <style>
     body.profile-page {
@@ -13,14 +14,22 @@
 
 <section class="profile-page-section">
   <div class="profile-page-content">
+
     <div class="profile-author-card">
       <%= image_tag "autor.png", alt: "Профиль пользователя", class: "profile-author-image" %>
+    </div>
+
+    
+    <div class="welcome-buttons">
+      <%= link_to "Зарегистрироваться", new_user_registration_path, class: "register-button" %>
+      <%= link_to "Войти", login_path, class: "login-button" %>
     </div>
 
     <div class="profile-actions">
       <button type="button" class="profile-action-button">
         <%= image_tag "Q_Button_1 (1).png", alt: "Настройки", class: "profile-action-image" %>
       </button>
+
       <%= link_to profile_details_path, class: "profile-action-button" do %>
         <%= image_tag "Q_Button_1 (2).png", alt: "Профиль", class: "profile-action-image" %>
       <% end %>
@@ -32,5 +41,6 @@
       <p class="profile-legal-link">Пользовательское соглашение</p>
       <p class="profile-legal-link">Политика обработки персональных данных</p>
     </div>
+
   </div>
 </section>
