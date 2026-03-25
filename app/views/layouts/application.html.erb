@@ -29,13 +29,13 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
   </head>
 
-
-
-  <body class="<%= 'about-page' if current_page?(about_path) || current_page?(root_path) %> <%= 'media-page' if current_page?(page1_path) %> <%= 'admin-page' if controller_path.include?('admin') %> <%= 'sprints-page' if current_page?(page2_path) %> <%= 'profile-page' if current_page?(page4_path) %> <%= 'my-sprints-page' if current_page?(page3_path) %>">
+  <body class="<%= 'about-page' if current_page?(about_path) || current_page?(root_path) %> <%= 'media-page' if current_page?(page1_path) %> <%= 'admin-page' if controller_path.include?('admin') %> <%= 'sprints-page' if current_page?(page2_path) %> <%= 'profile-page' if current_page?(page4_path) || current_page?(profile_details_path) %> <%= 'profile-details-page' if current_page?(profile_details_path) %> <%= 'register-page' if current_page?(register_path) %> <%= 'registration-page' if current_page?(registration_path) %> <%= 'login-page' if current_page?(login_path) %> <%= 'my-sprints-page' if current_page?(page3_path) %> <%= 'article-page' if current_page?(article_path) %>">
     <% if current_page?(page1_path) %>
       <div class="media-page-wrapper">
     <% end %>
     
+    <% minimal_nav_pages = current_page?(register_path) || current_page?(registration_path) || current_page?(login_path) %>
+
     <nav class="main-navigation">
       <div class="nav-container">
         <div class="nav-brand">
@@ -49,21 +49,23 @@
           <li class="nav-item">
             <%= link_to "О сервисе", about_path, class: "nav-link #{'active' if current_page?(about_path) || current_page?(root_path)}" %>
           </li>
-          <li class="nav-item">
-            <%= link_to "Медиа", page1_path, class: "nav-link #{'active' if current_page?(page1_path)}" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Открытые спринты", page2_path, class: "nav-link #{'active' if current_page?(page2_path)}" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Мои спринты", page3_path, class: "nav-link #{'active' if current_page?(page3_path)}" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Профиль", page4_path, class: "nav-link #{'active' if current_page?(page4_path)}" %>
-          </li>
-          <li class="nav-item nav-item--admin-hidden">
-            <button class="nav-link admin-link-btn" onclick="openAdminLogin()">🔧 Админ</button>
-          </li>
+          <% unless minimal_nav_pages %>
+            <li class="nav-item">
+              <%= link_to "Медиа", page1_path, class: "nav-link #{'active' if current_page?(page1_path)}" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Открытые спринты", page2_path, class: "nav-link #{'active' if current_page?(page2_path)}" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Мои спринты", page3_path, class: "nav-link #{'active' if current_page?(page3_path)}" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Профиль", page4_path, class: "nav-link #{'active' if current_page?(page4_path) || current_page?(profile_details_path)}" %>
+            </li>
+            <li class="nav-item nav-item--admin-hidden">
+              <button class="nav-link admin-link-btn" onclick="openAdminLogin()">🔧 Админ</button>
+            </li>
+          <% end %>
         </ul>
       </div>
     </nav>
@@ -76,11 +78,13 @@
       </div>
     <% end %>
 
-    <footer class="main-footer">
-      <div class="footer-content">
-        <%= image_tag "footer_bar.svg", alt: "найди единомышленников с make Meet", class: "footer-bar-img" %>
-      </div>
-    </footer>
+    <% unless current_page?(page4_path) || minimal_nav_pages %>
+      <footer class="main-footer">
+        <div class="footer-content">
+          <%= image_tag "footer_bar.svg", alt: "найди единомышленников с make Meet", class: "footer-bar-img" %>
+        </div>
+      </footer>
+    <% end %>
 
     <!-- Admin Login Modal -->
     <div class="admin-login-modal" id="adminLoginModal" style="display: none;">

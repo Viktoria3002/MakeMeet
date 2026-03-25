@@ -7,6 +7,10 @@ class PagesController < ApplicationController
     # Страница регистрации
   end
 
+  def registration
+    # Форма регистрации
+  end
+
   def login
     # Страница входа
   end
@@ -28,5 +32,13 @@ class PagesController < ApplicationController
   def page4
     @title = "Страница 4"
     @content = "Четвертая страница завершает нашу навигацию."
+  end
+
+  def profile_details
+    # Детальная страница профиля
+  end
+
+  def article
+    # Статья по спринту "Улучшить утренние ритуалы"
   end
 end

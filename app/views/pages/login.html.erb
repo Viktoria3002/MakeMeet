@@ -1,16 +1,58 @@
 <% content_for :title, "Войти - Make Meet" %>
+<% content_for :head do %>
+  <style>
+    body.login-page {
+      background-image: url('<%= asset_path("bgwelcome.png") %>');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+    }
+  </style>
+<% end %>
 
-<div class="login-section">
-  <div class="login-background">
-    <div class="login-background-gradient"></div>
-  </div>
-
+<section class="login-section">
   <div class="login-card">
     <h1 class="login-title">Рады возвращению!</h1>
-    <form class="login-form">
-      <input type="email" class="login-input" placeholder="Почта" required />
-      <input type="password" class="login-input" placeholder="Пароль" required />
-      <button type="submit" class="login-submit-button">Войти</button>
+
+    <form class="login-form" id="loginForm" novalidate>
+      <input type="email" class="login-input" id="loginEmail" placeholder="Почта">
+      <input type="password" class="login-input" id="loginPassword" placeholder="Пароль">
+
+      <p class="login-help-text" id="loginHelpText">Если забыли пароль, кликните здесь, чтобы восстановить!</p>
+
+      <button type="submit" class="login-submit-button login-submit-button--image">
+        <%= image_tag "Q_Button_1 (6).png", alt: "Войти", class: "login-submit-image" %>
+      </button>
     </form>
   </div>
-</div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('loginForm');
+    const emailInput = document.getElementById('loginEmail');
+    const passwordInput = document.getElementById('loginPassword');
+    const helpText = document.getElementById('loginHelpText');
+
+    if (!form || !emailInput || !passwordInput || !helpText) return;
+
+    const defaultText = 'Если забыли пароль, кликните здесь, чтобы восстановить!';
+    const errorText = 'К сожалению, вы ввели неверный логин или пароль.<br>Если забыли пароль, кликните здесь, чтобы восстановить!';
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
+
+      if (!email || !password) {
+        helpText.innerHTML = errorText;
+        return;
+      }
+
+      helpText.textContent = defaultText;
+      window.location.href = '<%= page4_path %>';
+    });
+  });
+</script>
