@@ -10,7 +10,7 @@
   </div>
 
 
-<button onclick="createPostAPI()">Создать пост через API</button>
+<%= link_to "Mini App", "/admin_mini/login", class: "btn btn-sm" %>
 
   <div class="admin-nav">
     <%= link_to "Главная", admin_root_path, class: "nav-link" %>
@@ -91,64 +91,3 @@
   </div>
 </div>
 
-<script>
-async function createPostAPI() {
-  const token = localStorage.getItem("token")
-
-  if (!token) {
-    alert("Нет токена! Сначала залогинься через API")
-    return
-  }
-
-  const res = await fetch("/api/posts", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + token
-    },
-    body: JSON.stringify({
-      post: {
-        content: "Пост создан через API 🚀"
-      }
-    })
-  })
-
-  const data = await res.json()
-  console.log(data)
-
-  alert("Пост создан через API!")
-  location.reload()
-}
-
-async function approvePostAPI(postId) {
-  const token = localStorage.getItem("token")
-
-  if (!token) {
-    alert("Нет токена! Сначала залогинься через API")
-    return
-  }
-
-  const res = await fetch(`/api/posts/${postId}/moderate`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + token
-    },
-    body: JSON.stringify({
-      status: "approved",
-      moderation_comment: "Одобрено через API"
-    })
-  })
-
-  const data = await res.json()
-  console.log(data)
-
-  if (res.ok) {
-    alert("Пост одобрен через API!")
-    location.reload()
-  } else {
-    alert("Ошибка при модерации")
-    console.log(data)
-  }
-}
-</script>

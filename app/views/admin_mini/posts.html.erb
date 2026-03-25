@@ -1,0 +1,15 @@
+<h1>Admin Mini App</h1>
+
+<div style="margin-bottom: 20px;">
+  <%= link_to "Перейти в админку", admin_root_path, class: "btn btn-sm" %>
+  <button onclick="logout()">Logout</button>
+</div>
+
+<div style="margin-bottom: 20px;">
+  <input id="content" placeholder="Текст поста">
+  <button onclick="createPostAPI()">Создать пост</button>
+</div>
+
+<h2>Посты</h2>
+
+<ul id="posts-list"></ul>
