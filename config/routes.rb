@@ -74,6 +74,5 @@ end
   # Admin Mini App
   # =========================
   get "admin_mini/login", to: "admin_mini#login"
-  get "admin_mini/posts", to: "admin_mini#posts"
-  
+  get "admin_mini/posts", to: "admin_mini#posts" 
 end
