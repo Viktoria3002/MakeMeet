@@ -71,23 +71,22 @@ async function loadPosts() {
   list.innerHTML = ""
 
   if (!Array.isArray(posts) || posts.length === 0) {
-    list.innerHTML = "<p>Постов пока нет</p>"
+    list.innerHTML = '<li class="admin-mini-empty">Постов пока нет</li>'
     return
   }
 
   posts.forEach(post => {
-    const item = document.createElement("div")
-    item.style.marginBottom = "16px"
-    item.style.padding = "12px"
-    item.style.border = "1px solid #444"
-    item.style.borderRadius = "8px"
+    const item = document.createElement("li")
+    item.className = "admin-mini-post-item"
 
     item.innerHTML = `
-      <div><strong>Текст:</strong> ${post.content}</div>
-      <div><strong>Статус:</strong> ${post.status}</div>
-      <div><strong>Автор ID:</strong> ${post.author_id}</div>
-      <div style="margin-top: 10px;">
-        <button onclick="approvePostAPI(${post.id})">Одобрить через API</button>
+      <div class="admin-mini-post-content">${post.content}</div>
+      <div class="admin-mini-post-meta">
+        <span><strong>Статус:</strong> ${post.status}</span>
+        <span><strong>Автор ID:</strong> ${post.author_id}</span>
+      </div>
+      <div class="admin-mini-post-actions">
+        <button type="button" class="admin-mini-button" onclick="approvePostAPI(${post.id})">Одобрить через API</button>
       </div>
     `
 

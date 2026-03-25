@@ -21,7 +21,7 @@
       <%= f.text_field :password_hash, class: "form-input", placeholder: "Оставьте пустым, чтобы не менять" %>
     </div>
 
-    <div style="display: flex; gap: 10px; margin-top: 30px;">
+    <div class="admin-form-actions">
       <%= f.submit "Сохранить изменения", class: "admin-login-submit" %>
       <%= link_to "Отмена", admin_users_path, class: "btn", style: "background: rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.7);" %>
     </div>

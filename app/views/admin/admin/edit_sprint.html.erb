@@ -26,7 +26,7 @@
       <%= f.date_field :end_date, class: "form-input", required: true %>
     </div>
 
-    <div style="display: flex; gap: 10px; margin-top: 30px;">
+    <div class="admin-form-actions">
       <%= f.submit "Сохранить изменения", class: "admin-login-submit" %>
       <%= link_to "Отмена", admin_sprints_path, class: "btn", style: "background: rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.7);" %>
     </div>

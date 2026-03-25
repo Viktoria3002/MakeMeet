@@ -1,12 +1,14 @@
-<h1>Admin Mini App Login</h1>
+<section class="admin-mini-page">
+  <div class="admin-mini-card admin-mini-card--auth">
+    <h1 class="admin-mini-title">Admin Mini App Login</h1>
 
-<input id="email" placeholder="Email">
-<br><br>
-
-<input id="password" type="password" placeholder="Password">
-<br><br>
-
-<button onclick="login()">Login</button>
+    <div class="admin-mini-form">
+      <input id="email" class="admin-mini-input" placeholder="Email">
+      <input id="password" class="admin-mini-input" type="password" placeholder="Password">
+      <button type="button" class="admin-mini-button" onclick="login()">Login</button>
+    </div>
+  </div>
+</section>
 
 <script>
 async function login() {

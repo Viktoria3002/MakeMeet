@@ -1,15 +1,20 @@
-<h1>Admin Mini App</h1>
+<section class="admin-mini-page">
+  <div class="admin-mini-card">
+    <div class="admin-mini-toolbar">
+      <h1 class="admin-mini-title">Admin Mini App</h1>
+      <div class="admin-mini-actions">
+        <%= link_to "Перейти в админку", admin_root_path, class: "admin-mini-link admin-mini-link--secondary" %>
+        <button type="button" class="admin-mini-button admin-mini-button--secondary" onclick="logout()">Logout</button>
+      </div>
+    </div>
 
-<div style="margin-bottom: 20px;">
-  <%= link_to "Перейти в админку", admin_root_path, class: "btn btn-sm" %>
-  <button onclick="logout()">Logout</button>
-</div>
+    <div class="admin-mini-create">
+      <textarea id="content" class="admin-mini-input admin-mini-textarea" placeholder="Текст поста"></textarea>
+      <button type="button" class="admin-mini-button" onclick="createPostAPI()">Создать пост</button>
+    </div>
 
-<div style="margin-bottom: 20px;">
-  <input id="content" placeholder="Текст поста">
-  <button onclick="createPostAPI()">Создать пост</button>
-</div>
+    <h2 class="admin-mini-section-title">Посты</h2>
 
-<h2>Посты</h2>
-
-<ul id="posts-list"></ul>
+    <ul id="posts-list" class="admin-mini-posts"></ul>
+  </div>
+</section>
