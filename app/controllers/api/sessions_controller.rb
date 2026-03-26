@@ -7,7 +7,7 @@ class Api::SessionsController < ActionController::API
 
       render json: {
         message: "Logged in",
-        token: user.session_token,
+        session_token: user.session_token,
         user: {
           id: user.id,
           username: user.username,
