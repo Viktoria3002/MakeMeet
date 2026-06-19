@@ -3017,7 +3017,7 @@ body.about-page::before {
   content: '';
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.08);
   pointer-events: none;
   z-index: 0;
 }
@@ -3184,350 +3184,339 @@ body.my-sprints-page .sprints-tags-and-grid-wrap .sprint-card:last-child .sprint
 
 .about-page-wrap {
   font-family: 'Inter', sans-serif;
+  font-weight: 500;
   max-width: 1512px;
   margin: 0 auto;
-  padding: 0 24px 60px;
+  padding: 0 60px 80px;
 }
 
+.about-section-title {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(44px, 7.3vw, 110px);
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 0.89;
+  letter-spacing: -0.08em;
+  margin: 0 0 51px;
+}
+
+.about-section-description {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(18px, 2.3vw, 35px);
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 0.94;
+  letter-spacing: -0.06em;
+  margin: 0;
+  opacity: 0.7;
+}
+
+/* Hero */
 .about-hero-section {
-  padding: 60px 0 80px;
   position: relative;
+  padding: 48px 0 100px;
+  text-align: center;
 }
 
-.about-hero-content {
-  position: relative;
-  max-width: 1150px;
-  margin: 0 auto;
-}
-
-.about-hero-pill-img {
+.about-hero-decor {
   position: absolute;
-  top: -65px;
-  left: 19%;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.about-hero-line {
+  position: absolute;
   height: auto;
-  width: 205px;
+  object-fit: contain;
+}
+
+.about-hero-line--left {
+  left: -2%;
+  top: 8%;
+  width: min(36vw, 440px);
+}
+
+.about-hero-line--right {
+  right: 2%;
+  top: 39%;
+  width: min(22vw, 260px);
+}
+
+.about-hero-social {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.about-hero-avatars-img {
+  width: clamp(100px, 12vw, 150px);
+  height: auto;
+  object-fit: contain;
+}
+
+.about-hero-social-text {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(16px, 1.6vw, 24px);
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: -0.04em;
+  margin: 0;
+  text-align: left;
+}
+
+.about-hero-social-accent {
+  color: #e85d3a;
+}
+
+.about-hero-title {
+  position: relative;
+  z-index: 1;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(48px, 7.94vw, 110px);
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0 0 28px;
+  line-height: 0.87;
+  letter-spacing: -0.08em;
+}
+
+.about-hero-word-globe {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
 }
 
 .about-hero-globe-img {
   position: absolute;
-  top: -69px;
-  right: -85px;
-  width: 131px;
-  height: 131px;
-  object-fit: contain;
+  left: calc(100% - 28px);
+  top: 18%;
+  transform: translateY(-54%);
+  width: clamp(58px, 6.5vw, 92px);
+  height: auto;
+  z-index: 2;
+  pointer-events: none;
 }
 
-.about-hero-main {
-  padding-top: 20px;
-  text-align: center;
-}
-
-/* Первый заголовок: 120px, letter-spacing -8%, line-height 67% */
-.about-hero-title {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(48px, 7.94vw, 120px);
-  font-weight: 500;
-  color: #ffffff;
-  margin-bottom: 16px;
-  line-height: 0.67;
-  letter-spacing: -0.08em;
-}
-
-/* Текст под заголовками: 35px, letter-spacing -6%, line-height 94% */
 .about-hero-description {
+  position: relative;
+  z-index: 1;
   font-family: 'Inter', sans-serif;
   font-size: clamp(18px, 2.3vw, 35px);
+  font-weight: 300;
   color: #ffffff;
-  margin-bottom: 24px;
   line-height: 0.94;
   letter-spacing: -0.06em;
-  max-width: 736px;
-  margin: 0 auto;
-  margin-top: 5%;
-}
-
-.about-hero-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  margin-bottom: 28px;
-  flex-wrap: wrap;
-  margin-top: -12%;
-}
-
-.about-hero-profile {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.about-hero-avatar-img {
-  width: 232px;
-  height: 223px;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-
-.about-hero-name {
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  color: #ffffff;
-}
-
-.about-hero-card-img {
-  max-width: 200px;
-  height: auto;
-  border-radius: 16px;
+  max-width: 872px;
+  margin: 0 auto 70px;
 }
 
 .about-cta-button {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
   text-decoration: none;
-  border-radius: 50px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s ease;
 }
 
 .about-cta-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
   text-decoration: none;
 }
 
 .about-cta-button-img {
   display: block;
-  max-width: 100%;
+  width: clamp(280px, 34vw, 430px);
   height: auto;
-  max-height: 90px;
+  object-fit: contain;
+}
+
+.about-cta-button--community {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 88px;
+}
+
+.about-cta-button--community .about-cta-button-img {
+  width: clamp(300px, 38vw, 522px);
+}
+
+/* 87% */
+.about-stats-section {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 48px;
+  align-items: center;
+  padding: 20px 0 100px;
+}
+
+.about-stats-number {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(120px, 18vw, 200px);
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 0.85;
+  letter-spacing: -0.08em;
+  margin: 0 0 16px;
+}
+
+.about-stats-caption {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(28px, 3.3vw, 50px);
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 0.94;
+  letter-spacing: -0.06em;
+  margin: 0;
+  opacity: 0.8;
+}
+
+.about-stats-cards {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-pain-cards-img {
+  display: block;
+  width: min(100%, 614px);
+  height: auto;
   object-fit: contain;
 }
 
 /* Присоединяйся */
 .about-join-section {
-  padding: 60px 0 80px;
+  padding: 20px 0 80px;
   text-align: center;
 }
 
-/* Остальные заголовки: 110px, letter-spacing -8%, line-height 89% */
-.about-join-section .about-section-title {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(44px, 7.3vw, 110px);
-  font-weight: 500;
-  color: #ffffff;
-  margin-bottom: 2%;
-  line-height: 0.89;
-  letter-spacing: -0.08em;
-}
-
-.about-join-section .about-section-description {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(18px, 2.3vw, 35px);
-  color: #ffffff;
-  line-height: 0.94;
-  letter-spacing: -0.06em;
+.about-join-description {
   max-width: 940px;
-  margin: 0 auto;
-  margin-bottom: 8%;
+  margin: 0 auto 56px;
 }
 
-.about-activity-cards {
-  max-width: 766px;
+.about-join-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(24px, 5vw, 80px);
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+.about-join-cards-img {
+  width: min(100%, 420px);
+  height: auto;
+  object-fit: contain;
+}
+
+.about-join-notifications-img {
+  width: min(100%, 480px);
+  height: auto;
+  object-fit: contain;
+}
+
+.about-step-pills {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
-.about-activity-cards-img {
+.about-step-pill-img {
   display: block;
   width: 100%;
-  max-width: 100%;
+  max-width: 579px;
   height: auto;
-  border-radius: 16px;
-}
-
-.about-activity-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 16px 20px;
-  background: rgba(168, 212, 238, 0.35);
-  backdrop-filter: blur(12px);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  text-align: left;
-}
-
-.about-activity-logo-img,
-.about-activity-avatar-img {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.about-activity-logo-img {
-  border-radius: 10px;
-  width: 40px;
-  height: 40px;
   object-fit: contain;
+  justify-self: center;
+  border-radius: 87px;
 }
 
-.about-activity-body {
-  flex: 1;
-  min-width: 0;
+.about-step-pill-img--wide {
+  max-width: 805px;
+  margin: 0 auto;
+  border-radius: 87px;
 }
 
-.about-activity-heading {
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  color: #ffffff;
-  margin-bottom: 4px;
-}
-
-.about-activity-text {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.4;
-}
-
-.about-activity-text.about-activity-faded {
-  opacity: 0.7;
-}
-
-.about-activity-time {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.6);
-  margin-top: 6px;
-}
-
-/* Выбери цель — по макету: один блок, слева текст, справа карточки-пузыри */
-.about-goal-section {
-  padding: 0 0 80px;
-  margin: 0px 30px 0px 30px;
-}
-
-.about-goal-wrap {
-  background: #7fb1c1;
-  border-radius: 24px;
-  padding: 0px 66px 0px 57px;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 20px;
-  flex-wrap: wrap;
-  position: relative;
-  border: 3px white solid;
-  align-items: center;
-}
-
-.about-goal-left {
-  flex: 1;
-  max-width: 729px;
-  text-align: left;
-}
-
-.about-goal-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
-  position: relative;
-}
-
-.about-goal-justshine-img {
-  width: auto;
-  object-fit: contain;
-}
-
-.about-goal-lightning-img {
-  object-fit: contain;
-}
-
-.about-goal-left .about-section-title {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(44px, 7.3vw, 110px);
-  font-weight: 500;
-  color: #ffffff;
-  line-height: 0.89;
-  letter-spacing: -0.08em;
-  margin-bottom: 8%;
-}
-
-.about-goal-left .about-section-description {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(18px, 2.3vw, 35px);
-  color: rgba(255, 255, 255, 0.95);
-  line-height: 94%;
-  letter-spacing: -0.06em;
-}
-
-.about-description-muted {
-  opacity: 0.6;
-}
-
-.about-goal-tiles {
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-}
-
-.about-goal-tile--first {
-  align-self: flex-start;
-  margin-right: 40px;
-  margin-right: 40px;
-  bottom: -79px;
-}
-
-.about-goal-tile--second {
-  align-self: flex-end;
-  margin-left: 40px;
-  right: -59%;
-  top: -139px;
-}
-
-.about-goal-tile {
-  position: relative;
-  line-height: 0;
-}
-
-.about-goal-tile-card-img {
-  display: block;
-  object-fit: contain;
-}
-
-/* Сделай жизнь лучше — красный блок */
-.about-lifestyle-section {
-  padding: 60px 32px;
-  border-radius: 24px;
-  margin: 0 -24px 0;
+/* Спринт */
+.about-sprint-section {
+  padding: 40px 0 100px;
   text-align: center;
 }
 
-.about-lifestyle-section .about-section-title {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(44px, 7.3vw, 110px);
-  font-weight: 500;
-  color: #fff;
-  margin-bottom: 12px;
-  line-height: 0.89;
-  letter-spacing: -0.08em;
+.about-sprint-visual {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto 48px;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.about-lifestyle-section .about-section-description {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(18px, 2.3vw, 35px);
-  color: rgba(255, 255, 255, 0.95);
-  margin-bottom: 28px;
-  line-height: 0.94;
-  letter-spacing: -0.06em;
+.about-sprint-card-img {
+  position: relative;
+  z-index: 1;
+  height: auto;
+  object-fit: contain;
+}
+
+.about-sprint-orbit {
+  position: absolute;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.about-sprint-orbit--left {
+  left: -39%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.about-sprint-orbit--right {
+  right: -36%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Community */
+.about-community-section {
+  padding: 40px 0 100px;
+}
+
+.about-community-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.about-community-text {
+  text-align: left;
+}
+
+.about-community-network-img {
+  width: min(100%, 520px);
+  height: auto;
+  object-fit: contain;
+  justify-self: end;
+}
+
+/* Сделай жизнь лучше */
+.about-lifestyle-section {
+  padding: 20px 0 40px;
+  text-align: center;
+}
+
+.about-lifestyle-description {
   max-width: 724px;
-  margin: 0 auto;
-  margin-bottom: 8%;
+  margin: 0 auto 48px;
 }
 
 .about-status-bar {
@@ -3549,35 +3538,94 @@ body.about-page .main-footer {
   border-top: none;
 }
 
+@media (max-width: 1024px) {
+  .about-page-wrap {
+    padding: 0 32px 60px;
+  }
+
+  .about-stats-section,
+  .about-community-top {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about-community-text {
+    text-align: center;
+  }
+
+  .about-community-network-img {
+    justify-self: center;
+  }
+
+  .about-step-pills {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 768px) {
-  .about-hero-globe {
-    width: 56px;
-    height: 56px;
-    right: 10px;
+  .about-page-wrap {
+    padding: 0 20px 40px;
   }
 
-  .about-hero-row {
-    flex-wrap: wrap;
+  .about-hero-section {
+    padding-bottom: 64px;
   }
 
-  .about-goal-wrap {
+  .about-hero-globe-img {
+    left: calc(100% - 10px);
+    width: clamp(48px, 14vw, 72px);
+    transform: translateY(-50%);
+  }
+
+  .about-hero-line--left,
+  .about-hero-line--right {
+    opacity: 0.85;
+  }
+
+  .about-hero-line--left {
+    left: -6%;
+    top: 12%;
+    width: min(58vw, 300px);
+  }
+
+  .about-hero-line--right {
+    right: 0;
+    top: 24%;
+    width: min(44vw, 200px);
+  }
+
+  .about-cta-button-img {
+    width: min(100%, 320px);
+  }
+
+  .about-join-visual {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .about-hero-social-text {
+    text-align: center;
+  }
+
+  .about-hero-social {
     flex-direction: column;
   }
 
-  .about-goal-tiles {
-    width: 100%;
-    align-items: center;
+  .about-sprint-visual {
+    min-height: 260px;
   }
 
-  .about-goal-tile--first,
-  .about-goal-tile--second {
-    margin-left: 0;
-    margin-right: 0;
-    align-self: center;
+  .about-sprint-orbit--left,
+  .about-sprint-orbit--right {
+    width: 50%;
+    opacity: 0.6;
   }
 
-  .about-goal-tile {
-    width: 100%;
+  .about-join-section,
+  .about-sprint-section,
+  .about-community-section,
+  .about-stats-section {
+    padding-bottom: 64px;
   }
 }
 
@@ -4784,64 +4832,6 @@ body.article-page .article-bottom-icon-img {
     padding: 0 20px 40px;
   }
 
-  .about-hero-pill-img {
-    width: 160px;
-    top: -32px;
-    left: 0;
-  }
-
-  .about-hero-globe-img {
-    width: 92px;
-    height: 92px;
-    top: -24px;
-    right: 0;
-  }
-
-  .about-hero-row {
-    margin-top: 24px;
-    justify-content: center;
-  }
-
-  .about-hero-avatar-img {
-    width: min(100%, 180px);
-    height: auto;
-  }
-
-  .about-goal-section {
-    margin: 0;
-    padding-bottom: 48px;
-  }
-
-  .about-goal-wrap {
-    padding: 36px 28px;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .about-goal-left {
-    max-width: none;
-  }
-
-  .about-goal-tiles {
-    width: 100%;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .about-goal-tile--first,
-  .about-goal-tile--second {
-    margin: 0;
-    right: auto;
-    top: auto;
-    bottom: auto;
-    align-self: center;
-  }
-
-  .about-goal-tile-card-img {
-    width: 100%;
-    max-width: 420px;
-  }
-
   .open-sprints-page {
     padding: 32px 0 60px;
   }
@@ -5250,28 +5240,6 @@ body.article-page .article-bottom-icon-img {
     padding: 28px 0 40px;
   }
 
-  .about-hero-pill-img,
-  .about-hero-globe-img {
-    position: static;
-    display: block;
-    margin: 0 auto 12px;
-  }
-
-  .about-hero-row {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    gap: 16px;
-    flex-direction: column;
-  }
-
-  .about-hero-avatar-img {
-    width: min(100%, 160px);
-  }
-
-  .about-hero-card-img {
-    max-width: min(100%, 180px);
-  }
-
   .about-join-section {
     padding: 28px 0 40px;
   }
@@ -5280,25 +5248,8 @@ body.article-page .article-bottom-icon-img {
     margin-bottom: 28px;
   }
 
-  .about-goal-wrap {
-    padding: 24px 16px;
-    border-radius: 20px;
-  }
-
-  .about-goal-header,
-  .about-goal-left {
-    justify-content: center;
-    text-align: center;
-  }
-
-  .about-goal-left .about-section-title {
-    margin-bottom: 20px;
-  }
-
   .about-lifestyle-section {
-    margin: 0;
-    padding: 32px 16px;
-    border-radius: 20px;
+    padding: 32px 0;
   }
 
   .about-lifestyle-section .about-section-description {
@@ -5812,8 +5763,6 @@ body.article-page .article-bottom-icon-img {
 .my-sprints-panel .sprint-card-description {
   color: rgba(255, 255, 255, 0.5);
 }
-
-
 
 .success-message {
   margin-bottom: 16px;

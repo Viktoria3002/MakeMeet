@@ -1,82 +1,114 @@
 <% content_for :title, "О сервисе - Make Meet" %>
 
-
 <% content_for :head do %>
   <style>
     body.about-page {
       background-image: url('<%= asset_path("about_background.png") %>');
-      background-size: 1600px 3455px;
+      background-size: 1600px 4450px;
       background-position: center top;
       background-repeat: no-repeat;
-      background-color: #0a0a0a;
+      background-color: #8ea5b0;
     }
   </style>
 <% end %>
-<% content_for :body_class, "media-page" %>
+
 <div class="about-page-wrap">
   <!-- Hero -->
   <section class="about-hero-section">
-    <div class="about-hero-content">
-      <%= image_tag "about/pill_notification.png", alt: "", class: "about-hero-pill-img", width: 140, height: 44 %>
-      <%= image_tag "about/globe.png", alt: "", class: "about-hero-globe-img", width: 80, height: 80 %>
-      <div class="about-hero-main">
-        <h1 class="about-hero-title">Знакомься и двигайся к целям вместе</h1>
-        <p class="about-hero-description">
-          ;make.Meet — платформа для поиска друзей и совместного роста через спринты
-        </p>
-        <div class="about-hero-row">
-          <div class="about-hero-profile">
-            <%= image_tag "about/profile_alisa.png", alt: "Алиса Бёрнс", class: "about-hero-avatar-img", width: 80, height: 80 %>
-          </div>
-          <%= image_tag "about/card.png", alt: "", class: "about-hero-card-img", width: 200 %>
-        </div>
-        <%= link_to register_path, class: "about-cta-button" do %>
-          <%= image_tag "about/cta_button.png", alt: "Открыть силу комьюнити", class: "about-cta-button-img" %>
-        <% end %>
-      </div>
+    <div class="about-hero-decor" aria-hidden="true">
+      <%= image_tag "about/hero_line_right.png", alt: "", class: "about-hero-line about-hero-line--left" %>
+      <%= image_tag "about/hero_line_left.png", alt: "", class: "about-hero-line about-hero-line--right" %>
+    </div>
+
+    <div class="about-hero-social">
+      <%= image_tag "about/hero_avatars.png", alt: "", class: "about-hero-avatars-img" %>
+      <p class="about-hero-social-text">
+        <span class="about-hero-social-accent">10K+</span> людей, которые уже растут вместе
+      </p>
+    </div>
+
+    <h1 class="about-hero-title">
+      Найди людей, <span class="about-hero-word-globe">которые<%= image_tag "about/globe_new.png", alt: "", class: "about-hero-globe-img" %></span><br>
+      идут к той же цели
+    </h1>
+
+    <p class="about-hero-description">
+      ;make.Meet помогает находить единомышленников<br>
+      и объединяться в спринты для достижения общих целей
+    </p>
+
+    <%= link_to register_path, class: "about-cta-button" do %>
+      <%= image_tag "about/cta_find_team.png", alt: "Найти команду", class: "about-cta-button-img" %>
+    <% end %>
+  </section>
+
+  <!-- 87% -->
+  <section class="about-stats-section">
+    <div class="about-stats-left">
+      <p class="about-stats-number">87%</p>
+      <p class="about-stats-caption">
+        людей бросают цели<br>
+        в первые недели
+      </p>
+    </div>
+
+    <div class="about-stats-cards">
+      <%= image_tag "about/pain_cards.png", alt: "Ты начинаешь один; Теряешь мотивацию; Нет ответственности", class: "about-pain-cards-img" %>
     </div>
   </section>
 
   <!-- Присоединяйся -->
   <section class="about-join-section">
     <h2 class="about-section-title">Присоединяйся</h2>
-    <p class="about-section-description">
-      к открытому челленджу, найди свою команду роста <br />
+    <p class="about-section-description about-join-description">
+      к открытому челленджу, найди свою команду роста<br>
       и двигайся к успеху среди людей, которые действительно понимают твои стремления
     </p>
-    <div class="about-activity-cards">
-      <%= image_tag "about/activity_cards.png", alt: "Цель достигнута, Гарри Стэнтон", class: "about-activity-cards-img" %>
+
+    <div class="about-join-visual">
+      <%= image_tag "about/goal_cards.png", alt: "Пробежать 50 км за месяц, Прочитать 20 книг за год", class: "about-join-cards-img" %>
+      <%= image_tag "about/notifications.png", alt: "Гарри Стэнтон", class: "about-join-notifications-img" %>
+    </div>
+
+    <div class="about-step-pills">
+      <%= image_tag "about/step_pill_goal.png", alt: "Выбери цель — Начни с того, чего действительно хочешь достичь", class: "about-step-pill-img" %>
+      <%= image_tag "about/step_pill_people.png", alt: "Найдите своих людей — Познакомьтесь с теми, кто движется к той же цели", class: "about-step-pill-img" %>
     </div>
   </section>
 
-  <!-- Выбери цель — по макету: слева текст, справа карточки-пузыри -->
-  <section class="about-goal-section">
-    <div class="about-goal-wrap">
-      <div class="about-goal-left">
-        <div class="about-goal-header">
-          <%= image_tag "about/just_shine.png", alt: "", class: "about-goal-justshine-img" %>
-          <%= image_tag "about/lightning.png", alt: "", class: "about-goal-lightning-img" %>
-        </div>
-        <h2 class="about-section-title">Выбери цель</h2>
+  <!-- Спринт -->
+  <section class="about-sprint-section">
+    <div class="about-sprint-visual">
+      <%= image_tag "about/orbit_left.png", alt: "", class: "about-sprint-orbit about-sprint-orbit--left", aria: { hidden: true } %>
+      <%= image_tag "about/sprint_card.png", alt: "Пробежать 50 км за месяц", class: "about-sprint-card-img" %>
+      <%= image_tag "about/orbit_right.png", alt: "", class: "about-sprint-orbit about-sprint-orbit--right", aria: { hidden: true } %>
+    </div>
+
+    <%= image_tag "about/step_pill_forward.png", alt: "Двигайся вперёд каждый день — Поддержка и общий прогресс помогают не сдаваться", class: "about-step-pill-img about-step-pill-img--wide" %>
+  </section>
+
+  <!-- Вместе ты растешь быстрее -->
+  <section class="about-community-section">
+    <div class="about-community-top">
+      <div class="about-community-text">
+        <h2 class="about-section-title">Вместе<br>ты растешь<br>быстрее</h2>
         <p class="about-section-description">
-          определи, к чему хочешь прийти <span class="about-description-muted">— в работе, обучении или жизни. Цель помогает найти людей, которые идут тем же путём</span>
+          Мы верим, что правильное окружение<br>
+          может изменить будущее человека
         </p>
       </div>
-      <div class="about-goal-tiles">
-        <div class="about-goal-tile about-goal-tile--first">
-          <%= image_tag "about/goal_run_card.png", alt: "Пробежать 50 км за месяц", class: "about-goal-tile-card-img" %>
-        </div>
-        <div class="about-goal-tile about-goal-tile--second">
-          <%= image_tag "about/goal_books_card.png", alt: "Прочитать 20 книг за год", class: "about-goal-tile-card-img" %>
-        </div>
-      </div>
+      <%= image_tag "about/network.png", alt: "", class: "about-community-network-img" %>
     </div>
+
+    <%= link_to register_path, class: "about-cta-button about-cta-button--community" do %>
+      <%= image_tag "about/cta_start_chat.png", alt: "Начать общение", class: "about-cta-button-img" %>
+    <% end %>
   </section>
 
   <!-- Сделай жизнь лучше -->
   <section class="about-lifestyle-section">
     <h2 class="about-section-title">Сделай жизнь лучше</h2>
-    <p class="about-section-description">
+    <p class="about-section-description about-lifestyle-description">
       всё в твоих руках и в приложении ;make.Meet, главное, только начать и сделать первый шаг, а
       единомышленники тебя поддержат
     </p>
