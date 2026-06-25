@@ -73,13 +73,13 @@ Rails.application.routes.draw do
     post "login", to: "sessions#create"
     post "logout", to: "sessions#destroy"
 
-    resources :posts, only: [:index, :show, :create, :update, :destroy] do
+    resources :posts, only: [ :index, :show, :create, :update, :destroy ] do
       member do
         patch :moderate
       end
     end
 
-    resources :users, only: [:update]
+    resources :users, only: [ :update ]
   end
 
   # =========================
