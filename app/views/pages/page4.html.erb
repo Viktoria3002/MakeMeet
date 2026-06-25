@@ -1,34 +1,51 @@
 <% content_for :title, "Профиль - Make Meet" %>
+<%= render "pages/auth_entry_head" %>
 
 <% content_for :head do %>
   <style>
-    body.profile-page {
-      background-image: url('<%= asset_path("bgprofile.png") %>');
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-attachment: fixed;
+    html.profile-user-logged-in .profile-guest-only {
+      display: none !important;
+    }
+
+    html.profile-user-logged-in .profile-auth-only {
+      display: flex !important;
+    }
+
+    html:not(.profile-user-logged-in) .profile-guest-only {
+      display: block !important;
+      width: 100%;
+    }
+
+    html:not(.profile-user-logged-in) .profile-auth-only {
+      display: none !important;
+    }
+
+    html:not(.profile-user-logged-in) .profile-page-section {
+      min-height: 100vh;
+      padding: clamp(96px, 14vh, 132px) clamp(16px, 3vw, 32px) clamp(32px, 5vh, 48px);
     }
   </style>
+  <script>
+    if (window.localStorage.getItem('makeMeetUserLoggedIn') === 'true') {
+      document.documentElement.classList.add('profile-user-logged-in');
+    }
+  </script>
 <% end %>
 
 <section class="profile-page-section">
-  <div class="profile-page-content">
+  <div class="profile-guest-only profile-guest-wrap">
+    <%= render "pages/auth_welcome_card" %>
+  </div>
 
+  <div class="profile-auth-only profile-page-content">
     <div class="profile-author-card">
       <%= image_tag "autor.png", alt: "Профиль пользователя", class: "profile-author-image" %>
     </div>
 
-    
-    <div class="welcome-buttons">
-      <%= link_to "Зарегистрироваться", new_user_registration_path, class: "register-button" %>
-      <%= link_to "Войти", login_path, class: "login-button" %>
-    </div>
-
     <div class="profile-actions">
-      <button type="button" class="profile-action-button">
+      <%= link_to settings_path, class: "profile-action-button" do %>
         <%= image_tag "Q_Button_1 (1).png", alt: "Настройки", class: "profile-action-image" %>
-      </button>
+      <% end %>
 
       <%= link_to profile_details_path, class: "profile-action-button" do %>
         <%= image_tag "Q_Button_1 (2).png", alt: "Профиль", class: "profile-action-image" %>
@@ -41,6 +58,18 @@
       <p class="profile-legal-link">Пользовательское соглашение</p>
       <p class="profile-legal-link">Политика обработки персональных данных</p>
     </div>
-
   </div>
 </section>
+
+<script>
+  function initProfilePageAuthState() {
+    const loggedIn = window.localStorage.getItem('makeMeetUserLoggedIn') === 'true';
+
+    document.documentElement.classList.toggle('profile-user-logged-in', loggedIn);
+    document.documentElement.classList.toggle('media-user-logged-in', loggedIn);
+  }
+
+  document.addEventListener('DOMContentLoaded', initProfilePageAuthState);
+  document.addEventListener('turbo:load', initProfilePageAuthState);
+  document.addEventListener('turbo:render', initProfilePageAuthState);
+</script>

@@ -9,7 +9,20 @@
       background-repeat: no-repeat;
       background-color: #ffffffff;
     }
+
+    html.media-user-logged-in .media-guest-only {
+      display: none !important;
+    }
+
+    html.media-user-logged-in .media-auth-only {
+      display: block !important;
+    }
   </style>
+  <script>
+    if (window.localStorage.getItem('makeMeetUserLoggedIn') === 'true') {
+      document.documentElement.classList.add('media-user-logged-in');
+    }
+  </script>
 <% end %>
 <div class="media-page-wrapper">
   <div class="hero-section">
@@ -19,7 +32,7 @@
         сервис для тех, кто хочет расти, реализовывать амбиции и <span class="hero-subtitle-muted">достигать целей с поддержкой</span>
         единомышленников
       </p>
-     <%= link_to register_path, class: "about-cta-button" do %>
+     <%= link_to register_path, class: "about-cta-button media-guest-only" do %>
           <%= image_tag "media/cta_button.png", alt: "Открыть силу комьюнити", class: "about-cta-button-img" %>
         <% end %>
     </div>
@@ -28,15 +41,34 @@
   <div class="media-section">
     <div class="media-header">
       <h2 class="media-title">Медиа</h2>
-    
 
-       <%= link_to register_path, class: "filter-button" do %>
+       <%= link_to register_path, class: "filter-button media-guest-only" do %>
           больше статей
         <% end %>
     </div>
 
-    <div class="media-grid">
-      <div class="media-card1">
+    <div class="media-filters media-auth-only" hidden>
+      <div class="media-tags-list" role="group" aria-label="Фильтр по тегам">
+        <% %w[саморазвитие спорт новые\ знания привычка здоровье фокус\ и\ продуктивность карьера креатив контент путешествия хобби].each do |tag| %>
+          <button type="button" class="media-tag" data-tag="<%= tag %>"><%= tag %></button>
+        <% end %>
+      </div>
+
+      <form class="media-search" role="search" onsubmit="return false;">
+        <input
+          type="search"
+          class="media-search-input"
+          id="mediaSearchInput"
+          placeholder="ПОИСК"
+          aria-label="Поиск статей"
+          autocomplete="off"
+        >
+        <span class="media-search-icon" aria-hidden="true"></span>
+      </form>
+    </div>
+
+    <div class="media-grid" id="mediaGrid">
+      <div class="media-card1 media-article-card" data-tags="карьера новые знания">
         <div class="card-content">
           <h3 class="card-title1">Тенденции развития удаленной работы<br> в 2026 году</h3>
           <p class="card-description1">
@@ -45,23 +77,23 @@
         </div>
       </div>
 
-  <div class="media-card2">
-  <div class="card-content">
-    <h3 class="card-title">
-      Почему цели важнее навыков для роста фрилансера
-    </h3>
-    <p class="card-description2">
-      Раскрывается концепция, что постановка целей может стать драйвером профессионального
-      роста. В статье описываются техники постановки и достижения целей.
-    </p>
-  </div>
+      <div class="media-card2 media-article-card" data-tags="карьера саморазвитие">
+        <div class="card-content">
+          <h3 class="card-title">
+            Почему цели важнее навыков для роста фрилансера
+          </h3>
+          <p class="card-description2">
+            Раскрывается концепция, что постановка целей может стать драйвером профессионального
+            роста. В статье описываются техники постановки и достижения целей.
+          </p>
+        </div>
 
-  <div class="card-image">
-    <%= image_tag "growth.png", class: "card-img" %>
-  </div>
-</div>
+        <div class="card-image">
+          <%= image_tag "growth.png", class: "card-img" %>
+        </div>
+      </div>
 
-      <div class="media-card3">
+      <div class="media-card3 media-article-card" data-tags="саморазвитие карьера креатив">
         <div class="card-content">
           <h3 class="card-title">Вдохновляющие истории успешных фрилансеров</h3>
           <p class="card-description">
@@ -71,7 +103,7 @@
         </div>
       </div>
 
-      <div class="media-card4">
+      <div class="media-card4 media-article-card" data-tags="спорт привычка здоровье">
         <div class="card-content">
           <h3 class="card-title4">
             Как Nike Run Club мотивирует миллионы людей к регулярным пробежкам
@@ -82,7 +114,7 @@
         </div>
       </div>
 
-      <div class="media-card5">
+      <div class="media-card5 media-article-card" data-tags="новые знания карьера">
         <div class="card-content">
           <h3 class="card-title">Обучение и развитие <br>в эпоху удаленной работы</h3>
           <p class="card-description5">
@@ -91,25 +123,104 @@
         </div>
       </div>
 
-<div class="media-card6">
-  <div class="card-content">
-    <h3 class="card-title">
-      Лучшие помощники<br>
-      в работе для фрилансеров
-    </h3>
+      <%= link_to article_freelance_helpers_path, class: "media-card6 media-article-card media-article-card--link", data: { tags: "фокус и продуктивность карьера контент" } do %>
+        <div class="card-content">
+          <h3 class="card-title">
+            Лучшие помощники<br>
+            в работе для фрилансеров
+          </h3>
 
-    <p class="card-description">
-      Современный фриланс требует не только<br> профессиональных навыков, 
-      но и умения<br> эффективно управлять временем, проектами<br>и коммуникацией. 
-      Мы собрали подборку<br> самых полезных приложений и сервисов
-    </p>
-  </div>
+          <p class="card-description">
+            Современный фриланс требует не только<br> профессиональных навыков,
+            но и умения<br> эффективно управлять временем, проектами<br>и коммуникацией.
+            Мы собрали подборку<br> самых полезных приложений и сервисов
+          </p>
+        </div>
 
-  <div class="card-image">
-    <%= image_tag "icons.png", class: "card-img" %>
-  </div>
-</div>
-
+        <div class="card-image">
+          <%= image_tag "icons.png", class: "card-img" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
+
+<script>
+  function initMediaPageAuthState() {
+    const loggedIn = window.localStorage.getItem('makeMeetUserLoggedIn') === 'true';
+
+    document.documentElement.classList.toggle('media-user-logged-in', loggedIn);
+    document.body.classList.toggle('media-page--authenticated', loggedIn);
+
+    document.querySelectorAll('.media-guest-only').forEach(function(element) {
+      element.hidden = loggedIn;
+    });
+
+    document.querySelectorAll('.media-auth-only').forEach(function(element) {
+      element.hidden = !loggedIn;
+    });
+
+    if (loggedIn) {
+      initMediaFilters();
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initMediaPageAuthState);
+  document.addEventListener('turbo:load', initMediaPageAuthState);
+  document.addEventListener('turbo:render', initMediaPageAuthState);
+
+  function initMediaFilters() {
+    const cards = Array.from(document.querySelectorAll('.media-article-card'));
+    const tagButtons = Array.from(document.querySelectorAll('.media-tag'));
+    const searchInput = document.getElementById('mediaSearchInput');
+
+    if (!cards.length || tagButtons.some(function(button) { return button.dataset.mediaFilterBound; })) {
+      return;
+    }
+
+    let activeTag = null;
+
+    function normalizeText(value) {
+      return value.toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+    function cardSearchText(card) {
+      return normalizeText(card.textContent || '');
+    }
+
+    function applyFilters() {
+      const query = normalizeText(searchInput ? searchInput.value : '');
+
+      cards.forEach(function(card) {
+        const tags = (card.dataset.tags || '').split(' ');
+        const matchesTag = !activeTag || tags.includes(activeTag);
+        const matchesSearch = !query || cardSearchText(card).includes(query);
+        card.classList.toggle('media-article-card--hidden', !(matchesTag && matchesSearch));
+      });
+    }
+
+    tagButtons.forEach(function(button) {
+      button.dataset.mediaFilterBound = 'true';
+
+      button.addEventListener('click', function() {
+        const tag = button.dataset.tag;
+
+        if (activeTag === tag) {
+          activeTag = null;
+          button.classList.remove('is-active');
+        } else {
+          activeTag = tag;
+          tagButtons.forEach(function(item) {
+            item.classList.toggle('is-active', item === button);
+          });
+        }
+
+        applyFilters();
+      });
+    });
+
+    if (searchInput) {
+      searchInput.addEventListener('input', applyFilters);
+    }
+  }
+</script>

@@ -10,14 +10,19 @@ Rails.application.routes.draw do
   get "register", to: "pages#register", as: :register
   get "registration", to: "pages#registration", as: :registration
   get "login", to: "pages#login", as: :login
+  get "welcome", to: "pages#auth_welcome", as: :auth_welcome
   get "page1", to: "pages#page1", as: :page1
   get "page2", to: "pages#page2", as: :page2
   get "page3", to: "pages#page3", as: :page3
+  get "my_sprints/new", to: "pages#create_sprint", as: :new_my_sprint
   get "page4", to: "pages#page4", as: :page4
   get "profile_details", to: "pages#profile_details", as: :profile_details
+  get "settings", to: "pages#settings", as: :settings
+  get "settings/change_password", to: "pages#settings_change_password", as: :settings_change_password
 
   # Страница статьи (не отображается в основном меню)
   get "article", to: "pages#article", as: :article
+  get "article/freelance-helpers", to: "pages#article_freelance", as: :article_freelance_helpers
 
   # Регистрация пользователей
   get "new", to: "users#new", as: :new_user_registration

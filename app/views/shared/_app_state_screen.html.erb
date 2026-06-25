@@ -1,0 +1,76 @@
+<div class="app-state-screen is-hidden" id="appStateScreen" aria-hidden="true">
+  <div class="app-state-screen__panel">
+    <div class="app-state-screen__view" data-app-state-view="loading">
+      <%= image_tag "state_loading_cloud.png", alt: "", class: "app-state-screen__icon app-state-screen__icon--loading", aria: { hidden: true } %>
+      <h2 class="app-state-screen__title">Загружаем совпадения</h2>
+      <p class="app-state-screen__text">
+        <span class="app-state-screen__line">Твоя энергия ищет отклик.</span>
+        <span class="app-state-screen__line">Это займёт всего пару мгновений</span>
+      </p>
+    </div>
+
+    <div class="app-state-screen__view is-hidden" data-app-state-view="error">
+      <button type="button" class="app-state-screen__retry-btn" id="appStateRetryBtn" aria-label="Повторить попытку">
+        <%= image_tag "state_error_sync.png", alt: "", class: "app-state-screen__icon app-state-screen__icon--error", aria: { hidden: true } %>
+      </button>
+      <h2 class="app-state-screen__title">Ошибка</h2>
+      <p class="app-state-screen__text">
+        <span class="app-state-screen__line">Кажется, что-то пошло не так</span>
+        <span class="app-state-screen__line">Интернет замер или платформа задумалась</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    if (window.AppStateScreen) return;
+
+    const screen = document.getElementById('appStateScreen');
+    const retryBtn = document.getElementById('appStateRetryBtn');
+    const views = screen ? screen.querySelectorAll('[data-app-state-view]') : [];
+    let retryHandler = null;
+
+    function setView(name) {
+      views.forEach(function(view) {
+        const active = view.getAttribute('data-app-state-view') === name;
+        view.classList.toggle('is-hidden', !active);
+      });
+    }
+
+    window.AppStateScreen = {
+      showLoading: function() {
+        if (!screen) return;
+        setView('loading');
+        screen.classList.remove('is-hidden');
+        screen.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('app-state-screen-open');
+      },
+
+      showError: function(options) {
+        if (!screen) return;
+        retryHandler = options && typeof options.onRetry === 'function' ? options.onRetry : null;
+        setView('error');
+        screen.classList.remove('is-hidden');
+        screen.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('app-state-screen-open');
+      },
+
+      hide: function() {
+        if (!screen) return;
+        screen.classList.add('is-hidden');
+        screen.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('app-state-screen-open');
+        retryHandler = null;
+      }
+    };
+
+    if (retryBtn) {
+      retryBtn.addEventListener('click', function() {
+        const handler = retryHandler;
+        window.AppStateScreen.hide();
+        if (handler) handler();
+      });
+    }
+  })();
+</script>

@@ -1,0 +1,29 @@
+<div class="register-card auth-entry-card">
+  <h1 class="register-title">Добро пожаловать</h1>
+
+  <p class="register-description">
+    Один&nbsp;– тоже путь. Но вместе&nbsp;– больше мотивации.<br>
+    Войди или зарегистрируйся, чтобы<br>
+    найти своего человека
+  </p>
+
+  <div class="register-actions">
+    <%= link_to registration_path, class: "auth-image-btn" do %>
+      <%= image_tag "Q_Button_1 (11).png", alt: "Зарегистрироваться", class: "auth-image-btn__img" %>
+    <% end %>
+
+    <%= link_to login_path, class: "auth-image-btn" do %>
+      <%= image_tag "Q_Button_1 (10).png", alt: "Войти", class: "auth-image-btn__img" %>
+    <% end %>
+  </div>
+
+  <div class="register-socials auth-socials">
+    <button type="button" class="auth-social-btn auth-social-btn--asset" aria-label="Войти через Apple">
+      <%= image_tag "Q_Button_1 (7).png", alt: "", class: "auth-social-asset-img", role: "presentation" %>
+    </button>
+
+    <button type="button" class="auth-social-btn auth-social-btn--asset" aria-label="Войти через Google">
+      <%= image_tag "Q_Button_1 (8).png", alt: "", class: "auth-social-asset-img", role: "presentation" %>
+    </button>
+  </div>
+</div>

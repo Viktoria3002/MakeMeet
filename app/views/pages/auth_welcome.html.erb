@@ -1,0 +1,33 @@
+<% content_for :title, "Добро пожаловать - Make Meet" %>
+
+<section class="auth-welcome" aria-live="polite">
+  <%= image_tag "auth_welcome_hero.png", alt: "Вместе — проще не сдаваться.", class: "auth-welcome-hero-img" %>
+  <button type="button" class="auth-welcome-hitarea" id="authWelcomeContinue" aria-label="Продолжить в профиль"></button>
+</section>
+
+<script>
+  function initAuthWelcomeRedirect() {
+    const button = document.getElementById('authWelcomeContinue');
+    if (!button || button.dataset.bound === 'true') return;
+
+    button.dataset.bound = 'true';
+
+    const redirectUrl = '<%= page4_path %>';
+    const delayMs = 3600;
+    let redirected = false;
+    let timeoutId = null;
+
+    function goToProfile() {
+      if (redirected) return;
+      redirected = true;
+      if (timeoutId) window.clearTimeout(timeoutId);
+      window.location.href = redirectUrl;
+    }
+
+    button.addEventListener('click', goToProfile);
+    timeoutId = window.setTimeout(goToProfile, delayMs);
+  }
+
+  document.addEventListener('DOMContentLoaded', initAuthWelcomeRedirect);
+  document.addEventListener('turbo:load', initAuthWelcomeRedirect);
+</script>

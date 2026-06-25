@@ -1,46 +1,6 @@
 <% content_for :title, "Регистрация - Make Meet" %>
-<% content_for :head do %>
-  <style>
-    body.register-page {
-      background-image: url('<%= asset_path("bgwelcome.png") %>');
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-attachment: fixed;
-    }
-  </style>
-<% end %>
+<%= render "pages/auth_entry_head" %>
 
 <section class="register-section">
-  <div class="register-card">
-    <h1 class="register-title">Добро пожаловать</h1>
-
-    <p class="register-description">
-      Один - тоже путь. Но вместе - больше мотивации.<br>
-      Войди или зарегистрируйся, чтобы<br>
-      найти своего человека
-    </p>
-
-    <div class="register-actions">
-      <%= link_to registration_path, class: "register-cta-link" do %>
-        <%= image_tag "Q_Button_1 (5).png", alt: "Зарегистрироваться", class: "register-cta-image" %>
-      <% end %>
-
-      <%= link_to login_path, class: "register-cta-link" do %>
-        <%= image_tag "Q_Button_1 (6).png", alt: "Войти", class: "register-cta-image" %>
-      <% end %>
-    </div>
-
-    <div class="register-socials">
-      <button type="button" class="register-social-button">
-        <%= image_tag "Q_Button_1 (7).png", alt: "Войти через Apple", class: "register-social-image" %>
-      </button>
-
-      <button type="button" class="register-social-button">
-        <%= image_tag "Q_Button_1 (8).png", alt: "Войти через Google", class: "register-social-image" %>
-      </button>
-    </div>
-  </div>
+  <%= render "pages/auth_welcome_card" %>
 </section>
-
-

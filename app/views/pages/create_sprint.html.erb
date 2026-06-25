@@ -1,0 +1,363 @@
+<% content_for :title, "Создать спринт - Make Meet" %>
+<% content_for :head do %>
+  <style>
+    body.create-sprint-page {
+      background-image: url('<%= asset_path("create_sprint/background.png") %>');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-color: #0a0a0a;
+      min-height: 100vh;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body.create-sprint-page .main-navigation {
+      position: relative;
+      z-index: 1001;
+      margin-bottom: 0;
+    }
+
+    body.create-sprint-page .main-content {
+      padding: 0;
+      max-width: none;
+    }
+
+    body.create-sprint-page .main-navigation .nav-container {
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    body.create-sprint-page .nav-link {
+      color: #ffffff;
+    }
+  </style>
+<% end %>
+
+<section class="create-sprint-section">
+  <div class="create-sprint-wrap">
+    <form class="create-sprint-form" action="#" method="post" novalidate>
+      <div class="create-sprint-sheet">
+        <header class="create-sprint-hero">
+          <label class="visually-hidden" for="createSprintName">Название спринта</label>
+          <input
+            id="createSprintName"
+            type="text"
+            class="create-sprint-hero-input"
+            placeholder="Название спринта"
+            autocomplete="off"
+          >
+          <button type="button" class="create-sprint-hero-cover-add" aria-label="Добавить обложку">
+            <%= image_tag "create_sprint/plus_icon.png", alt: "", class: "create-sprint-hero-plus", aria: { hidden: true } %>
+          </button>
+          <label class="visually-hidden" for="createSprintIntro">Вводный текст</label>
+          <textarea
+            id="createSprintIntro"
+            class="create-sprint-hero-intro"
+            rows="2"
+            placeholder="Напиши здесь вводный текст"
+          ></textarea>
+        </header>
+
+        <div class="create-sprint-meta">
+          <div class="create-sprint-select-row create-sprint-select-row--image">
+            <%= image_tag "create_sprint/row_duration.png", alt: "", class: "create-sprint-select-row-img", aria: { hidden: true } %>
+            <div class="create-sprint-select" data-create-sprint-select data-field="duration">
+              <button type="button" class="create-sprint-select-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Длительность">
+                <span class="create-sprint-select-value">Выберите</span>
+                <span class="create-sprint-select-chevron" aria-hidden="true"></span>
+              </button>
+              <div class="create-sprint-select-menu" role="listbox" hidden>
+                <button type="button" class="create-sprint-select-close" aria-label="Закрыть">
+                  <span class="create-sprint-select-chevron create-sprint-select-chevron--up" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="create-sprint-select-option is-selected" data-value="Выберите">Выберите</button>
+                <button type="button" class="create-sprint-select-option" data-value="1 неделя">1 неделя</button>
+                <button type="button" class="create-sprint-select-option" data-value="2 недели">2 недели</button>
+                <button type="button" class="create-sprint-select-option" data-value="3 недели">3 недели</button>
+                <button type="button" class="create-sprint-select-option" data-value="1 месяц">1 месяц</button>
+                <button type="button" class="create-sprint-select-option" data-value="1.5 месяца">1.5 месяца</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="create-sprint-select-row create-sprint-select-row--image">
+            <%= image_tag "create_sprint/row_form.png", alt: "", class: "create-sprint-select-row-img", aria: { hidden: true } %>
+            <div class="create-sprint-select" data-create-sprint-select data-field="form">
+              <button type="button" class="create-sprint-select-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Форма">
+                <span class="create-sprint-select-value">Выберите</span>
+                <span class="create-sprint-select-chevron" aria-hidden="true"></span>
+              </button>
+              <div class="create-sprint-select-menu" role="listbox" hidden>
+                <button type="button" class="create-sprint-select-close" aria-label="Закрыть">
+                  <span class="create-sprint-select-chevron create-sprint-select-chevron--up" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="create-sprint-select-option is-selected" data-value="Выберите">Выберите</button>
+                <button type="button" class="create-sprint-select-option" data-value="Индивидуальный">Индивидуальный</button>
+                <button type="button" class="create-sprint-select-option" data-value="Парный">Парный</button>
+                <button type="button" class="create-sprint-select-option" data-value="Групповой">Групповой</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="create-sprint-select-row create-sprint-select-row--image">
+            <%= image_tag "create_sprint/row_level.png", alt: "", class: "create-sprint-select-row-img", aria: { hidden: true } %>
+            <div class="create-sprint-select" data-create-sprint-select data-field="level">
+              <button type="button" class="create-sprint-select-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Уровень">
+                <span class="create-sprint-select-value">Выберите</span>
+                <span class="create-sprint-select-chevron" aria-hidden="true"></span>
+              </button>
+              <div class="create-sprint-select-menu" role="listbox" hidden>
+                <button type="button" class="create-sprint-select-close" aria-label="Закрыть">
+                  <span class="create-sprint-select-chevron create-sprint-select-chevron--up" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="create-sprint-select-option is-selected" data-value="Выберите">Выберите</button>
+                <button type="button" class="create-sprint-select-option" data-value="Для начинающих">Для начинающих</button>
+                <button type="button" class="create-sprint-select-option" data-value="Уже не первый раз">Уже не первый раз</button>
+                <button type="button" class="create-sprint-select-option" data-value="Профи">Профи</button>
+                <button type="button" class="create-sprint-select-option" data-value="Монстры спринтов">Монстры спринтов</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="create-sprint-goals">
+          <p class="create-sprint-goals-hint">Напишите здесь, что даст человеку этот спринт</p>
+          <h2 class="create-sprint-goals-title">Этот спринт поможет тебе:</h2>
+          <div class="create-sprint-goals-list" id="createSprintGoalsList">
+            <div class="create-sprint-goal-row">
+              <input type="text" class="create-sprint-goal-input" placeholder="напишите здесь для чего этот спринт">
+              <button type="button" class="create-sprint-goal-add" data-create-sprint-add-goal aria-label="Добавить цель">
+                <span aria-hidden="true">+</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="create-sprint-plan">
+          <%= image_tag "create_sprint/watermark_m.png", alt: "", class: "create-sprint-plan-watermark", aria: { hidden: true } %>
+
+          <h2 class="create-sprint-plan-title">План:</h2>
+          <p class="create-sprint-plan-hint">
+            Ваша задача разбить спринт на равные понятные части и расписать, что именно вы собираетесь делать, так цель станет достижимой, а путь — понятным
+          </p>
+
+          <div class="create-sprint-parts" id="createSprintParts">
+            <article class="create-sprint-part create-sprint-part--expanded">
+              <div class="create-sprint-part-top">
+                <span class="create-sprint-part-badge">Отрезок</span>
+                <label class="create-sprint-part-points">
+                  <span class="create-sprint-part-points-bullet" aria-hidden="true">•</span>
+                  <input type="text" class="create-sprint-part-points-input" placeholder="пункты">
+                </label>
+              </div>
+              <p class="create-sprint-part-name">1 часть</p>
+            </article>
+
+            <article class="create-sprint-part create-sprint-part--collapsed">
+              <span class="create-sprint-part-badge">Отрезок</span>
+              <span class="create-sprint-part-name">2 часть</span>
+            </article>
+          </div>
+
+          <button type="button" class="create-sprint-part-add" id="createSprintAddPart" aria-label="Добавить часть">
+            <span aria-hidden="true">+</span>
+          </button>
+        </div>
+
+        <div class="create-sprint-motivation-wrap">
+          <p class="create-sprint-motivation-label">
+            <span>Добавьте немного</span>
+            <span>мотивации здесь</span>
+          </p>
+          <label class="visually-hidden" for="createSprintMotivation">Мотивация</label>
+          <textarea id="createSprintMotivation" class="create-sprint-motivation-input" rows="2" placeholder=""></textarea>
+        </div>
+
+        <button type="submit" class="create-sprint-submit">Создать спринт</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  (function() {
+    const CUSTOM_SPRINTS_KEY = 'make_meet_custom_sprints';
+    const CARD_IMAGE_PATH = '<%= asset_path("mysprints/M_Sprint.png") %>';
+
+    function initCreateSprintSelects() {
+      document.querySelectorAll('[data-create-sprint-select]').forEach(function(select) {
+        if (select.dataset.bound === 'true') return;
+        select.dataset.bound = 'true';
+
+        const row = select.closest('.create-sprint-select-row');
+        const trigger = select.querySelector('.create-sprint-select-trigger');
+        const menu = select.querySelector('.create-sprint-select-menu');
+        const value = select.querySelector('.create-sprint-select-value');
+        const closeBtn = select.querySelector('.create-sprint-select-close');
+        const options = Array.from(select.querySelectorAll('.create-sprint-select-option'));
+
+        function closeSelect() {
+          select.classList.remove('is-open');
+          if (row) row.classList.remove('is-open');
+          trigger.setAttribute('aria-expanded', 'false');
+          menu.hidden = true;
+        }
+
+        function openSelect() {
+          document.querySelectorAll('[data-create-sprint-select].is-open').forEach(function(other) {
+            if (other !== select) {
+              other.classList.remove('is-open');
+              const otherRow = other.closest('.create-sprint-select-row');
+              if (otherRow) otherRow.classList.remove('is-open');
+              other.querySelector('.create-sprint-select-trigger').setAttribute('aria-expanded', 'false');
+              other.querySelector('.create-sprint-select-menu').hidden = true;
+            }
+          });
+
+          select.classList.add('is-open');
+          if (row) row.classList.add('is-open');
+          trigger.setAttribute('aria-expanded', 'true');
+          menu.hidden = false;
+        }
+
+        trigger.addEventListener('click', function(event) {
+          event.stopPropagation();
+          if (select.classList.contains('is-open')) {
+            closeSelect();
+          } else {
+            openSelect();
+          }
+        });
+
+        if (closeBtn) {
+          closeBtn.addEventListener('click', function(event) {
+            event.stopPropagation();
+            closeSelect();
+          });
+        }
+
+        options.forEach(function(option) {
+          option.addEventListener('click', function(event) {
+            event.stopPropagation();
+            const nextValue = option.dataset.value || option.textContent.trim();
+            value.textContent = nextValue;
+            options.forEach(function(item) {
+              item.classList.toggle('is-selected', item === option);
+            });
+            closeSelect();
+          });
+        });
+      });
+
+      if (!document.body.dataset.createSprintSelectOutsideBound) {
+        document.body.dataset.createSprintSelectOutsideBound = 'true';
+        document.addEventListener('click', function() {
+          document.querySelectorAll('[data-create-sprint-select].is-open').forEach(function(select) {
+            select.classList.remove('is-open');
+            const row = select.closest('.create-sprint-select-row');
+            if (row) row.classList.remove('is-open');
+            select.querySelector('.create-sprint-select-trigger').setAttribute('aria-expanded', 'false');
+            select.querySelector('.create-sprint-select-menu').hidden = true;
+          });
+        });
+      }
+    }
+
+    function initCreateSprintGoals() {
+      const list = document.getElementById('createSprintGoalsList');
+      if (!list || list.dataset.bound === 'true') return;
+      list.dataset.bound = 'true';
+
+      list.addEventListener('click', function(event) {
+        const button = event.target.closest('[data-create-sprint-add-goal]');
+        if (!button) return;
+
+        const row = button.closest('.create-sprint-goal-row');
+        if (!row) return;
+
+        const clone = row.cloneNode(true);
+        const input = clone.querySelector('.create-sprint-goal-input');
+        if (input) input.value = '';
+        list.appendChild(clone);
+      });
+    }
+
+    function initCreateSprintParts() {
+      const list = document.getElementById('createSprintParts');
+      const addButton = document.getElementById('createSprintAddPart');
+      if (!list || !addButton || addButton.dataset.bound === 'true') return;
+      addButton.dataset.bound = 'true';
+
+      addButton.addEventListener('click', function() {
+        const partNumber = list.querySelectorAll('.create-sprint-part').length + 1;
+        const part = document.createElement('article');
+        part.className = 'create-sprint-part create-sprint-part--collapsed';
+        part.innerHTML = '<span class="create-sprint-part-badge">Отрезок</span><span class="create-sprint-part-name">' + partNumber + ' часть</span>';
+        list.appendChild(part);
+      });
+    }
+
+    function readSelectValue(field) {
+      const select = document.querySelector('[data-create-sprint-select][data-field="' + field + '"] .create-sprint-select-value');
+      if (!select) return '';
+      const value = select.textContent.trim();
+      return value === 'Выберите' ? '' : value;
+    }
+
+    function initCreateSprintForm() {
+      const form = document.querySelector('.create-sprint-form');
+      if (!form || form.dataset.bound === 'true') return;
+      form.dataset.bound = 'true';
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const titleInput = document.getElementById('createSprintName');
+        const introInput = document.getElementById('createSprintIntro');
+        const motivationInput = document.getElementById('createSprintMotivation');
+        const goals = Array.from(document.querySelectorAll('.create-sprint-goal-input'))
+          .map(function(input) { return input.value.trim(); })
+          .filter(Boolean);
+
+        const sprint = {
+          id: 'custom-' + Date.now(),
+          title: (titleInput && titleInput.value.trim()) || 'Мой спринт',
+          description: (introInput && introInput.value.trim()) || goals.join('. ') || 'Персональный спринт',
+          duration: readSelectValue('duration') || '1 неделя',
+          form: readSelectValue('form'),
+          level: readSelectValue('level'),
+          goals: goals,
+          motivation: motivationInput ? motivationInput.value.trim() : '',
+          status: 'active',
+          image: CARD_IMAGE_PATH,
+          createdAt: Date.now()
+        };
+
+        let customSprints = [];
+        try {
+          customSprints = JSON.parse(window.localStorage.getItem(CUSTOM_SPRINTS_KEY) || '[]');
+        } catch (error) {
+          customSprints = [];
+        }
+
+        customSprints.unshift(sprint);
+        window.localStorage.setItem(CUSTOM_SPRINTS_KEY, JSON.stringify(customSprints));
+        window.location.href = '<%= page3_path %>';
+      });
+    }
+
+    function initCreateSprintPage() {
+      initCreateSprintSelects();
+      initCreateSprintGoals();
+      initCreateSprintParts();
+      initCreateSprintForm();
+    }
+
+    document.addEventListener('DOMContentLoaded', initCreateSprintPage);
+    document.addEventListener('turbo:load', initCreateSprintPage);
+    document.addEventListener('turbo:render', initCreateSprintPage);
+  })();
+</script>

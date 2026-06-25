@@ -12,135 +12,341 @@
 <% end %>
 
 <div class="open-sprints-page">
-  <!-- Hero Section -->
   <div class="sprints-hero-section">
     <h1 class="sprints-hero-title">Выбирай цели и достигай их за короткий срок</h1>
     <p class="sprints-hero-description">Присоединяйтесь к коротким, четко структурированным мероприятиям, которые помогают <span class="sprints-hero-description-muted">двигаться к вашим целям</span></p>
     <%= image_tag "sprints_star.png", alt: "", class: "sprints-hero-star" %>
   </div>
 
-  <!-- Info Section -->
   <div class="sprints-info-section">
     <%= image_tag "sprints_open_sprint_btn.png", alt: "Открытый спринт — это", class: "sprints-info-box-img" %>
     <p class="sprints-info-text">короткие <span class="sprints-info-text-muted">онлайн инициативы с конкретной целью</span>, рассчитанной на 1-4 недели. Они помогают сосредоточиться, добиться видимых результатов</p>
   </div>
 
-  <!-- Теги + Спринты в одном блоке с фоном #89BBCB -->
   <div class="sprints-tags-and-grid-wrap">
     <section class="sprints-tags-section">
-      <h2 class="sprints-tags-title">Теги</h2>
-      <div class="sprints-tags-list">
-        <button type="button" class="sprints-tag">саморазвитие</button>
-        <button type="button" class="sprints-tag">спорт</button>
-        <button type="button" class="sprints-tag">новые знания</button>
-        <button type="button" class="sprints-tag">привычка</button>
-        <button type="button" class="sprints-tag">здоровье</button>
-        <button type="button" class="sprints-tag">фокус и продуктивность</button>
-        <button type="button" class="sprints-tag">карьера</button>
-        <button type="button" class="sprints-tag">креатив</button>
-        <button type="button" class="sprints-tag">контент</button>
-        <button type="button" class="sprints-tag">путешествия</button>
-        <button type="button" class="sprints-tag">хобби</button>
+      <h2 class="sprints-tags-title">Спринты</h2>
+
+      <div class="sprints-filters">
+        <div class="sprints-duration-filter" id="sprintsDurationFilter">
+          <div class="sprints-duration-chip" id="sprintsDurationLabel">от 1 недели до 1 года</div>
+
+          <div class="sprints-duration-slider" id="sprintsDurationSlider">
+            <div class="sprints-duration-track" id="sprintsDurationTrack">
+              <div class="sprints-duration-range" id="sprintsDurationRange"></div>
+              <button type="button" class="sprints-duration-thumb" id="sprintsDurationThumbMin" aria-label="Минимальная длительность"></button>
+              <button type="button" class="sprints-duration-thumb" id="sprintsDurationThumbMax" aria-label="Максимальная длительность"></button>
+            </div>
+          </div>
+
+          <div class="sprints-duration-scale">
+            <span>1 неделя</span>
+            <span>6 месяцев</span>
+            <span>1 год</span>
+          </div>
+        </div>
+
+        <div class="sprints-tags-list" role="group" aria-label="Фильтр по тегам">
+          <button type="button" class="sprints-tag" data-tag="саморазвитие">саморазвитие</button>
+          <button type="button" class="sprints-tag" data-tag="спорт">спорт</button>
+          <button type="button" class="sprints-tag" data-tag="новые знания">новые знания</button>
+          <button type="button" class="sprints-tag" data-tag="привычка">привычка</button>
+          <button type="button" class="sprints-tag" data-tag="здоровье">здоровье</button>
+          <button type="button" class="sprints-tag" data-tag="фокус и продуктивность">фокус и продуктивность</button>
+          <button type="button" class="sprints-tag" data-tag="карьера">карьера</button>
+          <button type="button" class="sprints-tag" data-tag="креатив">креатив</button>
+          <button type="button" class="sprints-tag" data-tag="контент">контент</button>
+          <button type="button" class="sprints-tag" data-tag="путешествия">путешествия</button>
+          <button type="button" class="sprints-tag" data-tag="хобби">хобби</button>
+        </div>
       </div>
     </section>
 
-  <!-- Sprints Grid -->
-  <div class="sprints-grid">
-    <!-- Sprint Card 1 -->
-    <div class="sprint-card">
-      <div class="sprint-card-image">
-        <%= image_tag "sprints/card1.png", alt: "" %>
-      </div>
+    <div class="sprints-grid" id="openSprintsGrid">
+      <article class="sprint-card" data-duration-weeks="1" data-tags="привычка здоровье саморазвитие">
+        <div class="sprint-card-image">
+          <%= image_tag "sprints/card1.png", alt: "" %>
+        </div>
         <div class="sprint-card-content">
-        <%= link_to "Улучшить утренние ритуалы", article_path, class: "sprint-card-title sprint-card-title-link" %>
-        <p class="sprint-card-description">Создать и следовать персональному утреннему плану по улучшению себя: зарядка, пробежка, чтение, тренировка, изучение языков</p>
-      </div>
-      <div class="sprint-card-actions">
-        <span class="sprint-card-duration">1 неделя</span>
-        <button class="sprint-card-button" onclick="joinSprint('Улучшить утренние ритуалы', 'Создать и следовать персональному утреннему плану по улучшению себя: зарядка, пробежка, чтение, тренировка, изучение языков', '1 неделя', 'morning')">Присоединиться</button>
-      </div>
+          <%= link_to "Улучшить утренние ритуалы", article_path, class: "sprint-card-title sprint-card-title-link" %>
+          <p class="sprint-card-description">Создать и следовать персональному утреннему плану по улучшению себя: зарядка, пробежка, чтение, тренировка, изучение языков</p>
+        </div>
+        <div class="sprint-card-actions">
+          <span class="sprint-card-duration">1 неделя</span>
+          <button type="button" class="sprint-card-button" data-sprint-title="Улучшить утренние ритуалы">Присоединиться</button>
+        </div>
+      </article>
+
+      <article class="sprint-card" data-duration-weeks="2" data-tags="привычка новые знания саморазвитие">
+        <div class="sprint-card-image">
+          <%= image_tag "sprints/card2.png", alt: "" %>
+        </div>
+        <div class="sprint-card-content">
+          <h3 class="sprint-card-title">Развить привычку чтения</h3>
+          <p class="sprint-card-description">Читать по 10 страниц книги каждый день для формирования полезной привычки и расширения кругозора</p>
+        </div>
+        <div class="sprint-card-actions">
+          <span class="sprint-card-duration">2 недели</span>
+          <button type="button" class="sprint-card-button" data-sprint-title="Развить привычку чтения">Присоединиться</button>
+        </div>
+      </article>
+
+      <article class="sprint-card" data-duration-weeks="4" data-tags="карьера новые знания">
+        <div class="sprint-card-image">
+          <%= image_tag "sprints/card3.png", alt: "" %>
+        </div>
+        <div class="sprint-card-content">
+          <h3 class="sprint-card-title">Освоить базовые навыки программирования</h3>
+          <p class="sprint-card-description">Проходить онлайн-курс по Python/JavaScript для карьерного развития и автоматизации задач</p>
+        </div>
+        <div class="sprint-card-actions">
+          <span class="sprint-card-duration">4 недели</span>
+          <button type="button" class="sprint-card-button" data-sprint-title="Освоить базовые навыки программирования">Присоединиться</button>
+        </div>
+      </article>
+
+      <article class="sprint-card" data-duration-weeks="3" data-tags="спорт здоровье">
+        <div class="sprint-card-image">
+          <%= image_tag "sprints/card4.png", alt: "" %>
+        </div>
+        <div class="sprint-card-content">
+          <h3 class="sprint-card-title">Улучшить физическую форму</h3>
+          <p class="sprint-card-description">Выполнять короткую тренировку 15 минут в день для повышения здоровья и энергии</p>
+        </div>
+        <div class="sprint-card-actions">
+          <span class="sprint-card-duration">3 недели</span>
+          <button type="button" class="sprint-card-button" data-sprint-title="Улучшить физическую форму">Присоединиться</button>
+        </div>
+      </article>
+
+      <article class="sprint-card" data-duration-weeks="1" data-tags="фокус и продуктивность карьера">
+        <div class="sprint-card-image">
+          <%= image_tag "sprints/card5.png", alt: "" %>
+        </div>
+        <div class="sprint-card-content">
+          <h3 class="sprint-card-title">Разобраться с тайм-менеджментом</h3>
+          <p class="sprint-card-description">Освоить методики планирования и ведения для повышения эффективности и снижения стресса</p>
+        </div>
+        <div class="sprint-card-actions">
+          <span class="sprint-card-duration">1 неделя</span>
+          <button type="button" class="sprint-card-button" data-sprint-title="Разобраться с тайм-менеджментом">Присоединиться</button>
+        </div>
+      </article>
+
+      <article class="sprint-card" data-duration-weeks="1" data-tags="здоровье саморазвитие">
+        <div class="sprint-card-image">
+          <%= image_tag "sprints/card6.png", alt: "" %>
+        </div>
+        <div class="sprint-card-content">
+          <h3 class="sprint-card-title">Ментальное здоровье</h3>
+          <p class="sprint-card-description">Следовать программе медитации 10 минут в день для снижения стресса и повышения концентрации</p>
+        </div>
+        <div class="sprint-card-actions">
+          <span class="sprint-card-duration">1 неделя</span>
+          <button type="button" class="sprint-card-button" data-sprint-title="Ментальное здоровье">Присоединиться</button>
+        </div>
+      </article>
     </div>
 
-    <!-- Sprint Card 2 -->
-    <div class="sprint-card">
-      <div class="sprint-card-image">
-        <%= image_tag "sprints/card2.png", alt: "" %>
-      </div>
-      <div class="sprint-card-content">
-        <h3 class="sprint-card-title">Развить привычку чтения</h3>
-        <p class="sprint-card-description">Читать по 10 страниц книги каждый день для формирования полезной привычки и расширения кругозора</p>
-      </div>
-      <div class="sprint-card-actions">
-        <span class="sprint-card-duration">2 недели</span>
-        <button class="sprint-card-button" onclick="joinSprint('Развить привычку чтения', 'Читать по 10 страниц книги каждый день для формирования полезной привычки и расширения кругозора', '2 недели', 'reading')">Присоединиться</button>
-      </div>
-    </div>
-
-    <!-- Sprint Card 3 -->
-    <div class="sprint-card">
-      <div class="sprint-card-image">
-        <%= image_tag "sprints/card3.png", alt: "" %>
-      </div>
-      <div class="sprint-card-content">
-        <h3 class="sprint-card-title">Освоить базовые навыки программирования</h3>
-        <p class="sprint-card-description">Проходить онлайн-курс по Python/JavaScript для карьерного развития и автоматизации задач</p>
-      </div>
-      <div class="sprint-card-actions">
-        <span class="sprint-card-duration">4 недели</span>
-        <button class="sprint-card-button" onclick="joinSprint('Освоить базовые навыки программирования', 'Проходить онлайн-курс по Python/JavaScript для карьерного развития и автоматизации задач', '4 недели', 'coding')">Присоединиться</button>
-      </div>
-    </div>
-
-    <!-- Sprint Card 4 -->
-    <div class="sprint-card">
-      <div class="sprint-card-image">
-        <%= image_tag "sprints/card4.png", alt: "" %>
-      </div>
-      <div class="sprint-card-content">
-        <h3 class="sprint-card-title">Улучшить физическую форму</h3>
-        <p class="sprint-card-description">Выполнять короткую тренировку 15 минут в день для повышения здоровья и энергии</p>
-      </div>
-      <div class="sprint-card-actions">
-        <span class="sprint-card-duration">3 недели</span>
-        <button class="sprint-card-button" onclick="joinSprint('Улучшить физическую форму', 'Выполнять короткую тренировку 15 минут в день для повышения здоровья и энергии', '3 недели', 'fitness')">Присоединиться</button>
-      </div>
-    </div>
-
-    <!-- Sprint Card 5 -->
-    <div class="sprint-card">
-      <div class="sprint-card-image">
-        <%= image_tag "sprints/card5.png", alt: "" %>
-      </div>
-      <div class="sprint-card-content">
-        <h3 class="sprint-card-title">Разобраться с тайм-менеджментом</h3>
-        <p class="sprint-card-description">Освоить методики планирования и ведения для повышения эффективности и снижения стресса</p>
-      </div>
-      <div class="sprint-card-actions">
-        <span class="sprint-card-duration">1 неделя</span>
-        <button class="sprint-card-button" onclick="joinSprint('Разобраться с тайм-менеджментом', 'Освоить методики планирования и ведения для повышения эффективности и снижения стресса', '1 неделя', 'timemanage')">Присоединиться</button>
-      </div>
-    </div>
-
-    <!-- Sprint Card 6 -->
-    <div class="sprint-card">
-      <div class="sprint-card-image">
-        <%= image_tag "sprints/card6.png", alt: "" %>
-      </div>
-      <div class="sprint-card-content">
-        <h3 class="sprint-card-title">Ментальное здоровье</h3>
-        <p class="sprint-card-description">Следовать программе медитации 10 минут в день для снижения стресса и повышения концентрации</p>
-      </div>
-      <div class="sprint-card-actions">
-        <span class="sprint-card-duration">1 неделя</span>
-        <button class="sprint-card-button" onclick="joinSprint('Ментальное здоровье', 'Следовать программе медитации 10 минут в день для снижения стресса и повышения концентрации', '1 неделя', 'meditation')">Присоединиться</button>
-      </div>
-    </div>
-  </div>
+    <p class="sprints-grid-empty is-hidden" id="openSprintsEmpty">По выбранным фильтрам спринты не найдены</p>
   </div>
 </div>
 
 <script>
-  function joinSprint(title) {
-    alert('Вы успешно присоединились к спринту: ' + title);
-  }
+  (function() {
+    const MIN_WEEKS = 1;
+    const MAX_WEEKS = 52;
+
+    function clamp(value, min, max) {
+      return Math.min(Math.max(value, min), max);
+    }
+
+    function weeksToPercent(weeks) {
+      return ((weeks - MIN_WEEKS) / (MAX_WEEKS - MIN_WEEKS)) * 100;
+    }
+
+    function percentToWeeks(percent) {
+      return Math.round(MIN_WEEKS + (percent / 100) * (MAX_WEEKS - MIN_WEEKS));
+    }
+
+    function formatDurationPart(weeks) {
+      if (weeks <= 4) {
+        if (weeks === 1) return '1 неделя';
+        if (weeks >= 2 && weeks <= 4) return weeks + ' недели';
+        return weeks + ' недель';
+      }
+
+      const months = Math.max(1, Math.round(weeks / 4.33));
+      const mod10 = months % 10;
+      const mod100 = months % 100;
+
+      if (mod10 === 1 && mod100 !== 11) return months + ' месяц';
+      if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) return months + ' месяца';
+      return months + ' месяцев';
+    }
+
+    function formatDurationRange(minWeeks, maxWeeks) {
+      return 'от ' + formatDurationPart(minWeeks) + ' до ' + formatDurationPart(maxWeeks);
+    }
+
+    function initOpenSprintsFilters() {
+      const cards = Array.from(document.querySelectorAll('#openSprintsGrid .sprint-card'));
+      const tagButtons = Array.from(document.querySelectorAll('.sprints-tags-list .sprints-tag'));
+      const durationLabel = document.getElementById('sprintsDurationLabel');
+      const durationTrack = document.getElementById('sprintsDurationTrack');
+      const durationRange = document.getElementById('sprintsDurationRange');
+      const thumbMin = document.getElementById('sprintsDurationThumbMin');
+      const thumbMax = document.getElementById('sprintsDurationThumbMax');
+      const emptyState = document.getElementById('openSprintsEmpty');
+      const joinButtons = Array.from(document.querySelectorAll('.sprint-card-button[data-sprint-title]'));
+
+      if (!cards.length || !durationTrack || !thumbMin || !thumbMax || durationTrack.dataset.bound === 'true') return;
+      durationTrack.dataset.bound = 'true';
+
+      let minWeeks = 1;
+      let maxWeeks = 52;
+      const activeTags = new Set();
+      let draggingThumb = null;
+
+      function updateDurationUi() {
+        const minPercent = weeksToPercent(minWeeks);
+        const maxPercent = weeksToPercent(maxWeeks);
+
+        thumbMin.style.left = minPercent + '%';
+        thumbMax.style.left = maxPercent + '%';
+        durationRange.style.left = minPercent + '%';
+        durationRange.style.width = Math.max(0, maxPercent - minPercent) + '%';
+
+        if (durationLabel) {
+          durationLabel.textContent = formatDurationRange(minWeeks, maxWeeks);
+        }
+      }
+
+      function applyFilters() {
+        let visibleCount = 0;
+
+        cards.forEach(function(card) {
+          const weeks = parseInt(card.dataset.durationWeeks || '1', 10);
+          const tags = (card.dataset.tags || '').split(' ').filter(Boolean);
+          const matchesDuration = weeks >= minWeeks && weeks <= maxWeeks;
+          const matchesTags = activeTags.size === 0 || tags.some(function(tag) { return activeTags.has(tag); });
+          const visible = matchesDuration && matchesTags;
+
+          card.classList.toggle('sprint-card--hidden', !visible);
+          if (visible) visibleCount += 1;
+        });
+
+        if (emptyState) {
+          emptyState.classList.toggle('is-hidden', visibleCount > 0);
+        }
+      }
+
+      function valueFromPointer(clientX) {
+        const rect = durationTrack.getBoundingClientRect();
+        if (!rect.width) return MIN_WEEKS;
+        const percent = clamp(((clientX - rect.left) / rect.width) * 100, 0, 100);
+        return percentToWeeks(percent);
+      }
+
+      function endDrag() {
+        draggingThumb = null;
+        durationTrack.classList.remove('is-dragging');
+        document.removeEventListener('pointermove', onPointerMove);
+        document.removeEventListener('pointerup', onPointerUp);
+        document.removeEventListener('pointercancel', onPointerUp);
+        applyFilters();
+      }
+
+      function onPointerMove(event) {
+        if (!draggingThumb) return;
+        event.preventDefault();
+
+        const value = valueFromPointer(event.clientX);
+
+        if (draggingThumb === 'min') {
+          minWeeks = clamp(value, MIN_WEEKS, maxWeeks);
+        } else {
+          maxWeeks = clamp(value, minWeeks, MAX_WEEKS);
+        }
+
+        updateDurationUi();
+        applyFilters();
+      }
+
+      function onPointerUp() {
+        endDrag();
+      }
+
+      function startDrag(thumb, event) {
+        event.preventDefault();
+        draggingThumb = thumb;
+        durationTrack.classList.add('is-dragging');
+        document.addEventListener('pointermove', onPointerMove);
+        document.addEventListener('pointerup', onPointerUp);
+        document.addEventListener('pointercancel', onPointerUp);
+      }
+
+      thumbMin.addEventListener('pointerdown', function(event) {
+        startDrag('min', event);
+      });
+
+      thumbMax.addEventListener('pointerdown', function(event) {
+        startDrag('max', event);
+      });
+
+      durationTrack.addEventListener('pointerdown', function(event) {
+        if (event.target === thumbMin || event.target === thumbMax) return;
+
+        const value = valueFromPointer(event.clientX);
+        const distanceToMin = Math.abs(value - minWeeks);
+        const distanceToMax = Math.abs(value - maxWeeks);
+
+        if (distanceToMin <= distanceToMax) {
+          minWeeks = clamp(value, MIN_WEEKS, maxWeeks);
+        } else {
+          maxWeeks = clamp(value, minWeeks, MAX_WEEKS);
+        }
+
+        updateDurationUi();
+        applyFilters();
+      });
+
+      tagButtons.forEach(function(button) {
+        if (button.dataset.sprintFilterBound === 'true') return;
+        button.dataset.sprintFilterBound = 'true';
+
+        button.addEventListener('click', function() {
+          const tag = button.dataset.tag;
+          if (!tag) return;
+
+          if (activeTags.has(tag)) {
+            activeTags.delete(tag);
+            button.classList.remove('is-active');
+          } else {
+            activeTags.add(tag);
+            button.classList.add('is-active');
+          }
+
+          applyFilters();
+        });
+      });
+
+      joinButtons.forEach(function(button) {
+        if (button.dataset.sprintJoinBound === 'true') return;
+        button.dataset.sprintJoinBound = 'true';
+
+        button.addEventListener('click', function() {
+          const title = button.dataset.sprintTitle || 'спринту';
+          alert('Вы успешно присоединились к спринту: ' + title);
+        });
+      });
+
+      updateDurationUi();
+      applyFilters();
+    }
+
+    document.addEventListener('DOMContentLoaded', initOpenSprintsFilters);
+    document.addEventListener('turbo:load', initOpenSprintsFilters);
+    document.addEventListener('turbo:render', initOpenSprintsFilters);
+  })();
 </script>

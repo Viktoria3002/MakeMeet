@@ -78,14 +78,50 @@
 
       <div class="profile-details-block">
         <h2 class="profile-details-title">Интересы</h2>
-        <div class="profile-details-tags">
-          <span class="profile-details-tag" data-profile-editable="interest-1">саморазвитие</span>
-          <span class="profile-details-tag" data-profile-editable="interest-2">спорт</span>
-          <span class="profile-details-tag" data-profile-editable="interest-3">новые знания</span>
-          <span class="profile-details-tag" data-profile-editable="interest-4">привычка</span>
-          <span class="profile-details-tag" data-profile-editable="interest-5">здоровье</span>
-          <span class="profile-details-tag" data-profile-editable="interest-6">контент</span>
-          <span class="profile-details-tag" data-profile-editable="interest-7">креатив</span>
+        <div class="profile-details-tags" id="profileDetailsTags" data-profile-interests>
+          <span class="profile-details-tag-item">
+            <span class="profile-details-tag">саморазвитие</span>
+            <button type="button" class="profile-details-tag-remove" aria-label="Удалить интерес" hidden>×</button>
+          </span>
+          <span class="profile-details-tag-item">
+            <span class="profile-details-tag">спорт</span>
+            <button type="button" class="profile-details-tag-remove" aria-label="Удалить интерес" hidden>×</button>
+          </span>
+          <span class="profile-details-tag-item">
+            <span class="profile-details-tag">новые знания</span>
+            <button type="button" class="profile-details-tag-remove" aria-label="Удалить интерес" hidden>×</button>
+          </span>
+          <span class="profile-details-tag-item">
+            <span class="profile-details-tag">привычка</span>
+            <button type="button" class="profile-details-tag-remove" aria-label="Удалить интерес" hidden>×</button>
+          </span>
+          <span class="profile-details-tag-item">
+            <span class="profile-details-tag">здоровье</span>
+            <button type="button" class="profile-details-tag-remove" aria-label="Удалить интерес" hidden>×</button>
+          </span>
+          <span class="profile-details-tag-item">
+            <span class="profile-details-tag">контент</span>
+            <button type="button" class="profile-details-tag-remove" aria-label="Удалить интерес" hidden>×</button>
+          </span>
+          <span class="profile-details-tag-item">
+            <span class="profile-details-tag">креатив</span>
+            <button type="button" class="profile-details-tag-remove" aria-label="Удалить интерес" hidden>×</button>
+          </span>
+        </div>
+
+        <div class="profile-details-interests-picker" id="profileDetailsInterestsPicker" hidden>
+          <div class="profile-details-interests-search">
+            <input
+              type="search"
+              class="profile-details-interests-search-input"
+              id="profileDetailsInterestsSearch"
+              placeholder="поиск"
+              autocomplete="off"
+              enterkeyhint="done"
+            >
+            <span class="profile-details-interests-search-icon" aria-hidden="true"></span>
+          </div>
+          <div class="profile-details-interests-catalog" id="profileDetailsInterestsCatalog" role="listbox" aria-label="Доступные интересы"></div>
         </div>
       </div>
 
@@ -100,32 +136,63 @@
 
           <div class="profile-details-goal-row">
             <span class="profile-details-goal-chip profile-details-goal-chip--light" data-profile-editable="goal-label-2">Формат спринтов:</span>
-            <span class="profile-details-goal-chip profile-details-goal-chip--fill" data-profile-editable="goal-value-2">парный</span>
+            <div class="profile-details-sprint-select" id="profileSprintFormatSelect">
+              <button
+                type="button"
+                class="profile-details-sprint-select-trigger"
+                id="profileSprintFormatTrigger"
+                aria-expanded="false"
+                aria-haspopup="listbox"
+                aria-controls="profileSprintFormatMenu"
+              >
+                <span class="profile-details-sprint-select-value" id="profileSprintFormatValue">парный</span>
+                <span class="profile-details-sprint-select-chevron" aria-hidden="true"></span>
+              </button>
+              <div class="profile-details-sprint-select-menu" id="profileSprintFormatMenu" role="listbox">
+                <button type="button" class="profile-details-sprint-select-close" id="profileSprintFormatClose" aria-label="Закрыть список">
+                  <span class="profile-details-sprint-select-chevron profile-details-sprint-select-chevron--up" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="profile-details-sprint-select-option is-selected" data-value="парный" role="option">парный</button>
+                <button type="button" class="profile-details-sprint-select-option" data-value="одиночный" role="option">одиночный</button>
+                <button type="button" class="profile-details-sprint-select-option" data-value="групповой" role="option">групповой</button>
+              </div>
+            </div>
           </div>
 
-          <div class="profile-details-goal-row">
+          <div class="profile-details-goal-row profile-details-goal-row--meetings">
             <span class="profile-details-goal-chip profile-details-goal-chip--light" data-profile-editable="goal-label-3">Тип встреч:</span>
-            <div class="profile-details-goal-options">
-              <span class="profile-details-goal-chip profile-details-goal-chip--option" data-profile-editable="meeting-type-1">оффлайн</span>
-              <span class="profile-details-goal-chip profile-details-goal-chip--option" data-profile-editable="meeting-type-2">онлайн</span>
+            <div class="profile-details-meeting-options" id="profileMeetingTypes" data-profile-meetings>
+              <span class="profile-details-meeting-item">
+                <span class="profile-details-goal-chip profile-details-goal-chip--option profile-details-meeting-label">оффлайн</span>
+                <button type="button" class="profile-details-meeting-remove" aria-label="Удалить тип встречи" hidden>×</button>
+              </span>
+              <span class="profile-details-meeting-item">
+                <span class="profile-details-goal-chip profile-details-goal-chip--option profile-details-meeting-label">онлайн</span>
+                <button type="button" class="profile-details-meeting-remove" aria-label="Удалить тип встречи" hidden>×</button>
+              </span>
+              <button type="button" class="profile-details-meeting-add" id="profileMeetingTypeAdd" hidden aria-label="Добавить тип встречи">+</button>
             </div>
           </div>
         </div>
 
         <div class="profile-details-filter">
-          <div class="profile-details-filter-line">
-            <div class="profile-details-filter-thumb"></div>
+          <div class="profile-details-filter-row" data-profile-filter="social" data-profile-filter-default="28">
+            <div class="profile-details-filter-line" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="28" tabindex="0">
+              <div class="profile-details-filter-thumb"></div>
+            </div>
+            <div class="profile-details-filter-meta">
+              <button type="button" class="profile-details-filter-chip" data-profile-filter-side="left" data-profile-editable="filter-left-1">интроверт</button>
+              <button type="button" class="profile-details-filter-chip" data-profile-filter-side="right" data-profile-editable="filter-right-1">экстраверт</button>
+            </div>
           </div>
 
-          <div class="profile-details-filter-meta">
-            <div class="profile-details-filter-side">
-              <span class="profile-details-filter-chip" data-profile-editable="filter-left-1">интроверт</span>
-              <span class="profile-details-filter-chip" data-profile-editable="filter-left-2">люблю чаты</span>
+          <div class="profile-details-filter-row" data-profile-filter="contact" data-profile-filter-default="72">
+            <div class="profile-details-filter-line" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="72" tabindex="0">
+              <div class="profile-details-filter-thumb"></div>
             </div>
-
-            <div class="profile-details-filter-side profile-details-filter-side--right">
-              <span class="profile-details-filter-chip" data-profile-editable="filter-right-1">экстраверт</span>
-              <span class="profile-details-filter-chip" data-profile-editable="filter-right-2">люблю созвоны</span>
+            <div class="profile-details-filter-meta">
+              <button type="button" class="profile-details-filter-chip" data-profile-filter-side="left" data-profile-editable="filter-left-2">люблю чаты</button>
+              <button type="button" class="profile-details-filter-chip" data-profile-filter-side="right" data-profile-editable="filter-right-2">люблю созвоны</button>
             </div>
           </div>
         </div>
@@ -136,15 +203,68 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    window.localStorage.setItem('makeMeetUserLoggedIn', 'true');
+
     const card = document.getElementById('profileDetailsCard');
     const editButton = document.getElementById('profileDetailsEditButton');
     const editImage = document.getElementById('profileDetailsEditImage');
 
     if (!card || !editButton || !editImage) return;
 
-    const editableElements = Array.from(card.querySelectorAll('[data-profile-editable]'));
+    const editableElements = Array.from(card.querySelectorAll('[data-profile-editable]'))
+      .filter((element) => !element.hasAttribute('data-profile-filter-side') && !element.classList.contains('profile-details-meeting-label'));
+    const filterLabelElements = Array.from(card.querySelectorAll('[data-profile-filter-side][data-profile-editable]'));
+    const filterRows = Array.from(card.querySelectorAll('[data-profile-filter]'));
+    const interestsContainer = document.getElementById('profileDetailsTags');
+    const interestsPicker = document.getElementById('profileDetailsInterestsPicker');
+    const interestsSearch = document.getElementById('profileDetailsInterestsSearch');
+    const interestsCatalog = document.getElementById('profileDetailsInterestsCatalog');
+    const meetingsContainer = document.getElementById('profileMeetingTypes');
+    const meetingAddButton = document.getElementById('profileMeetingTypeAdd');
+    const sprintFormatSelect = document.getElementById('profileSprintFormatSelect');
+    const sprintFormatTrigger = document.getElementById('profileSprintFormatTrigger');
+    const sprintFormatMenu = document.getElementById('profileSprintFormatMenu');
+    const sprintFormatValue = document.getElementById('profileSprintFormatValue');
+    const sprintFormatClose = document.getElementById('profileSprintFormatClose');
+    const sprintFormatOptions = sprintFormatMenu
+      ? Array.from(sprintFormatMenu.querySelectorAll('.profile-details-sprint-select-option'))
+      : [];
     const storagePrefix = 'make_meet_profile_details_';
+    const sprintFormatStorageKey = storagePrefix + 'sprint-format';
+    const interestCatalog = [
+      'музыка',
+      'настольные игры',
+      'активный отдых',
+      'фильмы и сериалы',
+      'кулинария',
+      'фокус и продуктивность',
+      'искусство',
+      'творчество',
+      'мода',
+      'путешествия',
+      'хобби',
+      'саморазвитие',
+      'спорт',
+      'новые знания',
+      'привычка',
+      'здоровье',
+      'контент',
+      'креатив',
+      'чтение',
+      'бег',
+      'фехтование',
+      'блог',
+      'фриланс'
+    ];
     let isEditing = false;
+
+    function normalizeInterest(value) {
+      return value.trim().toLocaleLowerCase('ru');
+    }
+
+    function clamp(value, min, max) {
+      return Math.min(max, Math.max(min, value));
+    }
 
     editableElements.forEach((element) => {
       const key = element.dataset.profileEditable;
@@ -167,6 +287,18 @@
       });
     });
 
+    filterLabelElements.forEach((element) => {
+      const key = element.dataset.profileEditable;
+      const savedValue = window.localStorage.getItem(storagePrefix + key);
+
+      if (savedValue !== null) {
+        element.textContent = savedValue;
+      }
+
+      element.setAttribute('contenteditable', 'false');
+      element.setAttribute('spellcheck', 'false');
+    });
+
     function setEditingState(nextState) {
       isEditing = nextState;
       card.classList.toggle('is-editing', isEditing);
@@ -177,6 +309,51 @@
         element.setAttribute('contenteditable', isEditing ? 'true' : 'false');
       });
 
+      filterLabelElements.forEach((element) => {
+        element.setAttribute('contenteditable', isEditing ? 'true' : 'false');
+      });
+
+      if (interestsContainer) {
+        interestsContainer.querySelectorAll('.profile-details-tag-remove').forEach((button) => {
+          button.hidden = !isEditing;
+        });
+
+        interestsContainer.querySelectorAll('.profile-details-tag').forEach((tag) => {
+          tag.setAttribute('contenteditable', isEditing ? 'true' : 'false');
+          tag.setAttribute('spellcheck', 'false');
+        });
+      }
+
+      if (interestsPicker) {
+        interestsPicker.hidden = !isEditing;
+      }
+
+      if (interestsSearch) {
+        if (!isEditing) {
+          interestsSearch.value = '';
+        }
+        updateInterestCatalog();
+      }
+
+      if (meetingsContainer) {
+        meetingsContainer.querySelectorAll('.profile-details-meeting-remove').forEach((button) => {
+          button.hidden = !isEditing;
+        });
+
+        meetingsContainer.querySelectorAll('.profile-details-meeting-label').forEach((label) => {
+          label.setAttribute('contenteditable', isEditing ? 'true' : 'false');
+          label.setAttribute('spellcheck', 'false');
+        });
+      }
+
+      if (meetingAddButton) {
+        meetingAddButton.hidden = !isEditing;
+      }
+
+      if (!isEditing) {
+        closeSprintFormatMenu();
+      }
+
       if (isEditing && editableElements[0]) {
         editableElements[0].focus();
       }
@@ -186,6 +363,565 @@
       editableElements.forEach((element) => {
         const key = element.dataset.profileEditable;
         window.localStorage.setItem(storagePrefix + key, element.textContent.trim());
+      });
+
+      filterLabelElements.forEach((element) => {
+        const key = element.dataset.profileEditable;
+        window.localStorage.setItem(storagePrefix + key, element.textContent.trim());
+      });
+
+      filterRows.forEach((row) => {
+        const filterKey = row.dataset.profileFilter;
+        window.localStorage.setItem(storagePrefix + 'filter-value-' + filterKey, row.dataset.filterValue || '50');
+      });
+
+      saveInterests();
+      saveMeetingTypes();
+      saveSprintFormat();
+    }
+
+    function saveSprintFormat() {
+      if (!sprintFormatValue) return;
+      window.localStorage.setItem(sprintFormatStorageKey, sprintFormatValue.textContent.trim());
+      window.localStorage.setItem(storagePrefix + 'goal-value-2', sprintFormatValue.textContent.trim());
+    }
+
+    function setSprintFormat(value) {
+      if (!sprintFormatValue) return;
+
+      const nextValue = value.trim();
+      sprintFormatValue.textContent = nextValue;
+
+      sprintFormatOptions.forEach((option) => {
+        const isSelected = option.dataset.value === nextValue;
+        option.classList.toggle('is-selected', isSelected);
+        option.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+      });
+    }
+
+    function openSprintFormatMenu() {
+      if (!sprintFormatSelect || !sprintFormatTrigger) return;
+
+      sprintFormatSelect.classList.add('is-open');
+      sprintFormatTrigger.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeSprintFormatMenu() {
+      if (!sprintFormatSelect || !sprintFormatTrigger) return;
+
+      sprintFormatSelect.classList.remove('is-open');
+      sprintFormatTrigger.setAttribute('aria-expanded', 'false');
+    }
+
+    function initSprintFormatSelect() {
+      if (!sprintFormatSelect || !sprintFormatTrigger || !sprintFormatMenu) return;
+
+      closeSprintFormatMenu();
+
+      const saved = window.localStorage.getItem(sprintFormatStorageKey)
+        || window.localStorage.getItem(storagePrefix + 'goal-value-2')
+        || 'парный';
+
+      setSprintFormat(saved);
+
+      sprintFormatTrigger.addEventListener('click', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        openSprintFormatMenu();
+      });
+
+      if (sprintFormatClose) {
+        sprintFormatClose.addEventListener('click', function(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          closeSprintFormatMenu();
+        });
+      }
+
+      sprintFormatOptions.forEach((option) => {
+        option.addEventListener('click', function(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          setSprintFormat(option.dataset.value || option.textContent.trim());
+          saveSprintFormat();
+          closeSprintFormatMenu();
+        });
+      });
+
+      document.addEventListener('click', function(event) {
+        if (!sprintFormatSelect.classList.contains('is-open')) return;
+        if (event.target.closest('#profileSprintFormatSelect')) return;
+        closeSprintFormatMenu();
+      });
+
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') closeSprintFormatMenu();
+      });
+    }
+
+    function collectMeetingTypes() {
+      if (!meetingsContainer) return [];
+
+      return Array.from(meetingsContainer.querySelectorAll('.profile-details-meeting-item .profile-details-meeting-label'))
+        .map((label) => label.textContent.trim())
+        .filter(Boolean);
+    }
+
+    function saveMeetingTypes() {
+      window.localStorage.setItem(storagePrefix + 'meeting-types', JSON.stringify(collectMeetingTypes()));
+    }
+
+    function createMeetingItem(text) {
+      const item = document.createElement('span');
+      item.className = 'profile-details-meeting-item';
+
+      const label = document.createElement('span');
+      label.className = 'profile-details-goal-chip profile-details-goal-chip--option profile-details-meeting-label';
+      label.textContent = text;
+      label.setAttribute('contenteditable', isEditing ? 'true' : 'false');
+      label.setAttribute('spellcheck', 'false');
+
+      const removeButton = document.createElement('button');
+      removeButton.type = 'button';
+      removeButton.className = 'profile-details-meeting-remove';
+      removeButton.setAttribute('aria-label', 'Удалить тип встречи');
+      removeButton.hidden = !isEditing;
+      removeButton.textContent = '×';
+
+      item.appendChild(label);
+      item.appendChild(removeButton);
+      bindMeetingItem(item);
+
+      return item;
+    }
+
+    function bindMeetingItem(item) {
+      const label = item.querySelector('.profile-details-meeting-label');
+      const removeButton = item.querySelector('.profile-details-meeting-remove');
+
+      if (label) {
+        label.addEventListener('keydown', function(event) {
+          if (!isEditing) return;
+
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            label.blur();
+          }
+        });
+      }
+
+      if (removeButton) {
+        removeButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          item.remove();
+        });
+      }
+    }
+
+    function renderMeetingTypes(types) {
+      if (!meetingsContainer || !meetingAddButton) return;
+
+      meetingsContainer.querySelectorAll('.profile-details-meeting-item').forEach((item) => item.remove());
+
+      types.forEach((text) => {
+        meetingsContainer.insertBefore(createMeetingItem(text), meetingAddButton);
+      });
+    }
+
+    function loadMeetingTypes() {
+      if (!meetingsContainer) return;
+
+      const saved = window.localStorage.getItem(storagePrefix + 'meeting-types');
+
+      if (saved !== null) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed)) {
+            renderMeetingTypes(parsed);
+            return;
+          }
+        } catch (error) {
+          // ignore invalid JSON and fall back to defaults
+        }
+      }
+
+      const migrated = [];
+
+      for (let index = 1; index <= 20; index += 1) {
+        const legacyValue = window.localStorage.getItem(storagePrefix + 'meeting-type-' + index);
+        if (legacyValue) migrated.push(legacyValue);
+      }
+
+      if (migrated.length) {
+        renderMeetingTypes(migrated);
+      } else {
+        meetingsContainer.querySelectorAll('.profile-details-meeting-item').forEach(bindMeetingItem);
+        meetingsContainer.querySelectorAll('.profile-details-meeting-label').forEach((label) => {
+          label.setAttribute('contenteditable', 'false');
+          label.setAttribute('spellcheck', 'false');
+        });
+      }
+    }
+
+    function addMeetingType() {
+      if (!meetingsContainer || !meetingAddButton) return;
+
+      const item = createMeetingItem('новый тип');
+      meetingsContainer.insertBefore(item, meetingAddButton);
+
+      const label = item.querySelector('.profile-details-meeting-label');
+      if (!label) return;
+
+      label.focus();
+
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(label);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+
+    function collectInterests() {
+      if (!interestsContainer) return [];
+
+      return Array.from(interestsContainer.querySelectorAll('.profile-details-tag-item .profile-details-tag'))
+        .map((tag) => tag.textContent.trim())
+        .filter(Boolean);
+    }
+
+    function hasInterest(value) {
+      const normalized = normalizeInterest(value);
+      return collectInterests().some((interest) => normalizeInterest(interest) === normalized);
+    }
+
+    function saveInterests() {
+      window.localStorage.setItem(storagePrefix + 'interests', JSON.stringify(collectInterests()));
+      updateInterestCatalog();
+    }
+
+    function createInterestItem(text) {
+      const item = document.createElement('span');
+      item.className = 'profile-details-tag-item';
+
+      const tag = document.createElement('span');
+      tag.className = 'profile-details-tag';
+      tag.textContent = text;
+      tag.setAttribute('contenteditable', isEditing ? 'true' : 'false');
+      tag.setAttribute('spellcheck', 'false');
+
+      const removeButton = document.createElement('button');
+      removeButton.type = 'button';
+      removeButton.className = 'profile-details-tag-remove';
+      removeButton.setAttribute('aria-label', 'Удалить интерес');
+      removeButton.hidden = !isEditing;
+      removeButton.textContent = '×';
+
+      item.appendChild(tag);
+      item.appendChild(removeButton);
+      bindInterestItem(item);
+
+      return item;
+    }
+
+    function bindInterestItem(item) {
+      const tag = item.querySelector('.profile-details-tag');
+      const removeButton = item.querySelector('.profile-details-tag-remove');
+
+      if (tag) {
+        tag.addEventListener('keydown', function(event) {
+          if (!isEditing) return;
+
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            tag.blur();
+            updateInterestCatalog();
+          }
+        });
+
+        tag.addEventListener('blur', function() {
+          if (!isEditing) return;
+          updateInterestCatalog();
+        });
+      }
+
+      if (removeButton) {
+        removeButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          item.remove();
+          updateInterestCatalog();
+        });
+      }
+    }
+
+    function addInterest(text) {
+      if (!interestsContainer) return false;
+
+      const nextValue = text.trim();
+      if (!nextValue || hasInterest(nextValue)) return false;
+
+      interestsContainer.appendChild(createInterestItem(nextValue));
+      updateInterestCatalog();
+      return true;
+    }
+
+    function updateInterestCatalog() {
+      if (!interestsCatalog) return;
+
+      const query = interestsSearch ? normalizeInterest(interestsSearch.value) : '';
+      const selected = new Set(collectInterests().map(normalizeInterest));
+      const available = interestCatalog.filter((interest) => {
+        const normalized = normalizeInterest(interest);
+        if (selected.has(normalized)) return false;
+        if (!query) return true;
+        return normalized.includes(query);
+      });
+
+      interestsCatalog.innerHTML = '';
+
+      if (!available.length) {
+        const empty = document.createElement('p');
+        empty.className = 'profile-details-interests-catalog-empty';
+        empty.textContent = query
+          ? 'Ничего не найдено. Нажмите Enter, чтобы добавить свой интерес.'
+          : 'Все интересы из списка уже добавлены.';
+        interestsCatalog.appendChild(empty);
+        return;
+      }
+
+      available.forEach((interest) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'profile-details-interests-catalog-btn';
+        button.textContent = interest;
+        button.setAttribute('role', 'option');
+        button.addEventListener('click', function() {
+          addInterest(interest);
+        });
+        interestsCatalog.appendChild(button);
+      });
+    }
+
+    function renderInterests(interests) {
+      if (!interestsContainer) return;
+
+      interestsContainer.querySelectorAll('.profile-details-tag-item').forEach((item) => item.remove());
+
+      interests.forEach((text) => {
+        interestsContainer.appendChild(createInterestItem(text));
+      });
+
+      updateInterestCatalog();
+    }
+
+    function loadInterests() {
+      if (!interestsContainer) return;
+
+      const saved = window.localStorage.getItem(storagePrefix + 'interests');
+
+      if (saved !== null) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed)) {
+            renderInterests(parsed);
+            return;
+          }
+        } catch (error) {
+          // ignore invalid JSON and fall back to defaults
+        }
+      }
+
+      const migrated = [];
+
+      for (let index = 1; index <= 20; index += 1) {
+        const legacyValue = window.localStorage.getItem(storagePrefix + 'interest-' + index);
+        if (legacyValue) migrated.push(legacyValue);
+      }
+
+      if (migrated.length) {
+        renderInterests(migrated);
+      } else {
+        interestsContainer.querySelectorAll('.profile-details-tag-item').forEach(bindInterestItem);
+        updateInterestCatalog();
+      }
+    }
+
+    function initInterestPicker() {
+      if (!interestsSearch) return;
+
+      interestsSearch.addEventListener('input', updateInterestCatalog);
+
+      interestsSearch.addEventListener('keydown', function(event) {
+        if (!isEditing) return;
+
+        if (event.key !== 'Enter') return;
+
+        event.preventDefault();
+
+        const query = interestsSearch.value.trim();
+        if (!query) return;
+
+        const normalizedQuery = normalizeInterest(query);
+        const catalogMatch = interestCatalog.find((interest) => normalizeInterest(interest) === normalizedQuery);
+
+        if (addInterest(catalogMatch || query)) {
+          interestsSearch.value = '';
+          updateInterestCatalog();
+        }
+      });
+    }
+
+    function saveFilterValue(row) {
+      const filterKey = row.dataset.profileFilter;
+      window.localStorage.setItem(storagePrefix + 'filter-value-' + filterKey, row.dataset.filterValue || '50');
+    }
+
+    function updateFilterRow(row, value) {
+      const percent = clamp(Math.round(value), 0, 100);
+      row.dataset.filterValue = String(percent);
+
+      const line = row.querySelector('.profile-details-filter-line');
+      const thumb = row.querySelector('.profile-details-filter-thumb');
+
+      if (thumb) thumb.style.left = percent + '%';
+      if (line) line.setAttribute('aria-valuenow', String(percent));
+
+      row.querySelectorAll('[data-profile-filter-side]').forEach((chip) => {
+        const side = chip.dataset.profileFilterSide;
+        const isActive = side === 'left' ? percent < 50 : percent > 50;
+        chip.classList.toggle('is-active', isActive);
+        chip.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+    }
+
+    function valueFromPointer(row, clientX) {
+      const line = row.querySelector('.profile-details-filter-line');
+      if (!line) return 50;
+
+      const rect = line.getBoundingClientRect();
+      if (!rect.width) return 50;
+
+      return ((clientX - rect.left) / rect.width) * 100;
+    }
+
+    function initProfileFilter(row) {
+      const filterKey = row.dataset.profileFilter;
+      const defaultValue = parseInt(row.dataset.profileFilterDefault || '50', 10);
+      const saved = window.localStorage.getItem(storagePrefix + 'filter-value-' + filterKey);
+      let initialValue = saved !== null ? parseInt(saved, 10) : defaultValue;
+
+      if (Number.isNaN(initialValue)) initialValue = defaultValue;
+
+      updateFilterRow(row, initialValue);
+
+      const line = row.querySelector('.profile-details-filter-line');
+      const thumb = row.querySelector('.profile-details-filter-thumb');
+      let dragging = false;
+
+      function applyPointer(clientX) {
+        updateFilterRow(row, valueFromPointer(row, clientX));
+      }
+
+      function endDrag() {
+        if (!dragging) return;
+        dragging = false;
+        row.classList.remove('is-dragging');
+        document.removeEventListener('pointermove', onPointerMove);
+        document.removeEventListener('pointerup', onPointerUp);
+        document.removeEventListener('pointercancel', onPointerUp);
+        saveFilterValue(row);
+      }
+
+      function onPointerMove(event) {
+        if (!dragging) return;
+        event.preventDefault();
+        applyPointer(event.clientX);
+      }
+
+      function onPointerUp() {
+        endDrag();
+      }
+
+      if (thumb) {
+        thumb.addEventListener('pointerdown', function(event) {
+          event.preventDefault();
+          dragging = true;
+          row.classList.add('is-dragging');
+          thumb.setPointerCapture(event.pointerId);
+          document.addEventListener('pointermove', onPointerMove);
+          document.addEventListener('pointerup', onPointerUp);
+          document.addEventListener('pointercancel', onPointerUp);
+        });
+      }
+
+      if (line) {
+        line.addEventListener('pointerdown', function(event) {
+          if (event.target === thumb) return;
+          event.preventDefault();
+          applyPointer(event.clientX);
+          dragging = true;
+          row.classList.add('is-dragging');
+          line.setPointerCapture(event.pointerId);
+          document.addEventListener('pointermove', onPointerMove);
+          document.addEventListener('pointerup', onPointerUp);
+          document.addEventListener('pointercancel', onPointerUp);
+        });
+
+        line.addEventListener('keydown', function(event) {
+          const current = parseInt(row.dataset.filterValue || '50', 10);
+          const step = event.shiftKey ? 10 : 5;
+
+          if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') {
+            event.preventDefault();
+            updateFilterRow(row, current - step);
+            saveFilterValue(row);
+          } else if (event.key === 'ArrowRight' || event.key === 'ArrowUp') {
+            event.preventDefault();
+            updateFilterRow(row, current + step);
+            saveFilterValue(row);
+          } else if (event.key === 'Home') {
+            event.preventDefault();
+            updateFilterRow(row, 0);
+            saveFilterValue(row);
+          } else if (event.key === 'End') {
+            event.preventDefault();
+            updateFilterRow(row, 100);
+            saveFilterValue(row);
+          }
+        });
+      }
+
+      row.querySelectorAll('[data-profile-filter-side]').forEach((chip) => {
+        chip.addEventListener('click', function(event) {
+          if (isEditing) return;
+          event.preventDefault();
+          const side = chip.dataset.profileFilterSide;
+          updateFilterRow(row, side === 'left' ? 0 : 100);
+          saveFilterValue(row);
+        });
+
+        chip.addEventListener('keydown', function(event) {
+          if (!isEditing) return;
+
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            chip.blur();
+          }
+        });
+      });
+    }
+
+    filterRows.forEach(initProfileFilter);
+    loadInterests();
+    initInterestPicker();
+    loadMeetingTypes();
+    initSprintFormatSelect();
+
+    if (meetingAddButton) {
+      meetingAddButton.addEventListener('click', function() {
+        if (!isEditing) return;
+        addMeetingType();
       });
     }
 

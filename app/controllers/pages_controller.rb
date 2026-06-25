@@ -15,6 +15,10 @@ class PagesController < ApplicationController
     # Страница входа
   end
 
+  def auth_welcome
+    # Мотивирующий экран после входа или регистрации
+  end
+
   def page1
     # Главная страница с hero секцией и медиа контентом
   end
@@ -29,6 +33,10 @@ class PagesController < ApplicationController
     @content = "Третья страница содержит дополнительную информацию."
   end
 
+  def create_sprint
+    # Страница создания собственного спринта
+  end
+
   def page4
     @title = "Страница 4"
     @content = "Четвертая страница завершает нашу навигацию."
@@ -38,7 +46,19 @@ class PagesController < ApplicationController
     # Детальная страница профиля
   end
 
+  def settings
+    # Страница настроек профиля
+  end
+
+  def settings_change_password
+    # Страница смены пароля из настроек
+  end
+
   def article
     # Статья по спринту "Улучшить утренние ритуалы"
+  end
+
+  def article_freelance
+    # Статья "Лучшие помощники в работе на фрилансе"
   end
 end

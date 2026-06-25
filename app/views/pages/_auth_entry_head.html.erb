@@ -1,0 +1,16 @@
+<% content_for :head do %>
+  <style>
+    body.register-page,
+    body.login-page,
+    body.registration-page,
+    body.profile-page {
+      background-image: url('<%= asset_path("bgwelcome.png") %>');
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+  </style>
+<% end %>

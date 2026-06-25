@@ -1,0 +1,348 @@
+<% content_for :title, "Настройки - Make Meet" %>
+
+<% content_for :head do %>
+  <style>
+    body.settings-page {
+      background-image: url('<%= asset_path("bg_settings.png") %>');
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body.settings-page .main-navigation {
+      position: relative;
+      z-index: 1001;
+      margin-bottom: 0;
+    }
+
+    body.settings-page .main-content {
+      padding: 0;
+      max-width: none;
+    }
+
+    body.settings-page .main-navigation .nav-container {
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    body.settings-page .nav-link {
+      color: #ffffff;
+    }
+
+    body.settings-page .main-footer {
+      display: none;
+    }
+  </style>
+  <script>
+    if (window.localStorage.getItem('makeMeetUserLoggedIn') === 'true') {
+      document.documentElement.classList.add('profile-user-logged-in');
+    }
+  </script>
+<% end %>
+
+<section class="settings-section">
+  <div class="settings-wrap">
+    <h1 class="settings-title">Настройки</h1>
+
+    <div class="settings-group">
+      <h2 class="settings-group-title">Аккаунт</h2>
+      <div class="settings-card">
+        <%= link_to settings_change_password_path, class: "settings-row settings-row--link" do %>
+          <span class="settings-row-label">Изменить пароль</span>
+          <span class="settings-row-chevron" aria-hidden="true"></span>
+        <% end %>
+
+        <button type="button" class="settings-row settings-row--link">
+          <span class="settings-row-label">Привязать телефон</span>
+          <span class="settings-row-chevron" aria-hidden="true"></span>
+        </button>
+
+        <label class="settings-row settings-row--toggle">
+          <span class="settings-row-label">Видимость онлайн статуса</span>
+          <input type="checkbox" class="settings-toggle-input" data-settings-key="online-status">
+          <span class="settings-toggle" aria-hidden="true"></span>
+        </label>
+
+        <label class="settings-row settings-row--toggle">
+          <span class="settings-row-label">Показывать прогресс спринтов</span>
+          <input type="checkbox" class="settings-toggle-input" data-settings-key="sprint-progress">
+          <span class="settings-toggle" aria-hidden="true"></span>
+        </label>
+
+        <label class="settings-row settings-row--toggle">
+          <span class="settings-row-label">Разрешить приглашения</span>
+          <input type="checkbox" class="settings-toggle-input" data-settings-key="invitations">
+          <span class="settings-toggle" aria-hidden="true"></span>
+        </label>
+
+        <label class="settings-row settings-row--toggle">
+          <span class="settings-row-label">Видимость геолокации в профиле</span>
+          <input type="checkbox" class="settings-toggle-input" data-settings-key="geolocation">
+          <span class="settings-toggle" aria-hidden="true"></span>
+        </label>
+
+        <div class="settings-row settings-row--hint">
+          <span class="settings-row-label">Заблокированные аккаунты</span>
+          <p class="settings-row-hint">Вы сможете просматривать людей, которых заблокировали и изменить решение</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-group">
+      <h2 class="settings-group-title">Внешний вид</h2>
+      <div class="settings-card">
+        <div class="settings-row settings-row--hint">
+          <span class="settings-row-label">Тема</span>
+          <p class="settings-row-hint">Для вашего удобства мы разрабатываем темную версию сайта</p>
+        </div>
+
+        <div class="settings-row settings-row--language">
+          <span class="settings-row-label">Язык</span>
+          <div class="settings-language-select" id="settingsLanguageSelect">
+            <button type="button" class="settings-language-trigger" id="settingsLanguageTrigger" aria-expanded="false" aria-haspopup="listbox">
+              <span class="settings-language-value" id="settingsLanguageValue">Русский</span>
+              <span class="settings-language-chevron" aria-hidden="true"></span>
+            </button>
+            <div class="settings-language-menu" id="settingsLanguageMenu" role="listbox" hidden>
+              <button type="button" class="settings-language-option is-selected" data-language-value="ru" role="option">Русский</button>
+              <button type="button" class="settings-language-option" data-language-value="en" role="option">English</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-group">
+      <h2 class="settings-group-title">Push-уведомления</h2>
+      <div class="settings-card">
+        <label class="settings-row settings-row--toggle">
+          <span class="settings-row-label">Вся email-рассылка</span>
+          <input type="checkbox" class="settings-toggle-input" data-settings-key="email-all">
+          <span class="settings-toggle" aria-hidden="true"></span>
+        </label>
+
+        <label class="settings-row settings-row--toggle">
+          <span class="settings-row-label">Напоминание о спринтах</span>
+          <input type="checkbox" class="settings-toggle-input" data-settings-key="email-sprints">
+          <span class="settings-toggle" aria-hidden="true"></span>
+        </label>
+
+        <label class="settings-row settings-row--toggle">
+          <span class="settings-row-label">Новости и обновления</span>
+          <input type="checkbox" class="settings-toggle-input" data-settings-key="email-news">
+          <span class="settings-toggle" aria-hidden="true"></span>
+        </label>
+
+        <label class="settings-row settings-row--toggle">
+          <span class="settings-row-label">Уведомление в чатах</span>
+          <input type="checkbox" class="settings-toggle-input" data-settings-key="chat-notifications">
+          <span class="settings-toggle" aria-hidden="true"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="settings-actions">
+      <button type="button" class="settings-action-btn settings-action-btn--support">Поддержка</button>
+
+      <div class="settings-action-row">
+        <button type="button" class="settings-action-btn" id="settingsLogoutButton">Выйти из аккаунта</button>
+        <button type="button" class="settings-action-btn settings-action-btn--danger" id="settingsDeleteButton">Удалить аккаунт</button>
+      </div>
+    </div>
+
+    <div class="settings-legal">
+      <p>Версия веб-сервиса: 1.0</p>
+      <p class="settings-legal-link">Согласие на обработку персональных данных</p>
+      <p class="settings-legal-link">Пользовательское соглашение</p>
+      <p class="settings-legal-link">Политика обработки персональных данных</p>
+    </div>
+  </div>
+</section>
+
+<%= render "pages/settings_password_notice" %>
+
+<script>
+  (function() {
+    const storagePrefix = 'make_meet_settings_';
+
+    function initSettingsToggles() {
+      document.querySelectorAll('.settings-toggle-input[data-settings-key]').forEach(function(input) {
+        if (input.dataset.bound === 'true') return;
+        input.dataset.bound = 'true';
+
+        const key = input.dataset.settingsKey;
+        const saved = window.localStorage.getItem(storagePrefix + key);
+        if (saved === 'true') input.checked = true;
+
+        input.addEventListener('change', function() {
+          window.localStorage.setItem(storagePrefix + key, input.checked ? 'true' : 'false');
+        });
+      });
+    }
+
+    function initLanguageSelect() {
+      const select = document.getElementById('settingsLanguageSelect');
+      const trigger = document.getElementById('settingsLanguageTrigger');
+      const menu = document.getElementById('settingsLanguageMenu');
+      const valueNode = document.getElementById('settingsLanguageValue');
+      if (!select || !trigger || !menu || !valueNode || select.dataset.bound === 'true') return;
+      select.dataset.bound = 'true';
+
+      const labels = { ru: 'Русский', en: 'English' };
+      const saved = window.localStorage.getItem(storagePrefix + 'language') || 'ru';
+      valueNode.textContent = labels[saved] || labels.ru;
+
+      menu.querySelectorAll('.settings-language-option').forEach(function(option) {
+        const isSelected = option.dataset.languageValue === saved;
+        option.classList.toggle('is-selected', isSelected);
+        option.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+      });
+
+      function closeMenu() {
+        select.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+        menu.hidden = true;
+      }
+
+      function openMenu() {
+        select.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+        menu.hidden = false;
+      }
+
+      trigger.addEventListener('click', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (select.classList.contains('is-open')) closeMenu();
+        else openMenu();
+      });
+
+      menu.querySelectorAll('.settings-language-option').forEach(function(option) {
+        option.addEventListener('click', function(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          const value = option.dataset.languageValue;
+          window.localStorage.setItem(storagePrefix + 'language', value);
+          valueNode.textContent = labels[value] || option.textContent.trim();
+
+          menu.querySelectorAll('.settings-language-option').forEach(function(item) {
+            const selected = item === option;
+            item.classList.toggle('is-selected', selected);
+            item.setAttribute('aria-selected', selected ? 'true' : 'false');
+          });
+
+          closeMenu();
+        });
+      });
+
+      if (!window.__settingsLanguageDocBound) {
+        window.__settingsLanguageDocBound = true;
+
+        document.addEventListener('click', function(event) {
+          const activeSelect = document.getElementById('settingsLanguageSelect');
+          const activeMenu = document.getElementById('settingsLanguageMenu');
+          const activeTrigger = document.getElementById('settingsLanguageTrigger');
+          if (!activeSelect || !activeSelect.classList.contains('is-open')) return;
+          if (activeSelect.contains(event.target)) return;
+
+          activeSelect.classList.remove('is-open');
+          if (activeTrigger) activeTrigger.setAttribute('aria-expanded', 'false');
+          if (activeMenu) activeMenu.hidden = true;
+        });
+
+        document.addEventListener('keydown', function(event) {
+          if (event.key !== 'Escape') return;
+
+          const activeSelect = document.getElementById('settingsLanguageSelect');
+          const activeMenu = document.getElementById('settingsLanguageMenu');
+          const activeTrigger = document.getElementById('settingsLanguageTrigger');
+          if (!activeSelect || !activeSelect.classList.contains('is-open')) return;
+
+          activeSelect.classList.remove('is-open');
+          if (activeTrigger) activeTrigger.setAttribute('aria-expanded', 'false');
+          if (activeMenu) activeMenu.hidden = true;
+        });
+      }
+    }
+
+    function initSettingsActions() {
+      const logoutButton = document.getElementById('settingsLogoutButton');
+      const deleteButton = document.getElementById('settingsDeleteButton');
+
+      if (logoutButton && logoutButton.dataset.bound !== 'true') {
+        logoutButton.dataset.bound = 'true';
+        logoutButton.addEventListener('click', function() {
+          window.localStorage.removeItem('makeMeetUserLoggedIn');
+          document.documentElement.classList.remove('profile-user-logged-in', 'media-user-logged-in');
+          window.location.href = '<%= page4_path %>';
+        });
+      }
+
+      if (deleteButton && deleteButton.dataset.bound !== 'true') {
+        deleteButton.dataset.bound = 'true';
+        deleteButton.addEventListener('click', function() {
+          if (window.confirm('Вы уверены, что хотите удалить аккаунт? Это действие нельзя отменить.')) {
+            window.localStorage.removeItem('makeMeetUserLoggedIn');
+            document.documentElement.classList.remove('profile-user-logged-in', 'media-user-logged-in');
+            window.location.href = '<%= page4_path %>';
+          }
+        });
+      }
+    }
+
+    function initSettingsPasswordNotice() {
+      const notice = document.getElementById('settingsPasswordNotice');
+      const backdrop = document.getElementById('settingsPasswordNoticeBackdrop');
+      if (!notice || notice.dataset.bound === 'true') return;
+      notice.dataset.bound = 'true';
+
+      function openNotice() {
+        notice.classList.remove('is-hidden');
+        notice.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('settings-notice-open');
+      }
+
+      function closeNotice() {
+        notice.classList.add('is-hidden');
+        notice.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('settings-notice-open');
+      }
+
+      if (backdrop) {
+        backdrop.addEventListener('click', closeNotice);
+      }
+
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && !notice.classList.contains('is-hidden')) {
+          closeNotice();
+        }
+      });
+
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('password_sent') === '1') {
+        openNotice();
+        params.delete('password_sent');
+        const nextQuery = params.toString();
+        const nextUrl = window.location.pathname + (nextQuery ? '?' + nextQuery : '') + window.location.hash;
+        window.history.replaceState({}, '', nextUrl);
+      }
+    }
+
+    function initSettingsPage() {
+      initSettingsToggles();
+      initLanguageSelect();
+      initSettingsActions();
+      initSettingsPasswordNotice();
+    }
+
+    document.addEventListener('DOMContentLoaded', initSettingsPage);
+    document.addEventListener('turbo:load', initSettingsPage);
+    document.addEventListener('turbo:render', initSettingsPage);
+  })();
+</script>

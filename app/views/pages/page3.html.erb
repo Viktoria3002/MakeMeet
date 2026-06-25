@@ -11,7 +11,7 @@
   </style>
 <% end %>
 
-<div class="open-sprints-page">
+<div class="open-sprints-page my-sprints-page-content">
   <div class="sprints-hero-section">
     <div class="my-sprints-hero-top">
       <div class="my-sprints-hero-left">
@@ -21,13 +21,19 @@
           <span class="my-sprints-hero-description-muted">отследи прогресс и подведи результаты!</span>
         </p>
       </div>
-      <button type="button" class="my-sprints-create-button">Создать свой спринт</button>
+      <%= link_to "Создать свой спринт", new_my_sprint_path, class: "my-sprints-create-button" %>
     </div>
   </div>
 
   <div class="sprints-tags-and-grid-wrap my-sprints-panel">
-    <div class="sprints-grid">
-      <div class="sprint-card">
+    <div class="my-sprints-filters" role="tablist" aria-label="Фильтр спринтов">
+      <button type="button" class="my-sprints-filter is-active" data-my-sprints-filter="all" role="tab" aria-selected="true">Все</button>
+      <button type="button" class="my-sprints-filter" data-my-sprints-filter="upcoming" role="tab" aria-selected="false">Предстоящие</button>
+      <button type="button" class="my-sprints-filter" data-my-sprints-filter="completed" role="tab" aria-selected="false">Завершенные</button>
+    </div>
+
+    <div class="sprints-grid" id="mySprintsGrid">
+      <article class="sprint-card" data-sprint-id="morning" data-sprint-status="completed">
         <div class="sprint-card-image">
           <%= image_tag "sprints/card1.png", alt: "" %>
         </div>
@@ -37,11 +43,11 @@
         </div>
         <div class="sprint-card-actions">
           <span class="sprint-card-duration">1 неделя</span>
-          <button type="button" class="sprint-card-button">Завершить спринт</button>
+          <button type="button" class="sprint-card-button sprint-card-button--completed" data-sprint-complete>Завершен</button>
         </div>
-      </div>
+      </article>
 
-      <div class="sprint-card">
+      <article class="sprint-card" data-sprint-id="reading" data-sprint-status="active">
         <div class="sprint-card-image">
           <%= image_tag "sprints/card2.png", alt: "" %>
         </div>
@@ -51,11 +57,11 @@
         </div>
         <div class="sprint-card-actions">
           <span class="sprint-card-duration">2 недели</span>
-          <button type="button" class="sprint-card-button">Завершить спринт</button>
+          <button type="button" class="sprint-card-button" data-sprint-complete>Завершить спринт</button>
         </div>
-      </div>
+      </article>
 
-      <div class="sprint-card">
+      <article class="sprint-card" data-sprint-id="coding" data-sprint-status="active">
         <div class="sprint-card-image">
           <%= image_tag "sprints/card3.png", alt: "" %>
         </div>
@@ -65,9 +71,134 @@
         </div>
         <div class="sprint-card-actions">
           <span class="sprint-card-duration">4 недели</span>
-          <button type="button" class="sprint-card-button">Завершить спринт</button>
+          <button type="button" class="sprint-card-button" data-sprint-complete>Завершить спринт</button>
         </div>
-      </div>
+      </article>
     </div>
+
+    <p class="my-sprints-empty is-hidden" id="mySprintsEmpty">По выбранному фильтру спринты не найдены</p>
   </div>
 </div>
+
+<script>
+  (function() {
+    const STORAGE_KEY = 'make_meet_my_sprints_status';
+
+    function initMySprintsPage() {
+      const grid = document.getElementById('mySprintsGrid');
+      if (!grid || grid.dataset.bound === 'true') return;
+      grid.dataset.bound = 'true';
+
+      const cards = Array.from(grid.querySelectorAll('.sprint-card[data-sprint-id]'));
+      const filterButtons = Array.from(document.querySelectorAll('[data-my-sprints-filter]'));
+      const emptyState = document.getElementById('mySprintsEmpty');
+      let activeFilter = 'all';
+
+      function loadStatuses() {
+        try {
+          return JSON.parse(window.localStorage.getItem(STORAGE_KEY) || '{}');
+        } catch (error) {
+          return {};
+        }
+      }
+
+      function saveStatuses(statuses) {
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(statuses));
+      }
+
+      function applyStatusToCard(card, status) {
+        const normalizedStatus = status === 'completed' ? 'completed' : 'active';
+        card.dataset.sprintStatus = normalizedStatus;
+        card.classList.toggle('is-completed', normalizedStatus === 'completed');
+
+        const button = card.querySelector('[data-sprint-complete]');
+        if (!button) return;
+
+        if (normalizedStatus === 'completed') {
+          button.textContent = 'Завершен';
+          button.classList.add('sprint-card-button--completed');
+        } else {
+          button.textContent = 'Завершить спринт';
+          button.classList.remove('sprint-card-button--completed');
+        }
+      }
+
+      function syncCardsFromStorage() {
+        const saved = loadStatuses();
+
+        cards.forEach(function(card) {
+          const sprintId = card.dataset.sprintId;
+          const initialStatus = card.dataset.sprintStatus || 'active';
+          const status = saved[sprintId] || initialStatus;
+          applyStatusToCard(card, status);
+        });
+      }
+
+      function cardMatchesFilter(card) {
+        const status = card.dataset.sprintStatus || 'active';
+
+        if (activeFilter === 'upcoming') return status === 'active';
+        if (activeFilter === 'completed') return status === 'completed';
+        return true;
+      }
+
+      function applyFilter() {
+        let visibleCount = 0;
+
+        cards.forEach(function(card) {
+          const visible = cardMatchesFilter(card);
+          card.classList.toggle('sprint-card--hidden', !visible);
+          if (visible) visibleCount += 1;
+        });
+
+        if (emptyState) {
+          emptyState.classList.toggle('is-hidden', visibleCount > 0);
+        }
+      }
+
+      filterButtons.forEach(function(button) {
+        if (button.dataset.mySprintsFilterBound === 'true') return;
+        button.dataset.mySprintsFilterBound = 'true';
+
+        button.addEventListener('click', function() {
+          activeFilter = button.dataset.mySprintsFilter || 'all';
+
+          filterButtons.forEach(function(item) {
+            const selected = item === button;
+            item.classList.toggle('is-active', selected);
+            item.setAttribute('aria-selected', selected ? 'true' : 'false');
+          });
+
+          applyFilter();
+        });
+      });
+
+      cards.forEach(function(card) {
+        const button = card.querySelector('[data-sprint-complete]');
+        if (!button || button.dataset.mySprintsCompleteBound === 'true') return;
+        button.dataset.mySprintsCompleteBound = 'true';
+
+        button.addEventListener('click', function() {
+          const sprintId = card.dataset.sprintId;
+          if (!sprintId) return;
+
+          const currentStatus = card.dataset.sprintStatus || 'active';
+          const nextStatus = currentStatus === 'completed' ? 'active' : 'completed';
+
+          const statuses = loadStatuses();
+          statuses[sprintId] = nextStatus;
+          saveStatuses(statuses);
+          applyStatusToCard(card, nextStatus);
+          applyFilter();
+        });
+      });
+
+      syncCardsFromStorage();
+      applyFilter();
+    }
+
+    document.addEventListener('DOMContentLoaded', initMySprintsPage);
+    document.addEventListener('turbo:load', initMySprintsPage);
+    document.addEventListener('turbo:render', initMySprintsPage);
+  })();
+</script>

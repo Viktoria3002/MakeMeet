@@ -1,0 +1,167 @@
+<% content_for :title, "Лучшие помощники в работе на фрилансе - Make Meet" %>
+
+<% content_for :head do %>
+  <style>
+    body.freelance-article-page {
+      background-image: url('<%= asset_path("bgarticle.png") %>');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #e8eef1;
+    }
+
+    body.freelance-article-page .main-content {
+      padding: 0;
+    }
+  </style>
+<% end %>
+
+<div class="fa-page-wrapper">
+  <article class="fa-card">
+    <header class="fa-header">
+      <%= image_tag "articles/freelance/header_bg.png", alt: "", class: "fa-header-bg", aria: { hidden: true } %>
+      <div class="fa-header-top">
+        <span class="fa-meta-tag">4 минуты</span>
+        <span class="fa-meta-tag">от ;make.Meet</span>
+      </div>
+      <h1 class="fa-title">Лучшие помощники в&nbsp;работе на&nbsp;фрилансе</h1>
+    </header>
+
+    <p class="fa-lead">
+      Современный фриланс&nbsp;— это не&nbsp;только про&nbsp;профессиональные навыки. Это ещё&nbsp;и&nbsp;про&nbsp;управление временем,
+      задачами, клиентами, дедлайнами и&nbsp;собственным ресурсом
+    </p>
+
+    <div class="fa-roles-block">
+      <p class="fa-roles-title">Когда ты работаешь на&nbsp;себя, ты одновременно:</p>
+      <div class="fa-roles-grid">
+        <div class="fa-role-card"><span class="fa-role-name">исполнитель</span><span class="fa-role-num">1</span></div>
+        <div class="fa-role-card"><span class="fa-role-name">менеджер</span><span class="fa-role-num">2</span></div>
+        <div class="fa-role-card"><span class="fa-role-name">бухгалтер</span><span class="fa-role-num">3</span></div>
+        <div class="fa-role-card"><span class="fa-role-name">маркетолог</span><span class="fa-role-num">4</span></div>
+      </div>
+    </div>
+
+    <div class="fa-after-roles">
+      <p class="fa-narrow-text">И&nbsp;если не&nbsp;выстроить систему, легко утонуть в&nbsp;хаосе.</p>
+      <p class="fa-narrow-text fa-text-accent">Мы собрали инструменты, которые реально помогают фрилансерам держать всё под&nbsp;контролем&nbsp;— без&nbsp;перегруза и&nbsp;ощущения, что работа поглощает всю&nbsp;жизнь.</p>
+    </div>
+
+    <section class="fa-section">
+      <div class="fa-section-heading">
+        <h2 class="fa-section-title fa-section-title--hero">Для управления задачами и&nbsp;проектами</h2>
+        <span class="fa-section-num" aria-hidden="true">/1</span>
+      </div>
+
+      <p class="fa-section-intro fa-narrow-text fa-text-accent">
+        Без&nbsp;системы задач фриланс долго не&nbsp;живёт.<br>
+        Минимум, который нужен: список текущих проектов, статусы задач, дедлайны, понимание загрузки
+      </p>
+
+      <%= image_tag "articles/freelance/tools_tasks.png", alt: "", class: "fa-tools-img", aria: { hidden: true } %>
+
+      <div class="fa-rows">
+        <div class="fa-tool-row">
+          <span class="fa-tool-row-label">Trello</span>
+          <p class="fa-tool-row-text">подойдёт, если тебе нравится визуальная простота (доски и&nbsp;карточки)</p>
+        </div>
+        <div class="fa-tool-row">
+          <span class="fa-tool-row-label">Notion</span>
+          <p class="fa-tool-row-text">если хочется гибкости и&nbsp;объединения всего в&nbsp;одном месте</p>
+        </div>
+        <div class="fa-tool-row">
+          <span class="fa-tool-row-label">ClickUp</span>
+          <p class="fa-tool-row-text">если проектов много и&nbsp;нужна более строгая структура</p>
+        </div>
+      </div>
+
+      <p class="fa-rule fa-narrow-text">
+        <span class="fa-text-highlight">Главное правило:</span><br>
+        <span class="fa-text-accent">Не&nbsp;выбирай «самый мощный инструмент».</span><br>
+        <span class="fa-text-accent">Выбирай тот, которым ты будешь пользоваться каждый день</span>
+      </p>
+    </section>
+
+    <section class="fa-section">
+      <div class="fa-section-heading">
+        <h2 class="fa-section-title fa-section-title--hero">Для учёта времени</h2>
+        <span class="fa-section-num" aria-hidden="true">/2</span>
+      </div>
+
+      <p class="fa-section-intro fa-narrow-text fa-text-accent">
+        Фрилансер часто работает «на&nbsp;ощущениях». Кажется, что задача заняла час, а&nbsp;по&nbsp;факту&nbsp;— три
+      </p>
+
+      <%= image_tag "articles/freelance/tools_time.png", alt: "", class: "fa-tools-img", aria: { hidden: true } %>
+
+      <div class="fa-rows">
+        <div class="fa-tool-row">
+          <span class="fa-tool-row-label">Toggl</span>
+          <p class="fa-tool-row-text">если нужен простой и&nbsp;быстрый трекер без&nbsp;лишних настроек</p>
+        </div>
+        <div class="fa-tool-row">
+          <span class="fa-tool-row-label">Clockify</span>
+          <p class="fa-tool-row-text">если важна подробная статистика и&nbsp;работа с&nbsp;несколькими проектами</p>
+        </div>
+      </div>
+
+      <p class="fa-section-note fa-section-note--center fa-narrow-text fa-section-note--wide">
+        <span class="fa-text-accent">Даже если ты не&nbsp;биллишь по&nbsp;часам,</span>
+        <span class="fa-text-highlight"> учёт времени даёт прозрачность и&nbsp;контроль.</span>
+        <span class="fa-text-accent"> И&nbsp;важный момент: это не&nbsp;про&nbsp;тотальный контроль, а&nbsp;про&nbsp;понимание реальности</span>
+      </p>
+    </section>
+
+    <section class="fa-section">
+      <div class="fa-section-heading">
+        <h2 class="fa-section-title fa-section-title--hero">Для концентрации<br>и&nbsp;фокуса</h2>
+        <span class="fa-section-num" aria-hidden="true">/3</span>
+      </div>
+
+      <p class="fa-section-intro fa-narrow-text fa-text-accent fa-section-intro--wide">
+        Главный враг фрилансера&nbsp;— не&nbsp;сложные проекты.<br>
+        А&nbsp;расфокусировка. Соцсети, уведомления, мессенджеры, вкладки в&nbsp;браузере&nbsp;— и&nbsp;вот ты уже не&nbsp;работаешь
+      </p>
+
+      <%= image_tag "articles/freelance/tools_focus.png", alt: "", class: "fa-tools-img", aria: { hidden: true } %>
+
+      <div class="fa-rows">
+        <div class="fa-tool-row">
+          <span class="fa-tool-row-label">Forest</span>
+          <p class="fa-tool-row-text">если нужна игровая мотивация не&nbsp;отвлекаться</p>
+        </div>
+        <div class="fa-tool-row">
+          <span class="fa-tool-row-label">Pomodoro</span>
+          <p class="fa-tool-row-text">если хочешь работать короткими фокус-сессиями с&nbsp;перерывами</p>
+        </div>
+        <div class="fa-tool-row">
+          <span class="fa-tool-row-label">Режим фокуса</span>
+          <p class="fa-tool-row-text">чтобы просто отключить уведомления и&nbsp;сосредоточиться</p>
+        </div>
+      </div>
+
+      <p class="fa-section-note fa-section-note--center fa-narrow-text">
+        Фриланс даёт свободу.<br>
+        Но&nbsp;свобода без&nbsp;структуры превращается в&nbsp;тревогу.<br>
+        Выбери 2–3 инструмента и&nbsp;внедри их.
+      </p>
+    </section>
+
+    <p class="fa-quote">
+      Порядок в&nbsp;работе начинается<br>
+      не&nbsp;с&nbsp;идеальной системы, а&nbsp;с&nbsp;первого маленького шага к&nbsp;ней.
+    </p>
+
+    <div class="fa-bottom-actions">
+      <button type="button" class="fa-bottom-icon-btn" aria-label="Лайк">
+        <%= image_tag "A_Button_5 (4).png", alt: "", class: "fa-bottom-icon-img" %>
+      </button>
+      <button type="button" class="fa-bottom-icon-btn" aria-label="Поделиться">
+        <%= image_tag "A_Button_5 (5).png", alt: "", class: "fa-bottom-icon-img" %>
+      </button>
+      <button type="button" class="fa-bottom-icon-btn" aria-label="Комментарии">
+        <%= image_tag "A_Button_5 (6).png", alt: "", class: "fa-bottom-icon-img" %>
+      </button>
+    </div>
+  </article>
+</div>

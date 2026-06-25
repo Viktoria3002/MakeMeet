@@ -27,14 +27,23 @@
     <%= javascript_importmap_tags %>
     <%= javascript_include_tag "admin_api", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
+    <script>
+      (function() {
+        try {
+          if (window.localStorage.getItem('makeMeetUserLoggedIn') === 'true') {
+            document.documentElement.classList.add('profile-user-logged-in', 'media-user-logged-in');
+          }
+        } catch (error) {}
+      })();
+    </script>
   </head>
 
-  <body class="<%= 'about-page' if current_page?(about_path) || current_page?(root_path) %> <%= 'media-page' if current_page?(page1_path) %> <%= 'admin-page' if controller_path.include?('admin') %> <%= 'sprints-page' if current_page?(page2_path) %> <%= 'profile-page' if current_page?(page4_path) || current_page?(profile_details_path) %> <%= 'profile-details-page' if current_page?(profile_details_path) %> <%= 'register-page' if current_page?(register_path) %> <%= 'registration-page' if current_page?(registration_path) %> <%= 'login-page' if current_page?(login_path) %> <%= 'my-sprints-page' if current_page?(page3_path) %> <%= 'article-page' if current_page?(article_path) %>">
+  <body class="<%= 'about-page' if current_page?(about_path) || current_page?(root_path) %> <%= 'media-page' if current_page?(page1_path) %> <%= 'admin-page' if controller_path.include?('admin') %> <%= 'sprints-page' if current_page?(page2_path) %> <%= 'profile-page' if current_page?(page4_path) || current_page?(profile_details_path) || current_page?(settings_path) || current_page?(settings_change_password_path) %> <%= 'profile-details-page' if current_page?(profile_details_path) %> <%= 'settings-page' if current_page?(settings_path) %> <%= 'settings-change-password-page' if current_page?(settings_change_password_path) %> <%= 'register-page' if current_page?(register_path) %> <%= 'registration-page' if current_page?(registration_path) %> <%= 'login-page' if current_page?(login_path) %> <%= 'auth-welcome-page' if current_page?(auth_welcome_path) %> <%= 'my-sprints-page' if current_page?(page3_path) || current_page?(new_my_sprint_path) %> <%= 'create-sprint-page' if current_page?(new_my_sprint_path) %> <%= 'article-page' if current_page?(article_path) %> <%= 'freelance-article-page' if current_page?(article_freelance_helpers_path) %>">
     <% if current_page?(page1_path) %>
       <div class="media-page-wrapper">
     <% end %>
     
-    <% minimal_nav_pages = current_page?(register_path) || current_page?(registration_path) || current_page?(login_path) %>
+    <% minimal_nav_pages = current_page?(register_path) || current_page?(registration_path) || current_page?(login_path) || current_page?(auth_welcome_path) %>
 
     <nav class="main-navigation">
       <div class="nav-container">
@@ -57,10 +66,10 @@
               <%= link_to "Открытые спринты", page2_path, class: "nav-link #{'active' if current_page?(page2_path)}" %>
             </li>
             <li class="nav-item">
-              <%= link_to "Мои спринты", page3_path, class: "nav-link #{'active' if current_page?(page3_path)}" %>
+              <%= link_to "Мои спринты", page3_path, class: "nav-link #{'active' if current_page?(page3_path) || current_page?(new_my_sprint_path)}" %>
             </li>
             <li class="nav-item">
-              <%= link_to "Профиль", page4_path, class: "nav-link #{'active' if current_page?(page4_path) || current_page?(profile_details_path)}" %>
+              <%= link_to "Профиль", page4_path, class: "nav-link #{'active' if current_page?(page4_path) || current_page?(profile_details_path) || current_page?(settings_path) || current_page?(settings_change_password_path)}" %>
             </li>
             <li class="nav-item nav-item--admin-hidden">
               <button class="nav-link admin-link-btn" onclick="openAdminLogin()">🔧 Админ</button>
@@ -78,13 +87,15 @@
       </div>
     <% end %>
 
-    <% unless current_page?(page4_path) || minimal_nav_pages %>
+    <% unless current_page?(page4_path) || current_page?(settings_path) || current_page?(settings_change_password_path) || minimal_nav_pages %>
       <footer class="main-footer">
         <div class="footer-content">
           <%= image_tag "footer_bar.svg", alt: "найди единомышленников с make Meet", class: "footer-bar-img" %>
         </div>
       </footer>
     <% end %>
+
+    <%= render "shared/app_state_screen" %>
 
     <!-- Admin Login Modal -->
     <div class="admin-login-modal" id="adminLoginModal" style="display: none;">

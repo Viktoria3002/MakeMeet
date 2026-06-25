@@ -1,58 +1,303 @@
 <% content_for :title, "Войти - Make Meet" %>
-<% content_for :head do %>
-  <style>
-    body.login-page {
-      background-image: url('<%= asset_path("bgwelcome.png") %>');
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-attachment: fixed;
-    }
-  </style>
-<% end %>
+<%= render "pages/auth_entry_head" %>
 
 <section class="login-section">
-  <div class="login-card">
-    <h1 class="login-title">Рады возвращению!</h1>
+  <div class="login-card auth-entry-card">
+    <div class="login-step" id="loginStepLogin" data-login-step="login">
+      <h1 class="login-title">Рады возвращению!</h1>
 
-    <form class="login-form" id="loginForm" novalidate>
-      <input type="email" class="login-input" id="loginEmail" placeholder="Почта">
-      <input type="password" class="login-input" id="loginPassword" placeholder="Пароль">
+      <form class="login-form" id="loginForm" novalidate>
+        <input type="email" class="login-input is-empty" id="loginEmail" placeholder="Почта" autocomplete="email">
+        <input type="password" class="login-input is-empty" id="loginPassword" placeholder="Пароль" autocomplete="current-password">
 
-      <p class="login-help-text" id="loginHelpText">Если забыли пароль, кликните здесь, чтобы восстановить!</p>
+        <p class="login-help-text" id="loginHelpText">
+          Если забыли пароль,
+          <button type="button" class="login-help-link" data-action="start-recovery">кликните здесь</button>,
+          чтобы восстановить!
+        </p>
 
-      <button type="submit" class="login-submit-button login-submit-button--image">
-        <%= image_tag "Q_Button_1 (6).png", alt: "Войти", class: "login-submit-image" %>
-      </button>
-    </form>
+        <div class="login-submit-wrap">
+          <button type="submit" class="auth-image-btn auth-image-btn--submit auth-image-btn--wide login-submit-btn">
+            <%= image_tag "Q_Button_1 (10).png", alt: "Войти", class: "auth-image-btn__img" %>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="login-step login-step--hidden" id="loginStepPhone" data-login-step="phone">
+      <h1 class="login-title">Рады возвращению!</h1>
+
+      <form class="login-form login-recovery-form" id="loginPhoneForm" novalidate>
+        <input type="tel" class="login-input is-empty" id="recoveryPhone" placeholder="Телефон" autocomplete="tel">
+        <input type="text" class="login-input is-empty" id="recoveryCode" placeholder="Код" inputmode="numeric" autocomplete="one-time-code">
+
+        <p class="login-recovery-hint">
+          <button type="button" class="login-recovery-hint-link" id="recoveryCodeResend">Не пришел код?</button>
+        </p>
+
+        <div class="login-submit-wrap">
+          <button type="submit" class="auth-image-btn auth-image-btn--submit auth-image-btn--wide login-submit-btn">
+            <%= image_tag "Q_Button_1 (9).png", alt: "Сменить пароль", class: "auth-image-btn__img" %>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="login-step login-step--hidden" id="loginStepPassword" data-login-step="password">
+      <h1 class="login-title">Рады возвращению!</h1>
+      <p class="login-description">Восстановите пароль, если забыли или поменяйте на более сложный</p>
+
+      <form class="login-form login-recovery-form" id="loginPasswordForm" novalidate>
+        <input type="password" class="login-input is-empty" id="recoveryOldPassword" placeholder="Старый пароль" autocomplete="current-password">
+        <input type="password" class="login-input is-empty" id="recoveryNewPassword" placeholder="Новый пароль" autocomplete="new-password">
+
+        <div class="login-submit-wrap login-submit-wrap--recovery">
+          <button type="submit" class="auth-image-btn auth-image-btn--submit auth-image-btn--wide login-submit-btn">
+            <%= image_tag "Q_Button_1 (9).png", alt: "Сменить пароль", class: "auth-image-btn__img" %>
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </section>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('loginForm');
+    const steps = {
+      login: document.getElementById('loginStepLogin'),
+      phone: document.getElementById('loginStepPhone'),
+      password: document.getElementById('loginStepPassword')
+    };
+    const loginForm = document.getElementById('loginForm');
+    const phoneForm = document.getElementById('loginPhoneForm');
+    const passwordForm = document.getElementById('loginPasswordForm');
     const emailInput = document.getElementById('loginEmail');
     const passwordInput = document.getElementById('loginPassword');
     const helpText = document.getElementById('loginHelpText');
+    const codeResendButton = document.getElementById('recoveryCodeResend');
+    const recoveryNewPasswordInput = document.getElementById('recoveryNewPassword');
+    const DEMO_EMAIL_KEY = 'makeMeetUserEmail';
+    const DEMO_PASSWORD_KEY = 'makeMeetUserPassword';
+    const LOGIN_LOADING_MIN_MS = 1800;
+    const PROFILE_URL = '<%= page4_path %>';
+    let loginLoadingStartedAt = null;
+    let loginRedirectScheduled = false;
 
-    if (!form || !emailInput || !passwordInput || !helpText) return;
+    if (!steps.login || !steps.phone || !steps.password || !loginForm || !phoneForm || !passwordForm) return;
 
-    const defaultText = 'Если забыли пароль, кликните здесь, чтобы восстановить!';
-    const errorText = 'К сожалению, вы ввели неверный логин или пароль.<br>Если забыли пароль, кликните здесь, чтобы восстановить!';
+    const defaultHtml = 'Если забыли пароль, <button type="button" class="login-help-link" data-action="start-recovery">кликните здесь</button>, чтобы восстановить!';
+    const errorHtml = [
+      '<span class="login-error-line">К сожалению, вы ввели неверный логин или пароль.</span>',
+      '<span class="login-error-line">Если забыли пароль, <button type="button" class="login-help-link login-help-link--bold" data-action="start-recovery">кликните здесь</button>, чтобы восстановить!</span>'
+    ].join('');
 
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
+    function completeLogin() {
+      if (loginRedirectScheduled) return;
+      loginRedirectScheduled = true;
 
-      const email = emailInput.value.trim();
-      const password = passwordInput.value.trim();
+      showDefaultHelp();
+      window.localStorage.setItem('makeMeetUserLoggedIn', 'true');
+      document.documentElement.classList.add('profile-user-logged-in', 'media-user-logged-in');
 
-      if (!email || !password) {
-        helpText.innerHTML = errorText;
+      if (window.AppStateScreen) {
+        window.AppStateScreen.showLoading();
+      }
+
+      const startedAt = loginLoadingStartedAt || Date.now();
+      const remainingMs = Math.max(0, LOGIN_LOADING_MIN_MS - (Date.now() - startedAt));
+
+      window.setTimeout(function() {
+        window.location.replace(PROFILE_URL);
+      }, remainingMs);
+    }
+
+    function saveDemoEmail(email) {
+      if (email) {
+        window.localStorage.setItem(DEMO_EMAIL_KEY, email);
+      }
+    }
+
+    function canLoginWithDemo(email, password) {
+      return Boolean(email && password);
+    }
+
+    function showStep(stepName) {
+      Object.keys(steps).forEach(function(name) {
+        steps[name].classList.toggle('login-step--hidden', name !== stepName);
+      });
+    }
+
+    function updateInputState(input) {
+      const value = input.type === 'password' ? input.value : input.value.trim();
+      const filled = value.length > 0;
+      input.classList.toggle('is-filled', filled);
+      input.classList.toggle('is-empty', !filled);
+    }
+
+    function updateInputStates(inputs) {
+      inputs.forEach(updateInputState);
+    }
+
+    function bindInputStates(inputs) {
+      inputs.forEach(function(input) {
+        function refresh() {
+          updateInputState(input);
+        }
+
+        ['input', 'change', 'blur', 'focus'].forEach(function(eventName) {
+          input.addEventListener(eventName, refresh);
+        });
+
+        refresh();
+      });
+    }
+
+    function showDefaultHelp() {
+      helpText.classList.remove('login-help-text--error');
+      helpText.innerHTML = defaultHtml;
+    }
+
+    function showErrorHelp() {
+      helpText.classList.add('login-help-text--error');
+      helpText.innerHTML = errorHtml;
+    }
+
+    function startRecovery() {
+      showDefaultHelp();
+      showStep('phone');
+    }
+
+    bindInputStates([emailInput, passwordInput]);
+    bindInputStates(phoneForm.querySelectorAll('.login-input'));
+    bindInputStates(passwordForm.querySelectorAll('.login-input'));
+
+    document.addEventListener('animationstart', function(event) {
+      if (event.animationName === 'authInputAutofillStart' && event.target.classList.contains('login-input')) {
+        updateInputState(event.target);
+      }
+    }, true);
+
+    window.setTimeout(function() {
+      updateInputStates(document.querySelectorAll('.login-input'));
+    }, 150);
+
+    document.addEventListener('click', function(event) {
+      const recoveryTrigger = event.target.closest('[data-action="start-recovery"]');
+      if (recoveryTrigger) {
+        event.preventDefault();
+        startRecovery();
         return;
       }
 
-      helpText.textContent = defaultText;
-      window.location.href = '<%= page4_path %>';
+      if (event.target === codeResendButton) {
+        event.preventDefault();
+        window.alert('Код отправлен повторно.');
+      }
+    });
+
+    loginForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      attemptLogin();
+    });
+
+    function attemptLogin() {
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+
+      if (!email || !password) {
+        updateInputStates([emailInput, passwordInput]);
+        showDefaultHelp();
+        return;
+      }
+
+      showDefaultHelp();
+      loginRedirectScheduled = false;
+      loginLoadingStartedAt = Date.now();
+
+      if (window.AppStateScreen) {
+        window.AppStateScreen.showLoading();
+      }
+
+      fetch('<%= api_login_path %>', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ email: email, password: password })
+      })
+        .then(function(response) {
+          if (response.ok) {
+            return response.json()
+              .catch(function() {
+                return {};
+              })
+              .then(function(data) {
+                if (data && data.session_token) {
+                  window.localStorage.setItem('makeMeetSessionToken', data.session_token);
+                }
+
+                saveDemoEmail(email);
+                completeLogin();
+              });
+          }
+
+          if (response.status === 401 && canLoginWithDemo(email, password)) {
+            saveDemoEmail(email);
+            completeLogin();
+            return;
+          }
+
+          loginRedirectScheduled = false;
+
+          if (window.AppStateScreen) {
+            window.AppStateScreen.hide();
+          }
+
+          updateInputStates([emailInput, passwordInput]);
+          showErrorHelp();
+        })
+        .catch(function() {
+          if (canLoginWithDemo(email, password)) {
+            saveDemoEmail(email);
+            completeLogin();
+            return;
+          }
+
+          loginRedirectScheduled = false;
+
+          if (window.AppStateScreen) {
+            window.AppStateScreen.showError({ onRetry: attemptLogin });
+            return;
+          }
+
+          updateInputStates([emailInput, passwordInput]);
+          showErrorHelp();
+        });
+    }
+
+    phoneForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      showStep('password');
+    });
+
+    passwordForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const newPassword = recoveryNewPasswordInput.value;
+      const loginEmail = emailInput.value.trim();
+
+      if (newPassword) {
+        window.localStorage.setItem(DEMO_PASSWORD_KEY, newPassword);
+      }
+
+      saveDemoEmail(loginEmail);
+
+      passwordForm.reset();
+      phoneForm.reset();
+      updateInputStates(phoneForm.querySelectorAll('.login-input'));
+      updateInputStates(passwordForm.querySelectorAll('.login-input'));
+      showStep('login');
     });
   });
 </script>

@@ -1,30 +1,20 @@
 <% content_for :title, "Форма регистрации - Make Meet" %>
-<% content_for :head do %>
-  <style>
-    body.registration-page {
-      background-image: url('<%= asset_path("bgwelcome.png") %>');
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-attachment: fixed;
-    }
-  </style>
-<% end %>
+<%= render "pages/auth_entry_head" %>
 
 <section class="registration-section">
-  <div class="registration-card">
+  <div class="registration-card auth-entry-card">
     <h1 class="registration-title">Давайте знакомиться</h1>
 
     <form class="registration-form" id="registrationForm" novalidate>
       <div class="registration-grid">
         <div class="registration-left">
-          <input type="text" class="registration-input" id="registrationName" placeholder="Имя">
-          <input type="email" class="registration-input" id="registrationEmail" placeholder="Почта">
+          <input type="text" class="registration-input is-empty" id="registrationName" placeholder="Имя">
+          <input type="email" class="registration-input is-empty" id="registrationEmail" placeholder="Почта">
 
           <div class="registration-city-box">
             <input
               type="text"
-              class="registration-input registration-input--city"
+              class="registration-input registration-input--city is-empty"
               id="registrationCity"
               placeholder="Город"
               autocomplete="off"
@@ -39,7 +29,7 @@
         <div class="registration-right">
           <div class="registration-about-wrap">
             <textarea
-              class="registration-about"
+              class="registration-about is-empty"
               id="registrationAbout"
               placeholder="О себе"
               maxlength="400"
@@ -50,8 +40,8 @@
       </div>
 
       <div class="registration-submit-wrap">
-        <button type="submit" class="registration-submit-button" id="registrationSubmitButton">
-          <%= image_tag "Q_Button_1 (5).png", alt: "Зарегистрироваться", class: "registration-submit-image" %>
+        <button type="submit" class="auth-image-btn auth-image-btn--submit" id="registrationSubmitButton">
+          <%= image_tag "Q_Button_1 (11).png", alt: "Зарегистрироваться", class: "auth-image-btn__img" %>
         </button>
       </div>
 
@@ -74,11 +64,12 @@
     const submitButton = document.getElementById('registrationSubmitButton');
     const dropdown = document.getElementById('registrationCityDropdown');
     const toggleButton = document.getElementById('registrationCityToggle');
-    let shouldShowValidation = false;
 
     if (!form || !nameInput || !emailInput || !cityInput || !aboutInput || !counter || !submitButton || !dropdown || !toggleButton) {
       return;
     }
+
+    const formInputs = [nameInput, emailInput, cityInput, aboutInput];
 
     const russianCities = [
       'Абакан', 'Азов', 'Александров', 'Алексин', 'Альметьевск', 'Анапа', 'Ангарск', 'Анжеро-Судженск',
@@ -134,17 +125,24 @@
       );
     }
 
-    function updateValidationState() {
-      if (!shouldShowValidation) {
-        [nameInput, emailInput, cityInput, aboutInput].forEach((input) => {
-          input.classList.remove('is-empty');
-        });
-        return;
-      }
+    function updateInputStates() {
+      formInputs.forEach(function(input) {
+        const value = input.type === 'password' ? input.value : input.value.trim();
+        const filled = value.length > 0;
+        input.classList.toggle('is-filled', filled);
+        input.classList.toggle('is-empty', !filled);
+      });
+    }
 
-      [nameInput, emailInput, cityInput, aboutInput].forEach((input) => {
-        const empty = !input.value.trim();
-        input.classList.toggle('is-empty', empty);
+    function bindInputStates() {
+      formInputs.forEach(function(input) {
+        function refresh() {
+          updateInputStates();
+        }
+
+        ['input', 'change', 'blur', 'focus'].forEach(function(eventName) {
+          input.addEventListener(eventName, refresh);
+        });
       });
     }
 
@@ -174,7 +172,7 @@
         option.addEventListener('click', function() {
           cityInput.value = city;
           dropdown.classList.remove('is-open');
-          updateValidationState();
+          updateInputStates();
         });
         dropdown.appendChild(option);
       });
@@ -182,7 +180,7 @@
       dropdown.classList.add('is-open');
     }
 
-    [nameInput, emailInput, cityInput, aboutInput].forEach((input) => {
+    formInputs.forEach(function(input) {
       input.addEventListener('input', function() {
         if (input === aboutInput) {
           updateCounter();
@@ -191,10 +189,18 @@
         if (input === cityInput) {
           renderCityOptions(cityInput.value);
         }
-
-        updateValidationState();
       });
     });
+
+    bindInputStates();
+
+    document.addEventListener('animationstart', function(event) {
+      if (event.animationName !== 'authInputAutofillStart') return;
+      if (!event.target.classList.contains('registration-input') && !event.target.classList.contains('registration-about')) return;
+      updateInputStates();
+    }, true);
+
+    window.setTimeout(updateInputStates, 150);
 
     cityInput.addEventListener('focus', function() {
       renderCityOptions(cityInput.value);
@@ -215,17 +221,17 @@
       event.preventDefault();
 
       if (!isFormValid()) {
-        shouldShowValidation = true;
-        updateValidationState();
+        updateInputStates();
         return;
       }
 
-      shouldShowValidation = false;
-      updateValidationState();
-      window.location.href = '<%= page4_path %>';
+      updateInputStates();
+      window.localStorage.setItem('makeMeetUserLoggedIn', 'true');
+      window.localStorage.setItem('makeMeetUserEmail', emailInput.value.trim());
+      window.location.href = '<%= auth_welcome_path %>';
     });
 
     updateCounter();
-    updateValidationState();
+    updateInputStates();
   });
 </script>
